@@ -1,0 +1,50 @@
+
+@import "~src/assets/css/_variables.scss";
+
+
+table.app-table {
+  border-spacing: 0;
+  width: 100%;
+  background: #fff;
+}
+
+table.app-table tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+  height: 48px;
+}
+
+table.app-table tr:first-of-type {
+  height: 56px;
+}
+
+table.app-table td:first-of-type,
+table.app-table th:first-of-type {
+  padding-left: 24px;
+}
+
+table.app-table td:last-of-type,
+table.app-table th:last-of-type {
+  padding-right: 24px;
+}
+
+table.app-table td,
+table.app-table th {
+  padding: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  text-align: left;
+  border-bottom-color: rgba(0,0,0,.12);
+  font-size: 14px
+}
+
+table.app-table th {
+  color: rgba(0,0,0,.54);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+table.app-table tr:last-child td {
+  border-bottom: none;
+}

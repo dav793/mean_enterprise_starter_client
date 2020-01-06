@@ -1,0 +1,16 @@
+
+<div *ngIf="inputsReady">
+
+  <mat-radio-button
+    value="{{ selectionValue }}"
+    name="{{ groupName }}"
+    [checked]="isChecked"
+    (input)="onBtnSelect()"
+  >
+    {{ label }}
+  </mat-radio-button>
+
+</div>
+<div *ngIf="!inputsReady">
+  <p>not ready</p>
+</div>

@@ -1,0 +1,20 @@
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 250px minmax(400px, auto);
+  grid-template-rows: auto;
+}
+
+.profile-grid > .lane1 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.profile-grid > .lane2 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}

@@ -1,0 +1,72 @@
+
+<div class="wrapper">
+
+	<div class="header">
+		<h1>Registrar Nuevo Usuario</h1>
+	</div>
+
+	<div class="form" *ngIf="registerForm && passwordForm">
+
+		<app-form-input-text
+			[fGroup]="registerForm"
+			fControlName="firstName"
+			label="Nombre"
+			[errorMessages]="errorMessages.firstName"
+		></app-form-input-text>
+
+		<app-form-input-text
+			[fGroup]="registerForm"
+			fControlName="lastName"
+			label="Primer apellido"
+			[errorMessages]="errorMessages.lastName"
+		></app-form-input-text>
+
+		<app-form-input-text
+			[fGroup]="registerForm"
+			fControlName="secondLastName"
+			label="Segundo apellido (opcional)"
+			[errorMessages]="errorMessages.secondLastName"
+		></app-form-input-text>
+
+		<app-form-input-text
+			[fGroup]="registerForm"
+			fControlName="username"
+			label="Nombre de usuario"
+			[errorMessages]="errorMessages.username"
+		></app-form-input-text>
+
+		<app-form-input-text
+			[fGroup]="registerForm"
+			fControlName="email"
+			label="Correo electrónico"
+			[errorMessages]="errorMessages.email"
+		></app-form-input-text>
+
+		<app-form-input-password
+			[fGroup]="passwordForm"
+			fControlName="password"
+			label="Contraseña"
+			[errorMessages]="errorMessages.password"
+		></app-form-input-password>
+
+		<app-form-input-password
+			[fGroup]="passwordForm"
+			fControlName="passwordConfirm"
+			label="Confirme su contraseña"
+			[errorMessages]="errorMessages.passwordConfirm"
+		></app-form-input-password>
+
+		<div class="button">
+			<div>
+				<button mat-raised-button class="app-btn primary" (click)='register()' [disabled]="!formsAreValid"> Registrarse </button>
+				<p><a routerLink="/login">Ya tiene cuenta?&nbsp;</a></p>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<!--&lt;!&ndash;<pre>IS VALID: {{ passwordForm.valid }}</pre>&ndash;&gt;-->
+<!--&lt;!&ndash;<pre>ERRORS: {{ passwordForm.errors | json }}</pre>&ndash;&gt;-->
+<!--&lt;!&ndash;<pre>{{ passwordForm.value | json }}</pre>&ndash;&gt;-->

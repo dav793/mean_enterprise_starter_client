@@ -1,0 +1,20 @@
+
+@import "~src/assets/css/_variables.scss";
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.actions > button {
+  margin-right: $spacing-sm;
+}
+
+.actions > button:last-child {
+  margin-right: 0;
+}
+
+.mat-dialog-actions {
+  margin-bottom: 0;
+}

@@ -1,0 +1,22 @@
+
+<div [ngClass]="{'layout-grid': showAppLayout}">
+
+	<div class="app-navbar" *ngIf="showAppLayout">
+		<app-layout-nav></app-layout-nav>
+	</div>
+
+	<div class="app-sidenav" *ngIf="showAppLayout">
+		<app-layout-sidenav></app-layout-sidenav>
+	</div>
+
+	<div class="app-main-content" [ngClass]="{'clear-style': !showAppLayout}">
+		<mat-card class="card-fill" [ngClass]="{'clear-style': !showAppLayout}">
+			<div class="router-viewport">
+				<ng-content></ng-content>
+			</div>
+		</mat-card>
+	</div>
+
+</div>
+
+

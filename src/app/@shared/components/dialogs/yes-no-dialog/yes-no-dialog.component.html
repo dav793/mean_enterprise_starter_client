@@ -1,0 +1,11 @@
+
+<div class="fsize-md">
+  <h1 mat-dialog-title class="fsize-lg">{{data.title}}</h1>
+  <div mat-dialog-content>
+    <p>{{data.body}}</p>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-raised-button (click)="onNoClick()">No</button>
+    <button mat-raised-button (click)="onYesClick()" cdkFocusInitial>Yes</button>
+  </div>
+</div>

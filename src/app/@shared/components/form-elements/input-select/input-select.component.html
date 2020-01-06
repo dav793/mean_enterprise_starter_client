@@ -1,0 +1,86 @@
+<div *ngIf="inputsReady">
+
+	<form [formGroup]="fGroup" class="full-width">
+
+		<ng-container *ngIf="!multiple && fControlName">
+
+			<ng-container *ngIf="!isFormArrayMember">
+
+				<mat-form-field class="full-width">
+
+					<mat-label>{{ label }}</mat-label>
+					<mat-select formControlName="{{ fControlName }}">
+						<mat-option *ngFor="let option of options" [value]="option.key">{{ option.label }}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+
+				</mat-form-field>
+
+			</ng-container>
+
+			<ng-container *ngIf="isFormArrayMember">
+
+				<ng-container formArrayName="{{ fArrayName }}">
+					<ng-container [formGroupName]="fArrayIndex">
+
+						<mat-form-field class="full-width">
+
+							<mat-label>{{ label }}</mat-label>
+							<mat-select formControlName="{{ fControlName }}">
+								<mat-option *ngFor="let option of options" [value]="option.key">{{ option.label }}</mat-option>
+							</mat-select>
+							<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+
+						</mat-form-field>
+
+					</ng-container>
+				</ng-container>
+
+			</ng-container>
+
+		</ng-container>
+
+		<ng-container *ngIf="multiple && fControlName">
+
+			<ng-container *ngIf="!isFormArrayMember">
+
+				<mat-form-field class="full-width">
+
+					<mat-label>{{ label }}</mat-label>
+					<mat-select formControlName="{{ fControlName }}" multiple>
+						<mat-option *ngFor="let option of options" [value]="option.key">{{ option.label }}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+
+				</mat-form-field>
+
+			</ng-container>
+
+			<ng-container *ngIf="isFormArrayMember">
+
+				<ng-container formArrayName="{{ fArrayName }}">
+					<ng-container [formGroupName]="fArrayIndex">
+
+						<mat-form-field class="full-width">
+
+							<mat-label>{{ label }}</mat-label>
+							<mat-select formControlName="{{ fControlName }}" multiple>
+								<mat-option *ngFor="let option of options" [value]="option.key">{{ option.label }}</mat-option>
+							</mat-select>
+							<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+
+						</mat-form-field>
+
+					</ng-container>
+				</ng-container>
+
+			</ng-container>
+
+		</ng-container>
+
+	</form>
+
+</div>
+<div *ngIf="!inputsReady">
+	<p>not ready</p>
+</div>

@@ -1,0 +1,36 @@
+
+<div *ngIf="userGroupForm">
+
+	<div class="pad-all-lg app-grid">
+
+		<div class="item1 marg-bottom-lg">
+			<app-form-input-text
+				[fGroup]="userGroupForm"
+				fControlName="label"
+				label="Label"
+			></app-form-input-text>
+		</div>
+
+		<div class="item2">
+			<app-form-input-select-search
+				[fGroup]="userGroupForm"
+				fControlName="roleIds"
+				[options]="roleOptions"
+				[multiple]="true"
+				label="Roles"
+			></app-form-input-select-search>
+		</div>
+
+		<div class="item3">
+			<app-form-input-select-search
+				[fGroup]="userGroupForm"
+				fControlName="userIds"
+				[options]="userOptions"
+				[multiple]="true"
+				label="Users"
+			></app-form-input-select-search>
+		</div>
+
+	</div>
+
+</div>

@@ -1,0 +1,42 @@
+
+<div *ngIf="viewStatus === 'loading'" class="loading">
+  	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div *ngIf="viewStatus === 'failed'" class="loading">
+	<app-error
+		[errorCode]="errorCode"
+		[errorSig]="errorSig"
+	></app-error>
+</div>
+
+<div *ngIf="viewStatus === 'ready'">
+
+	<div class="toolbar">
+		<app-toolbar
+			[config]="toolbarConfig"
+		></app-toolbar>
+	</div>
+
+	<div class="search-textbox">
+		<app-search
+			[sorters]="searchSorters"
+			[allItems$]="sortedUsers$"
+			[reset$]="resetSearch$"
+			(searchItems)="onSearchItemsChange($event)"
+		></app-search>
+	</div>
+
+	<app-paginator
+		[allItems$]="filteredUsers$"
+		(pageItems)="onPageItemsChange($event)"
+	></app-paginator>
+
+	<app-user-list-table
+		[users$]="pageUsers$"
+		[sortParams]="sortParams"
+		(userClicked)="navigateToUserProfile($event)"
+		(columnClicked)="setActiveSort($event)"
+	></app-user-list-table>
+
+</div>

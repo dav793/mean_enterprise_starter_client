@@ -1,0 +1,53 @@
+
+<div *ngIf="allItems$" class="paginator-row">
+
+  <div class="left-section">
+
+    <span class="fsize-sm fcolor-gray">Items por página: </span>
+    <div class="page-size-input">
+      <app-form-input-select
+        [fGroup]="form"
+        fControlName="pageSize"
+        [options]="pageSizeOptions"
+      ></app-form-input-select>
+    </div>
+
+  </div>
+
+  <div class="center-section">
+    <span class="fsize-sm fcolor-gray">
+      {{ currentPageStart + 1 }} - {{ currentPageEnd + 1 }} de {{ allItems$.value.length }}
+    </span>
+  </div>
+
+  <div class="right-section">
+
+    <button mat-icon-button
+      [disabled]="!prevPageExists"
+      (click)="onPrevPageButtonClick()"
+    >
+      <mat-icon aria-hidden="false" aria-label="Select previous page">chevron_left</mat-icon>
+    </button>
+
+    <div class="page-num-input">
+      <app-form-input-text
+        [fGroup]="form"
+        fControlName="pageNumber"
+      ></app-form-input-text>
+    </div>
+
+    <button mat-icon-button
+      [disabled]="!nextPageExists"
+      (click)="onNextPageButtonClick()"
+    >
+      <mat-icon aria-hidden="false" aria-label="Select next page">chevron_right</mat-icon>
+    </button>
+
+  </div>
+
+</div>
+
+
+
+
+

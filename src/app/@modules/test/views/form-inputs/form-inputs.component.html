@@ -1,0 +1,430 @@
+<div class="pad-all-md">
+
+	<h1>Form Inputs</h1>
+
+	<div *ngIf="form">
+
+		<h2 class="marg-top-md marg-bottom-sm">Text</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-text
+					[fGroup]="form"
+					fControlName="text"
+					label="Text"
+					icon="search"
+					[errorMessages]="errorMessages.text"
+				></app-form-input-text>
+
+				<pre class="marg-top-sm">value: {{ form.controls['text'].value }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['text'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['text'].valid }}</pre>-->
+
+			</div>
+			<div>
+
+				<app-form-input-text
+					[fGroup]="form"
+					fControlName="textMulti"
+					[multiple]="true"
+					label="Text Multi"
+					icon="search"
+					[errorMessages]="errorMessages.textMulti"
+				></app-form-input-text>
+
+				<pre class="marg-top-sm">value: {{ form.controls['textMulti'].value }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['textMulti'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['textMulti'].valid }}</pre>-->
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Select</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-select
+					[fGroup]="form"
+					fControlName="select"
+					[options]="selectOptions"
+					label="Select"
+					[errorMessages]="errorMessages.select"
+				></app-form-input-select>
+
+				<pre class="marg-top-sm">value: {{ form.controls['select'].value }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['select'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['select'].valid }}</pre>-->
+
+			</div>
+			<div>
+
+				<app-form-input-select
+					[fGroup]="form"
+					fControlName="selectMulti"
+					[options]="selectOptions"
+					[multiple]="true"
+					label="Select Multi"
+					[errorMessages]="errorMessages.selectMulti"
+				></app-form-input-select>
+
+				<pre class="marg-top-sm">value: {{ form.controls['selectMulti'].value }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['selectMulti'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['selectMulti'].valid }}</pre>-->
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Select Search</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-select-search
+					[fGroup]="form"
+					fControlName="selectSearch"
+					[options]="selectOptions"
+					label="Select Search"
+					[errorMessages]="errorMessages.selectSearch"
+				></app-form-input-select-search>
+
+				<pre class="marg-top-sm">value: {{ form.controls['selectSearch'].value }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['selectSearch'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['selectSearch'].valid }}</pre>-->
+
+			</div>
+			<div>
+
+				<app-form-input-select-search
+					[fGroup]="form"
+					fControlName="selectSearchMulti"
+					[options]="selectOptions"
+					[multiple]="true"
+					label="Select Search Multi"
+					[errorMessages]="errorMessages.selectSearchMulti"
+				></app-form-input-select-search>
+
+				<pre class="marg-top-sm">value: {{ form.controls['selectSearchMulti'].value }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['selectSearchMulti'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['selectSearchMulti'].valid }}</pre>-->
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Date</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-date
+					[fGroup]="form"
+					fControlName="date"
+					label="Date"
+					[errorMessages]="errorMessages.date"
+				></app-form-input-date>
+
+				<pre class="marg-top-sm">value: {{ form.controls['date'].value }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['date'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['date'].valid }}</pre>-->
+
+			</div>
+			<div>
+
+				<!-- NO IMPLEMENTADO -->
+
+				<!--<app-form-input-date-->
+				<!--[fGroup]="form"-->
+				<!--fControlName="dateMulti"-->
+				<!--[multiple]="true"-->
+				<!--label="Date Multi"-->
+				<!--[errorMessages]="errorMessages.dateMulti"-->
+				<!--&gt;</app-form-input-date>-->
+
+				<!--<pre class="marg-top-sm">value: {{ form.controls['dateMulti'].value }}</pre>-->
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['dateMulti'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['dateMulti'].valid }}</pre>-->
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Password</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-password
+					[fGroup]="form"
+					fControlName="password"
+					label="Password"
+					[errorMessages]="errorMessages.password"
+				></app-form-input-password>
+
+				<pre class="marg-top-sm">value: {{ form.controls['password'].value }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['password'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['password'].valid }}</pre>-->
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Number</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-number
+					[fGroup]="form"
+					fControlName="number"
+					label="Number"
+					[errorMessages]="errorMessages.number"
+				></app-form-input-number>
+
+				<pre class="marg-top-sm">value: {{ form.controls['number'].value }}</pre>
+				<pre class="marg-top-sm">typeof value: {{ getTypeof(form.controls['number'].value) }}</pre>
+				<!--<pre class="marg-top-sm">errors: {{ form.controls['number'].errors | json }}</pre>-->
+				<!--<pre class="marg-top-sm">valid: {{ form.controls['number'].valid }}</pre>-->
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Check</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-check
+					[fGroup]="form"
+					fControlName="check"
+					label="Check"
+				></app-form-input-check>
+
+				<pre class="marg-top-sm">value: {{ form.controls['check'].value }}</pre>
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Toggle</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-toggle
+					[fGroup]="form"
+					fControlName="toggle"
+					label="Toggle"
+				></app-form-input-toggle>
+
+				<pre class="marg-top-sm">value: {{ form.controls['toggle'].value }}</pre>
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Radio</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-radio
+					[fGroup]="form"
+					fControlName="radio"
+					[selectionValue]="'1'"
+					groupName="radioBtnGroup_1"
+					label="Option 1"
+				></app-form-input-radio>
+
+				<app-form-input-radio
+					[fGroup]="form"
+					fControlName="radio"
+					[selectionValue]="'2'"
+					groupName="radioBtnGroup_1"
+					label="Option 2"
+				></app-form-input-radio>
+
+				<pre class="marg-top-sm">value: {{ form.controls['radio'].value }}</pre>
+
+			</div>
+		</div>
+
+		<h2 class="marg-top-md marg-bottom-sm">Form Array</h2>
+
+		<button (click)="addArrayValue()" class="marg-bottom-sm">Add</button>
+
+		<div *ngFor="let arrayValue of formArray.controls; let i = index" class="marg-bottom-lg">
+
+			<h3 class="marg-top-md marg-bottom-sm">Text</h3>
+
+			<div>
+				<app-form-input-text
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="text"
+					label="Text"
+					[errorMessages]="errorMessages.arrayValues.text"
+				></app-form-input-text>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['text'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Text Multi</h3>
+
+			<div>
+				<app-form-input-text
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="textMulti"
+					[multiple]="true"
+					label="Text Multi"
+					[errorMessages]="errorMessages.arrayValues.text"
+				></app-form-input-text>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['textMulti'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Select</h3>
+
+			<div>
+				<app-form-input-select
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="select"
+					[options]="selectOptions"
+					label="Select"
+					[errorMessages]="errorMessages.arrayValues.select"
+				></app-form-input-select>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['select'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Select Multi</h3>
+
+			<div>
+				<app-form-input-select
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="selectMulti"
+					[options]="selectOptions"
+					[multiple]="true"
+					label="Select Multi"
+					[errorMessages]="errorMessages.arrayValues.selectMulti"
+				></app-form-input-select>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['selectMulti'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Select Search</h3>
+
+			<div>
+				<app-form-input-select-search
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="selectSearch"
+					[options]="selectOptions"
+					label="Select Search"
+					[errorMessages]="errorMessages.arrayValues.selectSearch"
+				></app-form-input-select-search>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['selectSearch'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Select Search Multi</h3>
+
+			<div>
+				<app-form-input-select-search
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="selectSearchMulti"
+					[options]="selectOptions"
+					[multiple]="true"
+					label="Select Search Multi"
+					[errorMessages]="errorMessages.selectSearchMulti"
+				></app-form-input-select-search>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['selectSearchMulti'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Date</h3>
+
+			<div>
+				<app-form-input-date
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="date"
+					label="Date"
+					[errorMessages]="errorMessages.arrayValues.date"
+				></app-form-input-date>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['date'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Check</h3>
+
+			<div>
+				<app-form-input-check
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="check"
+					label="Check"
+				></app-form-input-check>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['check'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Toggle</h3>
+
+			<div>
+				<app-form-input-toggle
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="toggle"
+					label="Toggle"
+				></app-form-input-toggle>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['toggle'].value }}</pre>
+			</div>
+
+			<h3 class="marg-top-md marg-bottom-sm">Radio</h3>
+
+			<div>
+				<app-form-input-radio
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="radio"
+					[selectionValue]="'1'"
+					groupName="{{ 'arrayRadioBtnGroup_' + i }}"
+					label="Option 1"
+				></app-form-input-radio>
+
+				<app-form-input-radio
+					[fGroup]="form"
+					[fArrayName]="'arrayValues'"
+					[fArrayIndex]="i"
+					fControlName="radio"
+					[selectionValue]="'2'"
+					groupName="{{ 'arrayRadioBtnGroup_' + i }}"
+					label="Option 2"
+				></app-form-input-radio>
+
+				<pre class="marg-top-sm">value: {{ formArray.controls[i].controls['radio'].value }}</pre>
+			</div>
+
+			<button (click)="removeArrayValue(i)">Remove</button>
+
+		</div>
+
+		<!--<pre>FA: {{ formArray.value | json }}</pre>-->
+
+		<!--<pre>{{ form.value | json }}</pre>-->
+
+	</div>
+
+</div>

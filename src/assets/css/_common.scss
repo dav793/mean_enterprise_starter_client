@@ -1,0 +1,264 @@
+
+@import "~src/assets/css/_variables.scss";
+
+body {
+	font-family: $sans-serif;
+}
+
+
+/** BUTTON STYLING **/
+.app-btn {
+	text-transform: uppercase;
+}
+
+.app-btn.primary {
+	background-color: $primary;
+	color: $tertiary-textbody;
+}
+
+.app-btn.accent {
+	background-color: $accent;
+	color: $tertiary-textbody;
+}
+
+.app-btn.warn {
+	background-color: $warn;
+	color: $tertiary-textbody;
+}
+
+.app-btn.success {
+	background-color: $success;
+	color: $tertiary-textbody;
+}
+
+.app-btn.error {
+	background-color: $error;
+	color: $tertiary-textbody;
+}
+
+
+/** BUTTON SIZING **/
+.app-btn.size-lg {
+	line-height: 48px;
+	padding: 0 $spacing-lg;
+	font-size: $font-sz-lg;
+}
+.app-btn.size-lg mat-icon {
+	font-size: 24px;
+	line-height: 22px;
+}
+
+.app-btn.size-md {
+	line-height: 35px;
+	padding: 0 $spacing-md;
+	font-size: $font-sz-md;
+}
+.app-btn.size-md mat-icon {
+	font-size: 24px;
+	line-height: 20px;
+}
+
+.app-btn.size-sm {
+	line-height: 30px;
+	padding: 0 $spacing-sm;
+	font-size: $font-sz-sm;
+}
+.app-btn.size-sm mat-icon {
+	font-size: 18px;
+	line-height: 22px;
+}
+
+.app-btn.size-xs {
+	line-height: 20px;
+	padding: 0 $spacing-xs;
+	font-size: $font-sz-xs;
+	min-width: 0;
+}
+.app-btn.size-xs mat-icon {
+	font-size: 16px;
+	line-height: 22px;
+}
+
+
+/** TEXT STYLING **/
+.f-italic {
+	font-style: italic !important;
+}
+
+.f-bold {
+	font-weight: bold !important;
+}
+
+.talign-left {
+	text-align: left !important;
+}
+
+.talign-center {
+	text-align: center !important;
+}
+
+.talign-right {
+	text-align: right !important;
+}
+
+.ffamily {
+	font-family: $sans-serif;
+}
+
+.app-link {
+	cursor: pointer;
+}
+
+.app-link:hover {
+	text-decoration: underline;
+}
+
+/** TEXT COLORS **/
+.fcolor-black {
+	color: $primary-textbody;
+}
+
+.fcolor-gray {
+	color: $secondary-textbody;
+}
+
+.fcolor-white {
+	color: $tertiary-textbody;
+}
+
+.fcolor-primary {
+	color: $primary;
+}
+
+.fcolor-accent {
+	color: $accent;
+}
+
+.fcolor-warn {
+	color: $warn;
+}
+
+.fcolor-success {
+	color: $success;
+}
+
+/** TEXT SIZING **/
+mat-form-field.mat-form-field {
+	font-size: $font-sz-md !important;
+}
+
+.fsize-xl {
+	font-size: $font-sz-xl !important;
+}
+
+.fsize-lg {
+	font-size: $font-sz-lg !important;
+}
+
+.fsize-md {
+	font-size: $font-sz-md !important;
+}
+
+.fsize-sm {
+	font-size: $font-sz-sm !important;
+}
+
+.fsize-xs {
+	font-size: $font-sz-xs !important;
+}
+
+
+/** ELEMENT SIZING **/
+.full-width {
+	width: 100% !important;
+}
+
+
+/** ELEMENT SPACING **/
+.pad-all-sm {
+	padding: $spacing-sm !important;
+}
+
+.pad-all-md {
+	padding: $spacing-md !important;
+}
+
+.pad-all-lg {
+	padding: $spacing-lg !important;
+}
+
+.pad-left-sm {
+	padding-left: $spacing-sm !important;
+}
+
+.pad-left-md {
+	padding-left: $spacing-md !important;
+}
+
+.pad-left-lg {
+	padding-left: $spacing-lg !important;
+}
+
+.pad-right-sm {
+	padding-right: $spacing-sm !important;
+}
+
+.pad-right-md {
+	padding-right: $spacing-md !important;
+}
+
+.pad-right-lg {
+	padding-right: $spacing-lg !important;
+}
+
+.marg-all-sm {
+	padding: $spacing-sm !important;
+}
+
+.marg-all-md {
+	padding: $spacing-md !important;
+}
+
+.marg-all-lg {
+	padding: $spacing-lg !important;
+}
+
+.marg-top-sm {
+	margin-top: $spacing-sm !important;
+}
+
+.marg-top-md {
+	margin-top: $spacing-md !important;
+}
+
+.marg-top-lg {
+	margin-top: $spacing-lg !important;
+}
+
+.marg-bottom-sm {
+	margin-bottom: $spacing-sm !important;
+}
+
+.marg-bottom-md {
+	margin-bottom: $spacing-md !important;
+}
+
+.marg-bottom-lg {
+	margin-bottom: $spacing-lg !important;
+}
+
+.marg-bottom-none {
+	margin-bottom: 0 !important;
+}
+
+
+/** BACKGROUND COLOR **/
+.hover-bg-shadow:hover {
+	background-color: $shadow-color;
+}
+
+
+/** MISC **/
+.hover-pointer {
+	cursor: pointer;
+}

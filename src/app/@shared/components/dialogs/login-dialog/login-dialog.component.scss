@@ -1,0 +1,25 @@
+
+@import "~src/assets/css/_variables.scss";
+
+.actions {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: $spacing-md;
+}
+
+.actions > button {
+	margin-right: $spacing-sm;
+}
+
+.actions > button:last-child {
+	margin-right: 0;
+}
+
+.mat-dialog-actions {
+	margin-bottom: 0;
+}
+
+.content-box {
+	padding: 0 $spacing-xl;
+}

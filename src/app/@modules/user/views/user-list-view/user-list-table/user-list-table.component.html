@@ -1,0 +1,49 @@
+<div *ngIf="isReady && users">
+
+  <table class="app-table">
+
+    <tr>
+      <th (click)="clickColumnHeader('_label_fullName')">
+        Nombre
+        <mat-icon *ngIf="isSortingByProperty('_label_fullName', 'desc')" aria-hidden="false" aria-label="Sorting by Full Name Descending">arrow_drop_down</mat-icon>
+        <mat-icon *ngIf="isSortingByProperty('_label_fullName', 'asc')" aria-hidden="false" aria-label="Sorting by Full Name Ascending">arrow_drop_up</mat-icon>
+      </th>
+      <th (click)="clickColumnHeader('username')">
+        Usuario
+        <mat-icon *ngIf="isSortingByProperty('username', 'desc')" aria-hidden="false" aria-label="Sorting by Username Descending">arrow_drop_down</mat-icon>
+        <mat-icon *ngIf="isSortingByProperty('username', 'asc')" aria-hidden="false" aria-label="Sorting by Username Ascending">arrow_drop_up</mat-icon>
+      </th>
+      <th (click)="clickColumnHeader('email')">
+        Email
+        <mat-icon *ngIf="isSortingByProperty('email', 'desc')" aria-hidden="false" aria-label="Sorting by Email Descending">arrow_drop_down</mat-icon>
+        <mat-icon *ngIf="isSortingByProperty('email', 'asc')" aria-hidden="false" aria-label="Sorting by Email Ascending">arrow_drop_up</mat-icon>
+      </th>
+      <th (click)="clickColumnHeader('_label_groupNames')">
+        Grupos
+        <mat-icon *ngIf="isSortingByProperty('_label_groupNames', 'desc')" aria-hidden="false" aria-label="Sorting by Groups Descending">arrow_drop_down</mat-icon>
+        <mat-icon *ngIf="isSortingByProperty('_label_groupNames', 'asc')" aria-hidden="false" aria-label="Sorting by Groups Ascending">arrow_drop_up</mat-icon>
+      </th>
+      <th (click)="clickColumnHeader('_label_roleNames')">
+        Roles
+        <mat-icon *ngIf="isSortingByProperty('_label_roleNames', 'desc')" aria-hidden="false" aria-label="Sorting by Roles Descending">arrow_drop_down</mat-icon>
+        <mat-icon *ngIf="isSortingByProperty('_label_roleNames', 'asc')" aria-hidden="false" aria-label="Sorting by Roles Ascending">arrow_drop_up</mat-icon>
+      </th>
+    </tr>
+
+    <tr *ngFor="let user of users" (click)="clickUser(user)" class="hover-bg-shadow hover-pointer">
+      <td>{{ user._label_fullName }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td matTooltip="{{ user._label_groupNames }}">
+        {{ user._label_groupNames | truncateString:15 }}
+      </td>
+      <td matTooltip="{{ user._label_roleNames }}">
+        {{ user._label_roleNames | truncateString:15 }}
+      </td>
+    </tr>
+
+  </table>
+
+  <!--<pre>{{ users | json }}</pre>-->
+
+</div>

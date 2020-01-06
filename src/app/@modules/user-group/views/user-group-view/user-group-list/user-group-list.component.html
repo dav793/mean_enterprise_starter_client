@@ -1,0 +1,18 @@
+
+<div *ngIf="userGroups">
+
+	<button mat-raised-button class="add-group-btn app-btn primary size-xs"
+			(click)="addUserGroupButtonClick()"
+	>
+		Nuevo <mat-icon aria-hidden="false" aria-label="Add User Group">add_circle_outline</mat-icon>
+	</button>
+
+	<table class="app-table">
+
+		<tr *ngFor="let group of userGroups; let i = index" (click)="clickUserGroup(group)" class="hover-bg-shadow hover-pointer">
+			<td>{{ group.label }}</td>
+		</tr>
+
+	</table>
+
+</div>

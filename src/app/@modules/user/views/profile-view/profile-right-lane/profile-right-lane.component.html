@@ -1,0 +1,61 @@
+<div *ngIf="userForm">
+	<div class="pad-all-lg">
+
+		<div class="app-grid marg-bottom-md">
+			<div class="item1">
+				<app-form-input-text
+					[fGroup]="userForm"
+					fControlName="firstName"
+					label="Nombre"
+					[errorMessages]="errorMessages.firstName"
+				></app-form-input-text>
+			</div>
+			<div class="item2">
+				<app-form-input-text
+					[fGroup]="userForm"
+					fControlName="lastName"
+					label="Primer Apellido"
+				></app-form-input-text>
+			</div>
+			<div class="item3">
+				<app-form-input-text
+					[fGroup]="userForm"
+					fControlName="secondLastName"
+					label="Segundo Apellido"
+				></app-form-input-text>
+			</div>
+
+			<div class="item4">
+				<app-form-input-text
+					[fGroup]="userForm"
+					fControlName="email"
+					label="Email"
+				></app-form-input-text>
+			</div>
+
+			<div class="item5 marg-top-md">
+				<app-form-input-select-search
+					[fGroup]="userForm"
+					fControlName="roleIds"
+					[options]="roleOptions"
+					[multiple]="true"
+					label="Roles"
+				></app-form-input-select-search>
+			</div>
+
+			<!--<div class="item6 marg-bottom-md">-->
+				<!--<app-form-input-select-search-->
+					<!--[fGroup]="groupsForm"-->
+					<!--fControlName="groupIds"-->
+					<!--[options]="userGroupOptions"-->
+					<!--[multiple]="true"-->
+					<!--label="Groups"-->
+				<!--&gt;</app-form-input-select-search>-->
+			<!--</div>-->
+
+		</div>
+
+		<!--<pre>{{ userForm.value | json }}</pre>-->
+
+	</div>
+</div>

@@ -1,0 +1,41 @@
+
+@import "~src/assets/css/_variables.scss";
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.section-label {
+  margin-right: $spacing-sm;
+}
+
+.section-items {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.item-align-left {
+  flex-direction: row;
+}
+
+.item-align-right {
+  flex-direction: row-reverse;
+}
+
+.item-align-left > * {
+  margin-right: $spacing-sm;
+}
+
+.item-align-left > *:last-child {
+  margin-right: 0;
+}
+
+.item-align-right > * {
+  margin-left: $spacing-sm;
+}
+
+.item-align-right > *:last-child {
+  margin-left: 0;
+}

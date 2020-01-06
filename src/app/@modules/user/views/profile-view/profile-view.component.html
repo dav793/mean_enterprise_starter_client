@@ -1,0 +1,36 @@
+
+<div *ngIf="isLoading" class="loading">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div *ngIf="!isLoading">
+
+  <app-toolbar
+    [config]="toolbarConfig"
+    (events$)="onToolbarEvent($event)"
+  ></app-toolbar>
+
+  <div class="profile-grid">
+    <div class="lane1">
+
+      <app-user-profile-left-lane
+        [user$]="user$"
+      ></app-user-profile-left-lane>
+
+    </div>
+    <div class="lane2">
+
+      <app-user-profile-right-lane
+        [user$]="user$"
+		[userGroups$]="userGroups$"
+        [roles$]="roles$"
+        [revert$]="revert$"
+        (formChanges)="onUserFormChange($event)"
+        (formValidChanges)="onUserFormValidChange($event)"
+        (formDirtyChanges)="onUserFormDirtyChange($event)"
+      ></app-user-profile-right-lane>
+
+    </div>
+  </div>
+
+</div>

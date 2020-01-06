@@ -1,0 +1,49 @@
+
+<div *ngIf="isLoading" class="loading">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div *ngIf="!isLoading">
+
+	<app-toolbar
+		[config]="toolbarConfig"
+		(events$)="onToolbarEvent($event)"
+	></app-toolbar>
+
+	<div class="view-grid">
+
+		<div class="role-list">
+			<app-role-list
+				[roles$]="roles$"
+				(selectRole)="selectRole($event)"
+				(addRole)="addRole()"
+			></app-role-list>
+		</div>
+
+		<div class="role-form app-grid">
+			<div class="item-half">
+				<app-role-form
+					[role$]="selectedRole$"
+					[revert$]="revertForms$"
+					(formChanges)="onRoleFormChange($event)"
+					(formValidChanges)="onRoleFormValidChange($event)"
+					(formDirtyChanges)="onRoleFormDirtyChange($event)"
+				></app-role-form>
+			</div>
+		</div>
+
+		<div class="permission-table app-grid">
+			<div class="item-full">
+				<app-role-permission-table
+					[role$]="selectedRole$"
+					[revert$]="revertForms$"
+					(formChanges)="onPermFormChange($event)"
+					(formValidChanges)="onPermFormValidChange($event)"
+					(formDirtyChanges)="onPermFormDirtyChange($event)"
+				></app-role-permission-table>
+			</div>
+		</div>
+
+	</div>
+
+</div>

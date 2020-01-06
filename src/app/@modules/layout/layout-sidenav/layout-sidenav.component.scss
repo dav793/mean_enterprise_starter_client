@@ -1,0 +1,40 @@
+
+@import "~src/assets/css/_variables.scss";
+
+.sidenav-wrapper {
+	width: 100%;
+	height: 100%;
+	background-color: $primary-darker;
+	color: $tertiary-textbody;
+	font-size: $font-sz-md;
+	padding-top: $spacing-sm;
+}
+
+.sidenav-option {
+	display: block;
+	padding: 0 $spacing-sm;
+	line-height: 38px;
+	color: $tertiary-textbody;
+	text-decoration: none;
+}
+
+.sidenav-option:hover {
+	background-color: $primary-even-darker;
+	color: $secondary-textbody-darkgb;
+	cursor: pointer;
+}
+
+.sidenav-label {
+	display: block;
+	padding: 0 $spacing-sm;
+	line-height: 38px;
+	color: $secondary-textbody-darkgb;
+	font-size: $font-sz-xs;
+	text-transform: uppercase;
+	border-bottom: 2px solid $primary-even-darker;
+}
+
+mat-icon {
+	vertical-align: middle;
+	font-size: 20px;
+}

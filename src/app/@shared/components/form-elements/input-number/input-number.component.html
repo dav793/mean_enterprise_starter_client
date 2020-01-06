@@ -1,0 +1,19 @@
+
+<div *ngIf="inputsReady">
+
+  <mat-form-field class="full-width">
+
+    <mat-label>{{ label }}</mat-label>
+
+    <form [formGroup]="frontForm" class="full-width">
+      <input matInput formControlName="text" name="text">
+    </form>
+
+    <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+
+  </mat-form-field>
+
+</div>
+<div *ngIf="!inputsReady">
+  <p>not ready</p>
+</div>

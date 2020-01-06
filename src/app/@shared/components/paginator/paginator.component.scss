@@ -1,0 +1,36 @@
+
+@import "../../../../assets/css/variables";
+
+.paginator-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-section {
+  text-align: left;
+}
+
+.center-section {
+  flex-grow: 1;
+  text-align: left;
+  vertical-align: middle;
+  margin-left: $spacing-sm;
+}
+
+.right-section {
+  text-align: right;
+}
+
+.page-size-input {
+  width: 50px;
+  display: inline-block;
+}
+
+.page-num-input {
+  width: 30px;
+  display: inline-block;
+}
+
+.center-section span {
+  line-height: 53px;
+}

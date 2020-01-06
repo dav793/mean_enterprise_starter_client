@@ -1,0 +1,27 @@
+
+<div *ngIf="(user$ | async)">
+
+  <div class="pad-all-lg">
+
+    <p class="talign-center">
+      <img src="assets/img/user.png">
+    </p>
+
+    <p class="marg-bottom-none talign-center t-primary">
+      {{ (user$ | async).firstName }}
+      {{ (user$ | async).lastName }}
+      <ng-container *ngIf="(user$ | async).secondLastName">{{ (user$ | async).secondLastName }}</ng-container>
+    </p>
+    <p class="f-italic talign-center t-muted">
+      {{ (user$ | async).username }}
+    </p>
+
+    <p class="marg-top-lg talign-center">
+      <!--<button mat-raised-button color="primary" class="marg-bottom-sm">Cambiar contraseña</button>-->
+      <!--<button mat-raised-button color="accent" class="marg-bottom-sm">Cambiar contraseña</button>-->
+      <!--<button mat-raised-button color="warn" class="marg-bottom-sm">Cambiar contraseña</button>-->
+    </p>
+
+  </div>
+
+</div>

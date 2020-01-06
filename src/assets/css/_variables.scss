@@ -1,0 +1,58 @@
+
+@import '~@angular/material/theming';
+
+// select theme colors
+$app-primary: mat-palette($mat-indigo);
+$app-accent:  mat-palette($mat-lime);
+$app-warn:    mat-palette($mat-deep-orange);
+$app-success: mat-palette($mat-light-green);
+
+
+// colors
+$primary: mat-color($app-primary);
+$primary-darker: mat-color($app-primary, darker);
+$primary-even-darker: mat-color($app-primary, 800);
+$primary-darkest: mat-color($app-primary, 900);
+$primary-lighter: mat-color($app-primary, lighter);
+
+$accent: mat-color($app-accent);
+$accent-darker: mat-color($app-accent, darker);
+$accent-lighter: mat-color($app-accent, lighter);
+
+$success: mat-color($app-success);
+$success-darker: mat-color($app-success, darker);
+$success-lighter: mat-color($app-success, lighter);
+
+$warn: #ffb122;
+
+$error: #ff2255;
+
+$primary-textbody: #212121;
+$secondary-textbody: #757575;
+$secondary-textbody-darkgb: #d7d7d7;
+$tertiary-textbody: #f9f9f9;
+
+$shadow-color: #f9f9f9;
+
+
+// sizes
+$spacing-xs: 10px;
+$spacing-sm: 15px;
+$spacing-md: 25px;
+$spacing-lg: 40px;
+$spacing-xl: 80px;
+
+
+// fonts
+$font-sz-xs: 10px;
+$font-sz-sm: 12px;
+$font-sz-md: 14px;
+$font-sz-lg: 18px;
+$font-sz-xl: 22px;
+
+$sans-serif: Roboto, "Helvetica Neue", sans-serif;
+
+
+// layouts
+$nav-height: 50px;
+$sidenav-width: 200px;

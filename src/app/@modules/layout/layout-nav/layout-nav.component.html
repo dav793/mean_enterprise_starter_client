@@ -1,0 +1,52 @@
+
+<div class="navbar-wrapper mat-elevation-z6">
+	<div class="brand">
+
+		Product Name
+
+	</div>
+	<div class="menu fsize-md">
+		<div class="left-menu">
+
+			<a (click)="onClickUserList()">
+				<mat-icon aria-hidden="false" aria-label="Description">inbox</mat-icon>
+				Option 1
+			</a>
+
+			<a (click)="onClickRoles()">
+				<mat-icon aria-hidden="false" aria-label="Description">access_alarm</mat-icon>
+				Option 2
+			</a>
+
+			<a (click)="onClickUserGroups()">
+				<mat-icon aria-hidden="false" aria-label="Description">security</mat-icon>
+				Option 3
+			</a>
+
+			<a (click)="onClickContactList()">
+				<mat-icon aria-hidden="false" aria-label="Description">security</mat-icon>
+				Option 4
+			</a>
+
+		</div>
+		<div class="right-menu">
+
+			<a (click)="onClickUserProfile()">
+				<mat-icon aria-hidden="false" aria-label="User profile">person</mat-icon>
+				Option 4
+			</a>
+
+			<a (click)="onClickLogIn()">
+				Log In
+			</a>
+
+			<button mat-icon-button class="app-btn primary"
+				matTooltip="Log out"
+				(click)="onClickLogOut()"
+			>
+				<mat-icon aria-hidden="false" aria-label="Log out">exit_to_app</mat-icon>
+			</button>
+
+		</div>
+	</div>
+</div>

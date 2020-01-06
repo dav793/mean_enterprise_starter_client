@@ -1,0 +1,61 @@
+
+@import "~src/assets/css/_variables.scss";
+
+.layout-grid {
+	display: grid;
+	grid-template-columns: $sidenav-width auto;
+	grid-template-rows: $nav-height auto;
+}
+
+.app-navbar {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.app-sidenav {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.app-main-content {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	padding: $spacing-sm;
+	box-sizing: border-box;
+	height: calc(100vh - #{$nav-height});
+	overflow: auto;
+	background-color: whitesmoke;
+}
+
+/**
+  * yes, the clear-style class is an ugly solution,
+  * but it is by far the solution that brought upon the least resistance.
+  **/
+.app-main-content.clear-style {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+mat-card.clear-style {
+	padding: 0;
+	margin: 0;
+	box-shadow: none;
+	border-radius: 0;
+	border: none;
+}
+
+.card-fill {
+	min-height: 100%;
+}
+
+.router-viewport {
+	overflow-x: auto;
+	min-width: 650px;
+}

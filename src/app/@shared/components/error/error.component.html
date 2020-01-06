@@ -1,0 +1,16 @@
+
+<div class="error-wrapper">
+
+	<h1>
+		<mat-icon *ngIf="errorIsUnauthorized || errorIsForbidden" aria-hidden="false" aria-label="Error" class="err-icon">block</mat-icon>
+		<mat-icon *ngIf="errorIsInternalServerError" aria-hidden="false" aria-label="Error" class="err-icon">cancel</mat-icon>
+	</h1>
+	<h3 class="err-header">Oh no! Parece que ha ocurrido un error.</h3>
+	<!--<h5 class="err-subheader">Por favor contacte a un administrador del sistema.</h5>-->
+	<h6 class="err-code" *ngIf="errorSig || errorMessage">
+		<span *ngIf="errorSig"><{{errorSig}}> </span>
+		{{errorMessage}}
+	</h6>
+
+</div>
+

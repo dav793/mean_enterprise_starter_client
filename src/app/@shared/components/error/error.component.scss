@@ -1,0 +1,28 @@
+
+@import "~src/assets/css/_variables.scss";
+
+h1, h2, h3, h4, h5, h6, p {
+	text-align: center;
+	color: $error;
+}
+
+.error-wrapper {
+	padding: $spacing-lg 0;
+}
+
+.err-icon {
+	font-size: 80px;
+	width: auto;
+	height: auto;
+}
+
+.err-header {}
+
+.err-subheader {
+	margin-top: $spacing-sm;
+}
+
+.err-code {
+	font-size: $font-sz-md;
+	margin-top: $spacing-lg;
+}

@@ -1,0 +1,38 @@
+@import "~src/assets/css/_variables.scss";
+
+.wrapper {
+	display: grid;
+	grid-template-columns: auto 500px auto;
+	grid-row-gap: $spacing-sm;
+	grid-column-gap: $spacing-lg;
+	grid-auto-rows: minmax($spacing-xl, auto);
+}
+
+.header {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.form {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+h1{
+	font-size: $spacing-lg;
+}
+
+.button {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: flex-end;
+	margin-top: $spacing-md;
+}
+
+.button > div {
+	text-align: right;
+}
+
+.button p {
+	margin: $spacing-xs 0 0 0;
+}

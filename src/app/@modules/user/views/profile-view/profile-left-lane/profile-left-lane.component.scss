@@ -1,0 +1,14 @@
+
+@import "~src/assets/css/_variables.scss";
+
+.t-primary {
+  color: $primary;
+}
+
+.t-secondary {
+  color: $accent;
+}
+
+.t-muted {
+  color: $secondary-textbody;
+}

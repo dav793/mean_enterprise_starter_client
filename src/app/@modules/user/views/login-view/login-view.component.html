@@ -1,0 +1,47 @@
+<div class="wrapper">
+
+	<div class="content-box">
+		<mat-card class="login-box">
+
+			<h3 class="header">PRODUCT NAME</h3>
+
+			<app-form-input-text
+				[fGroup]="loginForm"
+				fControlName="username"
+				label="Username"
+				(onSubmit)="login()"
+			></app-form-input-text>
+
+			<app-form-input-password
+				[fGroup]="loginForm"
+				fControlName="password"
+				label="Password"
+				(onSubmit)="login()"
+			></app-form-input-password>
+
+			<br>
+
+			<p *ngIf="errorMessage && !loading" class="error-message">{{errorMessage}}</p>
+
+			<div class="login-box-footer">
+				<div></div>
+				<div>
+					<button mat-raised-button color="primary" class="right" type="submit" [disabled]="loading" (click)="login()">
+						<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+						Enter
+						<mat-icon aria-hidden="false" aria-label="Log out">exit_to_app</mat-icon>
+					</button>
+				</div>
+			</div>
+			<p class="recover">
+				<a href="">Recover lost password</a>
+			</p>
+
+		</mat-card>
+
+		<div class="footer">
+			<p>Need an account? <a routerLink="/register" class="light">Sign up</a>.</p>
+		</div>
+	</div>
+
+</div>

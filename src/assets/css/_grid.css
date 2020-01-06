@@ -1,0 +1,39 @@
+
+/*
+ * This stylesheet allows full placement control of elements within a 12-column based grid system
+ * To use it, apply the class 'app-grid' to the wrapper element, and put the individual elements inside
+ * Then, apply css classes/properties on the child elements to control their placement
+ *
+ * Unlike other systems like bootstrap, the individual elements do not need to be placed inside a row wrapper
+ */
+
+.app-grid {
+	display: grid;
+	grid-template-columns: repeat(12, [col-start] 1fr);
+	grid-auto-flow: column;
+	grid-gap: 20px;
+}
+
+/*
+ * You can position an element within the grid using the 'grid-column' and 'grid-row' properties.
+ *
+ * As an example:
+ *
+ * .item1 {
+ *   grid-column: col-start / span 3;		place on first column, span 3 column tracks and 1 row
+ * }
+ *
+ *
+ * Some more property examples:
+ *
+ * grid-column: col-start 6 / -1; 		    start on column 6, span all column tracks from 6 to the end of the row
+ *
+ * grid-row: 2;								start on row 2
+ * grid-row: 1 / 3;							start on row 1, end before row 3 (span 2 rows)
+ *
+ */
+
+/*
+ * For more info and examples, refer to:
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Realizing_common_layouts_using_CSS_Grid_Layout
+ */

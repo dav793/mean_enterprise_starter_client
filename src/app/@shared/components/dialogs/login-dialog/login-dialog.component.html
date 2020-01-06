@@ -1,0 +1,21 @@
+
+<div class="fsize-md">
+	<h1 mat-dialog-title class="fsize-lg"><mat-icon aria-hidden="false" aria-label="Log in">lock</mat-icon> {{data.title}}</h1>
+	<div mat-dialog-content class="content-box">
+
+		<app-form-input-password
+			[fGroup]="loginForm"
+			fControlName="password"
+			label="Password"
+			(onSubmit)="login()"
+		></app-form-input-password>
+
+	</div>
+	<div mat-dialog-actions class="actions">
+
+		<button mat-raised-button cdkFocusInitial color="primary" class="right" type="submit" (click)="login()">
+			Enter <mat-icon aria-hidden="false" aria-label="Log in">exit_to_app</mat-icon>
+		</button>
+
+	</div>
+</div>

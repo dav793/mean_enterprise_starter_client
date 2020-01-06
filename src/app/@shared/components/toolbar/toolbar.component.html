@@ -1,0 +1,49 @@
+
+<div>
+
+  <mat-toolbar>
+
+    <div class="flex-container full-width">
+      <div class="section-label" *ngIf="hasLabel">
+
+        <span>{{ config.label }}</span>
+
+      </div>
+      <div
+        class="section-items"
+        *ngIf="hasItems"
+        [ngClass]="{
+          'item-align-left': config.itemAlignment === 'left',
+          'item-align-right': config.itemAlignment === 'right'
+        }"
+      >
+
+        <ng-container *ngFor="let item of itemList; let i = index">
+
+          <ng-container *ngIf="!item.isHidden">
+
+            <ng-container [ngSwitch]="item.type">
+
+              <button
+                *ngSwitchCase="'button'"
+                class="app-btn"
+                mat-flat-button
+                [ngClass]="getClassesObj(item.classes)"
+                (click)="onButtonClick(i)"
+                [disabled]="item.isDisabled"
+              >
+                <ng-container *ngIf="item.label">{{ item.label }}</ng-container>
+              </button>
+
+            </ng-container>
+
+          </ng-container>
+
+        </ng-container>
+
+      </div>
+    </div>
+
+  </mat-toolbar>
+
+</div>

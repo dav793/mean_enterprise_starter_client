@@ -1,0 +1,15 @@
+
+.item1 {
+	grid-column: col-start / span 6;
+	grid-row: 1;
+}
+
+.item2 {
+	grid-column: col-start / span 6;
+	grid-row: 2;
+}
+
+.item3 {
+	grid-column: col-start 7 / -1;
+	grid-row: 2;
+}

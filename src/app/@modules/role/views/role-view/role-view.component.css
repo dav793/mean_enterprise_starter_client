@@ -1,0 +1,37 @@
+
+.view-grid {
+  display: grid;
+  grid-template-columns: 250px minmax(400px, auto);
+  grid-template-rows: auto auto;
+}
+
+.view-grid > .role-list {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.view-grid > .role-form {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.view-grid > .permission-table {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.item-half {
+  grid-column: col-start / span 6;
+  grid-row: 1;
+}
+
+.item-full {
+	grid-column: col-start / span 12;
+	grid-row: 1;
+}

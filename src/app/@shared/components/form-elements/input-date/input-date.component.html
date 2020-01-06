@@ -1,0 +1,56 @@
+<div *ngIf="inputsReady">
+
+	<ng-container *ngIf="!multiple">
+
+		<mat-form-field class="full-width">
+
+			<mat-label>{{ label }} (dd/mm/aaaa)</mat-label>
+
+			<form [formGroup]="frontForm" class="full-width">
+				<input matInput #pickerInput formControlName="date"
+					   (change)="onDateFrontFormSingleChange($event, pickerInput.value)"
+					   (dateChange)="onDateSingleChange($event, pickerInput.value)"
+					   [matDatepicker]="myDatepicker"
+				>
+			</form>
+			<mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+			<mat-datepicker #myDatepicker></mat-datepicker>
+
+			<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+
+		</mat-form-field>
+
+	</ng-container>
+
+	<ng-container *ngIf="multiple">
+
+		<mat-form-field class="full-width">
+
+			<mat-label>{{ label }} (dd/mm/aaaa)</mat-label>
+
+			<input matInput (dateChange)="onDateMultiChange($event, pickerInputMulti.value)"
+				   [matDatepicker]="myDatepicker" #pickerInputMulti placeholder="Escriba y presione Enter">
+			<mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+			<mat-datepicker #myDatepicker></mat-datepicker>
+
+			<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+
+		</mat-form-field>
+
+		<mat-chip-list>
+			<mat-chip *ngFor="let chip of getFormControl().value; let i = index"
+					  [selectable]="true"
+					  [removable]="true"
+					  (removed)="onChipRemove(i)"
+			>
+				{{ chip }}
+				<mat-icon matChipRemove>cancel</mat-icon>
+			</mat-chip>
+		</mat-chip-list>
+
+	</ng-container>
+
+</div>
+<div *ngIf="!inputsReady">
+	<p>not ready</p>
+</div>

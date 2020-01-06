@@ -1,0 +1,45 @@
+
+<div *ngIf="permForm">
+
+	<div class="pad-all-lg">
+
+		<div class="row marg-bottom-md">
+			<div class="col-12">
+
+				<h5>Permisos</h5>
+
+				<table class="app-table">
+
+					<tr>
+						<th>Recurso</th>
+						<th *ngFor="let action of actionTypes" class="pad-left-sm pad-right-sm">
+							<a class="app-link" (click)="onClickAction(action)">{{ action }}</a>
+						</th>
+					</tr>
+
+					<tr *ngFor="let resource of resourceNames" class="hover-bg-shadow hover-pointer">
+						<td>
+							<a class="app-link row-leftmost" (click)="onClickResource(resource)">{{ resource }}</a>
+						</td>
+						<td *ngFor="let action of actionTypes" class="select-cell pad-left-sm pad-right-sm">
+
+							<app-form-input-select
+								[fGroup]="getResourceForm(resource)"
+								fControlName="{{ action }}"
+								[options]="levelOptions"
+							></app-form-input-select>
+
+						</td>
+					</tr>
+
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!--<pre>{{ permForm.value | json }}</pre>-->
+
+</div>
+

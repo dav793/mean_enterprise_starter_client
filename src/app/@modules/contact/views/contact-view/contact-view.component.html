@@ -1,0 +1,248 @@
+
+<div *ngIf="isLoading" class="loading">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div *ngIf="!isLoading">
+
+	<app-toolbar
+		[config]="toolbarConfig"
+		(events$)="onToolbarEvent($event)"
+	></app-toolbar>
+
+	<div *ngIf="contactForm" class="pad-all-lg form-container">
+
+		<div class="app-grid marg-top-sm">
+			<div class="item-A1">
+				<app-form-input-select
+					[fGroup]="contactForm"
+					fControlName="contactType"
+					[options]="contactTypeOptions"
+					label="Type"
+					[errorMessages]="errorMessages.contactType"
+				></app-form-input-select>
+			</div>
+		</div>
+
+		<div *ngIf="showPhysicalContactForm()" class="app-grid marg-top-sm">
+
+			<div class="item-B-title1">
+				<h3 class="marg-top-lg marg-bottom-sm">Personal</h3>
+			</div>
+
+			<div class="item-B1">
+				<app-form-input-text
+					[fGroup]="contactForm"
+					fControlName="firstName"
+					label="First name"
+					[errorMessages]="errorMessages.firstName"
+				></app-form-input-text>
+			</div>
+
+			<div class="item-B2">
+				<app-form-input-text
+					[fGroup]="contactForm"
+					fControlName="middleName"
+					label="Middle name"
+					[errorMessages]="errorMessages.middleName"
+				></app-form-input-text>
+			</div>
+
+			<div class="item-B3">
+				<app-form-input-text
+					[fGroup]="contactForm"
+					fControlName="lastName"
+					label="Last name"
+					[errorMessages]="errorMessages.lastName"
+				></app-form-input-text>
+			</div>
+
+			<div class="item-B4">
+				<app-form-input-text
+					[fGroup]="contactForm"
+					fControlName="mothersMaidenName"
+					label="Mother's maiden name"
+					[errorMessages]="errorMessages.mothersMaidenName"
+				></app-form-input-text>
+			</div>
+
+			<div class="item-B5 marg-top-lg">
+				<app-form-input-select
+					[fGroup]="contactForm"
+					fControlName="gender"
+					[options]="genderOptions"
+					label="Gender"
+					[errorMessages]="errorMessages.gender"
+				></app-form-input-select>
+			</div>
+
+			<div class="item-B6">
+				<app-form-input-select
+					[fGroup]="contactForm"
+					fControlName="maritalStatus"
+					[options]="maritalStatusOptions"
+					label="Marital status"
+					[errorMessages]="errorMessages.maritalStatus"
+				></app-form-input-select>
+			</div>
+
+			<div class="item-B7 marg-top-lg">
+				<app-form-input-date
+					[fGroup]="contactForm"
+					fControlName="birthDate"
+					label="Birth date"
+					[errorMessages]="errorMessages.birthDate"
+				></app-form-input-date>
+			</div>
+
+			<div class="item-B8">
+				<app-form-input-select-search
+					[fGroup]="contactForm"
+					fControlName="countryOfBirth"
+					[options]="countryOptions"
+					label="Country of birth"
+					[errorMessages]="errorMessages.countryOfBirth"
+				></app-form-input-select-search>
+			</div>
+
+			<div class="item-B9">
+				<app-form-input-select-search
+					[fGroup]="contactForm"
+					fControlName="nationalities"
+					[options]="countryOptions"
+					[multiple]="true"
+					label="Nationalities"
+					[errorMessages]="errorMessages.nationalities"
+				></app-form-input-select-search>
+			</div>
+
+			<div class="item-B10 marg-top-lg">
+				<app-form-input-text
+					[fGroup]="contactForm"
+					fControlName="homePhoneNumber"
+					label="Home phone number"
+					[errorMessages]="errorMessages.homePhoneNumber"
+				></app-form-input-text>
+			</div>
+
+			<div class="item-B11 marg-top-lg">
+				<app-form-input-text
+					[fGroup]="contactForm"
+					fControlName="mobilePhoneNumber"
+					label="Mobile phone number"
+					[errorMessages]="errorMessages.mobilePhoneNumber"
+				></app-form-input-text>
+			</div>
+
+			<div class="item-B12">
+				<app-form-input-text
+					[fGroup]="contactForm"
+					fControlName="email"
+					label="Email address"
+					[errorMessages]="errorMessages.email"
+				></app-form-input-text>
+			</div>
+
+			<div class="item-B13 marg-top-lg">
+				<app-form-input-check
+					[fGroup]="contactForm"
+					fControlName="isPep"
+					label="Politically exposed person (or spouse of one)"
+				></app-form-input-check>
+			</div>
+
+			<div class="item-B-title2 marg-top-lg">
+				<h3 class="title">Identifications</h3>
+				<div>
+					<button
+						(click)="addIdentification()"
+						class="app-btn success size-sm"
+						mat-flat-button
+					>
+						<mat-icon aria-hidden="false" aria-label="Add ID">add</mat-icon>
+					</button>
+				</div>
+			</div>
+
+			<div class="item-B14">
+				<div *ngFor="let identification of identifications.controls; let i = index" class="app-grid marg-bottom-lg">
+					<div class="item-B-identification1">
+						<app-form-input-toggle
+							[fGroup]="contactForm"
+							[fArrayName]="'identifications'"
+							[fArrayIndex]="i"
+							fControlName="isMainId"
+							label="Main ID"
+						></app-form-input-toggle>
+
+						<!--<app-form-input-text-->
+							<!--[fGroup]="contactForm"-->
+							<!--[fArrayName]="'identifications'"-->
+							<!--[fArrayIndex]="i"-->
+							<!--fControlName="idNumber"-->
+							<!--label="ID number"-->
+							<!--[errorMessages]="errorMessages.identifications.idNumber"-->
+						<!--&gt;</app-form-input-text>-->
+					</div>
+
+					<div class="item-B-identification2">
+						<div></div>
+						<div>
+							<button
+								(click)="removeIdentification(i)"
+								class="app-btn error size-sm"
+								mat-flat-button
+							>
+								<mat-icon aria-hidden="false" aria-label="Remove ID">clear</mat-icon>
+							</button>
+						</div>
+					</div>
+
+					<div class="item-B-identification3">
+						<app-form-input-select
+							[fGroup]="contactForm"
+							[fArrayName]="'identifications'"
+							[fArrayIndex]="i"
+							fControlName="idType"
+							[options]="identificationTypeOptions"
+							label="Type"
+							[errorMessages]="errorMessages.identifications.idType"
+						></app-form-input-select>
+					</div>
+
+					<div class="item-B-identification4">
+						<!--<app-form-input-date-->
+							<!--[fGroup]="contactForm"-->
+							<!--[fArrayName]="'arrayValues'"-->
+							<!--[fArrayIndex]="i"-->
+							<!--fControlName="expirationDate"-->
+							<!--label="Expiration date"-->
+							<!--[errorMessages]="errorMessages.identifications.expirationDate"-->
+						<!--&gt;</app-form-input-date>-->
+					</div>
+				</div>
+			</div>
+
+			<!--<div class="item-B-title3">-->
+				<!--<h3 class="marg-bottom-sm">Addresses</h3>-->
+			<!--</div>-->
+
+			<!--<div class="item-B-title4">-->
+				<!--<h3 class="marg-bottom-sm">Ocupation</h3>-->
+			<!--</div>-->
+
+		</div>
+
+		<div *ngIf="showCorporateContactForm()" class="app-grid marg-top-sm">
+
+		</div>
+
+	</div>
+
+	<pre>{{ contact | json }}</pre>
+
+	<div *ngIf="contactForm">
+		<pre>{{ contactForm.value | json }}</pre>
+	</div>
+
+</div>

@@ -1,0 +1,62 @@
+
+@import "~src/assets/css/_variables.scss";
+
+.navbar-wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	background-color: $primary;
+	color: $tertiary-textbody;
+	line-height: $nav-height;
+	vertical-align: middle;
+}
+
+.navbar-wrapper .brand {
+	width: $sidenav-width;
+	padding: 0 $spacing-sm 0 $spacing-sm;
+	text-transform: uppercase;
+	font-size: $font-sz-lg;
+}
+
+.navbar-wrapper .menu {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: row;
+}
+
+.navbar-wrapper .menu .left-menu {
+	flex-grow: 1;
+	padding: 0 $spacing-sm 0 $spacing-sm;
+}
+
+.navbar-wrapper .menu .right-menu {
+	padding: 0 $spacing-sm 0 $spacing-sm;
+}
+
+.navbar-wrapper .menu .left-menu a,
+.navbar-wrapper .menu .right-menu a {
+	padding-right: $spacing-sm;
+	padding-left: $spacing-sm;
+	display: inline-block;
+	cursor: pointer;
+	color: $tertiary-textbody;
+}
+
+.navbar-wrapper .menu .left-menu a:hover {
+	background-color: $primary-darker;
+}
+
+.navbar-wrapper .menu .left-menu a:hover,
+.navbar-wrapper .menu .right-menu a:hover {
+	color: $secondary-textbody-darkgb;
+}
+
+mat-icon {
+	vertical-align: middle;
+	font-size: 20px;
+}
+
+button:hover {
+	color: $secondary-textbody-darkgb;
+}
