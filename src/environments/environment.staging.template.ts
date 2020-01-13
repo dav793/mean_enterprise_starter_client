@@ -4,5 +4,6 @@ export const environment = {
   api_url: 'http://localhost:8080/api',
   socket_url: 'http://localhost:8080',
   session_token: '',
-  session_uid: ''
+  session_uid: '',
+  app_id: 'mes'
 };

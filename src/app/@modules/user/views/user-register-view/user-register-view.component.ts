@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -10,14 +10,14 @@ import { UserStoreService } from '../../store/user-store';
 
 import { validatePasswords } from './confirm-password.validator';
 import { regularTextValidator } from '../../../../@shared/validators/regular-text.validator';
-import {ToasterService} from "../../../../@shared/lib/ngx-toastr/toaster.service";
+import { ToasterService } from '../../../../@shared/lib/ngx-toastr/toaster.service';
 
 @Component({
 	selector: 'app-user-register-view',
 	templateUrl: './user-register-view.component.html',
 	styleUrls: ['./user-register-view.component.scss']
 })
-export class UserRegisterViewComponent implements OnInit {
+export class UserRegisterViewComponent implements OnInit, OnDestroy {
 
 	registerForm: FormGroup;
 	passwordForm: FormGroup;

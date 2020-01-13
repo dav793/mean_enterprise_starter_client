@@ -113,7 +113,7 @@ class Utils {
 	 * check if an object is empty (equal to {})
 	 */
 	isEmptyObj(obj: any): boolean {
-    	for (let key in obj) {
+    	for (const key in obj) {
     		if (obj.hasOwnProperty(key))
     			return false;
 		}

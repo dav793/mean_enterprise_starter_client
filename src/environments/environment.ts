@@ -8,7 +8,8 @@ export const environment = {
   api_url: '',
   socket_url: '',
   session_token: '',
-  session_uid: ''
+  session_uid: '',
+  app_id: ''
 };
 
 /*

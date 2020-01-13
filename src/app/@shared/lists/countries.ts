@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 /**
  *  risk1: http://www.knowyourcountry.com
  *  risk2: https://www.transparency.org/cpi2012/results

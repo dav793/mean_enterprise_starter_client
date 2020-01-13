@@ -30,9 +30,9 @@ import {
 import { ISearchPropertyMetadata } from '../../../../@shared/components/search/search.interface';
 import { ISortPropertyMetadata } from '../../../../@shared/helpers/utils/sort-utils';
 
-import { ErrorCode } from "../../../../@shared/enums/errors";
-import { ViewStatus } from "../../../../@shared/types/view-status";
-import { IActionMetadata } from "../../../../@shared/helpers/utils/store-action-metadata-factory";
+import { ErrorCode } from '../../../../@shared/enums/errors';
+import { ViewStatus } from '../../../../@shared/types/view-status';
+import { IActionMetadata } from '../../../../@shared/helpers/utils/store-action-metadata-factory';
 import SortUtils from '../../../../@shared/helpers/utils/sort-utils';
 import Utils from '../../../../@shared/helpers/utils/utils';
 

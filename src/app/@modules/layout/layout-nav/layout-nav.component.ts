@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {UserSessionService} from "../../../@core/user/user-session.service";
+import {UserSessionService} from '../../../@core/user/user-session.service';
 
 @Component({
     selector: 'app-layout-nav',

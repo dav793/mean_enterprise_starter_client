@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 /**
  *  http://www.felaban.com/lvdo/cap4_definicion.html#act
  *

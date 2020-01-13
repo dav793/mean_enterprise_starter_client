@@ -1,8 +1,8 @@
 
 const list = [
-	{id:"1",label:"Masculino"},
-	{id:"2",label:"Femenino"},
-	{id:"3",label:"No especifica"}
+	{id: '1', label: 'Masculino'},
+	{id: '2', label: 'Femenino'},
+	{id: '3', label: 'No especifica'}
 ];
 
 class GendersUtility {

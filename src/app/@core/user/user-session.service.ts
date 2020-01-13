@@ -14,8 +14,6 @@ import { DialogService } from '../../@shared/services/dialog.service';
 import { ServerEventStreamService } from '../../@shared/services/server-event-stream.service';
 import { ISocketMessage, SocketMessageType } from '../../@shared/lib/socket-io/socket-types';
 
-import { environment } from '../../../environments/environment';
-
 import Utils from '../../@shared/helpers/utils/utils';
 
 /**
@@ -113,7 +111,7 @@ export class UserSessionService {
 				return this.coreStore.selectUser(session.uid).pipe(
 					switchMap((user: IUser) => {
 						// get user from API service if store doesn't have it
-						let user$ = user ? of(user) : this.userApiService.getUser(session.uid);
+						const user$ = user ? of(user) : this.userApiService.getUser(session.uid);
 						return user$ as Observable<IUser>;
 					}),
 					switchMap((user: IUser) => this.replyLogin(user.username, dialogResponse.password))

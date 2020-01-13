@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { of, zip } from 'rxjs';
-import { filter, first, mergeMap } from "rxjs/operators";
+import { filter, first, mergeMap } from 'rxjs/operators';
 import { excludeFalsy } from '../../../@shared/helpers/operators/exclude-falsy';
 
 import { State } from './user-state';
@@ -62,7 +62,7 @@ export class UserStoreService {
 }
 
 export interface IUserStoreEventInfo {
-	eventId: string,
-	errorCode: ErrorCode,
+	eventId: string;
+	errorCode: ErrorCode;
 	errorSig?: string;
 }

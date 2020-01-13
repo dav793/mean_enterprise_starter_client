@@ -1,10 +1,10 @@
 
 
 const list = [
-	{id:"1",label:"Passport"},
-	{id:"2",label:"Costa Rican National"},
-	{id:"3",label:"Costa Rican Resident"},
-	{id:"4",label:"DIMEX"}
+	{id: '1', label: 'Passport'},
+	{id: '2', label: 'Costa Rican National'},
+	{id: '3', label: 'Costa Rican Resident'},
+	{id: '4', label: 'DIMEX'}
 ];
 
 class IdentificationTypesUtility {

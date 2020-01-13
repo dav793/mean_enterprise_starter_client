@@ -7,7 +7,7 @@ import { IUserGroup } from '../../../../../@core/user-group/user-group.model';
 import { IUser, User } from '../../../../../@core/user/user.model';
 import { IRole } from '../../../../../@core/role/role.model';
 import { IOptionType } from '../../../../../@shared/components/form-elements/option-type';
-import Utils from "../../../../../@shared/helpers/utils/utils";
+import Utils from '../../../../../@shared/helpers/utils/utils';
 
 @Component({
 	selector: 'app-user-group-form',

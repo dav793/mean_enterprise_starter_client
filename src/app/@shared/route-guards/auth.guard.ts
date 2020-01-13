@@ -14,20 +14,20 @@ export class AuthGuard implements CanActivate {
 	/**
 	 * allow route activation if a valid, unexpired session token is found
 	 *
-	 * @param next
-	 * @param state
+	 * @param next next
+	 * @param state state
 	 */
   	canActivate(
     	next: ActivatedRouteSnapshot,
-    	state: RouterStateSnapshot): Observable<boolean> | boolean {
-
+    	state: RouterStateSnapshot): Observable<boolean> | boolean
+	{
 		const session = this.userSessionService.getSessionData();
 		if (!session || session.expired) {
 			this.router.navigate(['login']);
 			return false;
 		}
 
-    	return true;
+		return true;
 	}
   
 }

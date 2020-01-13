@@ -100,7 +100,7 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 		).subscribe(id => {
 
 			// unsubscribe from previous store subscriptions
-			for(let i = 0; i < this.subs.length;) {
+			for (const i = 0; i < this.subs.length;) {
 				this.subs[i].unsubscribe();
 				this.subs = this.subs.slice(0, 1);
 			}

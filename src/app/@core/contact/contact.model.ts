@@ -3,155 +3,155 @@ import Utils from '../../@shared/helpers/utils/utils';
 import { ContactTypes } from '../../@shared/lists/contact-types';
 
 export interface IAddress {
-	street: string,
-	city: string,
-	state: string,
-	country: string,
-	postalCode: string
+	street: string;
+	city: string;
+	state: string;
+	country: string;
+	postalCode: string;
 }
 
 export interface IPhoneNumber {
-	phoneNumber: string,
-	detail: string
+	phoneNumber: string;
+	detail: string;
 }
 
 export interface IIdentification {
-	idType: string,
-	idNumber: string,
-	expirationDate: Date,
-	isMainId: boolean
+	idType: string;
+	idNumber: string;
+	expirationDate: Date;
+	isMainId: boolean;
 }
 
 export interface ICorporateRepresentative {
-	name: string,
-	relation: string,
-	participationPercentage: number,
-	addressLine: string
+	name: string;
+	relation: string;
+	participationPercentage: number;
+	addressLine: string;
 }
 
 export interface ICommercialReference {
-	name: string,
-	phoneNumber: string
+	name: string;
+	phoneNumber: string;
 }
 
 export interface IPhysicalContact {
 	_id: string;
-	contactType: string,
-	firstName: string,
-	middleName: string,
-	lastName: string,
-	mothersMaidenName: string,
-	gender: string,
-	maritalStatus: string,
-	nationalities: string[],
-	countryOfBirth: string,
-	birthDate: Date,
-	homePhoneNumber: string,
-	mobilePhoneNumber: string,
-	email: string,
-	isPep: boolean,
-	identifications: IIdentification[],
-	addresses: IAddress[],
-	profession: string,
-	jobPosition: string,
-	companyName: string,
-	companyActivity: string,
-	companyPhoneNumber: string,
-	companyAddressLine: string,
-	grossMonthlyIncome: number,
-	sourcesOfIncome: string,
-	sourcesOfFunds: string[],
-	otherSourcesOfFunds: string,
-	countriesOfFundsOrigin: string[],
-	purposeOfFunds: string[],
-	otherPurposesOfFunds: string,
-	estimatedAmountOfTransactions: string,
-	deleted: boolean,
-	createdAt?: Date,
-	updatedAt?: Date
+	contactType: string;
+	firstName: string;
+	middleName: string;
+	lastName: string;
+	mothersMaidenName: string;
+	gender: string;
+	maritalStatus: string;
+	nationalities: string[];
+	countryOfBirth: string;
+	birthDate: Date;
+	homePhoneNumber: string;
+	mobilePhoneNumber: string;
+	email: string;
+	isPep: boolean;
+	identifications: IIdentification[];
+	addresses: IAddress[];
+	profession: string;
+	jobPosition: string;
+	companyName: string;
+	companyActivity: string;
+	companyPhoneNumber: string;
+	companyAddressLine: string;
+	grossMonthlyIncome: number;
+	sourcesOfIncome: string;
+	sourcesOfFunds: string[];
+	otherSourcesOfFunds: string;
+	countriesOfFundsOrigin: string[];
+	purposeOfFunds: string[];
+	otherPurposesOfFunds: string;
+	estimatedAmountOfTransactions: string;
+	deleted: boolean;
+	createdAt?: Date;
+	updatedAt?: Date;
 }
 
 export interface ICorporateContact {
 	_id: string;
-	contactType: string,
-	corporationName: string,
-	corporationType: string,
-	corporationIdNumber: string,
-	dateOfConstitution: Date,
-	countryOfConstitution: string,
-	email: string,
-	languagesSpoken: string[],
-	phoneNumbers: IPhoneNumber[],
-	isPep: boolean,
-	namesOfPeps: string[],
-	corporateRepresentatives: ICorporateRepresentative[],
-	commercialReferences: ICommercialReference[],
-	addresses: IAddress[],
-	companyActivity: string,
-	grossMonthlyIncome: number,
-	sourcesOfIncome: string,
-	sourcesOfFunds: string[],
-	otherSourcesOfFunds: string,
-	countriesOfFundsOrigin: string[],
-	purposeOfFunds: string[],
-	otherPurposesOfFunds: string,
-	estimatedAmountOfTransactions: string,
-	deleted: boolean,
-	createdAt?: Date,
-	updatedAt?: Date
+	contactType: string;
+	corporationName: string;
+	corporationType: string;
+	corporationIdNumber: string;
+	dateOfConstitution: Date;
+	countryOfConstitution: string;
+	email: string;
+	languagesSpoken: string[];
+	phoneNumbers: IPhoneNumber[];
+	isPep: boolean;
+	namesOfPeps: string[];
+	corporateRepresentatives: ICorporateRepresentative[];
+	commercialReferences: ICommercialReference[];
+	addresses: IAddress[];
+	companyActivity: string;
+	grossMonthlyIncome: number;
+	sourcesOfIncome: string;
+	sourcesOfFunds: string[];
+	otherSourcesOfFunds: string;
+	countriesOfFundsOrigin: string[];
+	purposeOfFunds: string[];
+	otherPurposesOfFunds: string;
+	estimatedAmountOfTransactions: string;
+	deleted: boolean;
+	createdAt?: Date;
+	updatedAt?: Date;
 }
 
 export interface IContact {
 	_id: string;
 
 	// common properties
-	contactType: string,
-	email: string,
-	isPep: boolean,
-	addresses: IAddress[],
-	companyActivity: string,
-	grossMonthlyIncome: number,
-	sourcesOfIncome: string,
-	sourcesOfFunds: string[],
-	otherSourcesOfFunds: string,
-	countriesOfFundsOrigin: string[],
-	purposeOfFunds: string[],
-	otherPurposesOfFunds: string,
-	estimatedAmountOfTransactions: string,
-	deleted: boolean,
-	createdAt?: Date,
-	updatedAt?: Date,
+	contactType: string;
+	email: string;
+	isPep: boolean;
+	addresses: IAddress[];
+	companyActivity: string;
+	grossMonthlyIncome: number;
+	sourcesOfIncome: string;
+	sourcesOfFunds: string[];
+	otherSourcesOfFunds: string;
+	countriesOfFundsOrigin: string[];
+	purposeOfFunds: string[];
+	otherPurposesOfFunds: string;
+	estimatedAmountOfTransactions: string;
+	deleted: boolean;
+	createdAt?: Date;
+	updatedAt?: Date;
 
 	// physical contact properties
-	firstName?: string,
-	middleName?: string,
-	lastName?: string,
-	mothersMaidenName?: string,
-	gender?: string,
-	maritalStatus?: string,
-	nationalities?: string[],
-	countryOfBirth?: string,
-	birthDate?: Date,
-	homePhoneNumber?: string,
-	mobilePhoneNumber?: string,
-	identifications?: IIdentification[],
-	profession?: string,
-	jobPosition?: string,
-	companyName?: string,
-	companyPhoneNumber?: string,
-	companyAddressLine?: string,
+	firstName?: string;
+	middleName?: string;
+	lastName?: string;
+	mothersMaidenName?: string;
+	gender?: string;
+	maritalStatus?: string;
+	nationalities?: string[];
+	countryOfBirth?: string;
+	birthDate?: Date;
+	homePhoneNumber?: string;
+	mobilePhoneNumber?: string;
+	identifications?: IIdentification[];
+	profession?: string;
+	jobPosition?: string;
+	companyName?: string;
+	companyPhoneNumber?: string;
+	companyAddressLine?: string;
 
 	// corporate contact properties
-	corporationName?: string,
-	corporationType?: string,
-	corporationIdNumber?: string,
-	dateOfConstitution?: Date,
-	countryOfConstitution?: string,
-	languagesSpoken?: string[],
-	phoneNumbers?: IPhoneNumber[],
-	namesOfPeps?: string[],
-	corporateRepresentatives?: ICorporateRepresentative[],
-	commercialReferences?: ICommercialReference[],
+	corporationName?: string;
+	corporationType?: string;
+	corporationIdNumber?: string;
+	dateOfConstitution?: Date;
+	countryOfConstitution?: string;
+	languagesSpoken?: string[];
+	phoneNumbers?: IPhoneNumber[];
+	namesOfPeps?: string[];
+	corporateRepresentatives?: ICorporateRepresentative[];
+	commercialReferences?: ICommercialReference[];
 }
 
 export class PhysicalContact {

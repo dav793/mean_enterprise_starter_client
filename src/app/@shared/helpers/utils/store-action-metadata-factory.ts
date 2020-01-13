@@ -1,5 +1,5 @@
 import IdGenerator from './id-generator';
-import { ErrorCode } from "../../enums/errors";
+import { ErrorCode } from '../../enums/errors';
 
 export interface IActionMetadata {
   clientId?: string;

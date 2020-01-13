@@ -1,7 +1,7 @@
 
 const list = [
-    {id: '1', name: "Mantiene relaciones comerciales locales y en el exterior",riskLevel:4},
-    {id: '2', name: "Mantiene solo relaciones comerciales locales",riskLevel:2}
+    {id: '1', name: 'Mantiene relaciones comerciales locales y en el exterior', riskLevel: 4},
+    {id: '2', name: 'Mantiene solo relaciones comerciales locales', riskLevel: 2}
 ];
 
 class CommercialRelationsUtility {
