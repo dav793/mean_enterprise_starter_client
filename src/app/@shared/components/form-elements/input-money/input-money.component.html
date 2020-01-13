@@ -1,0 +1,106 @@
+<div *ngIf="inputsReady">
+
+	<ng-container *ngIf="!multiple">
+
+		<ng-container *ngIf="fControlName">
+
+			<mat-form-field class="full-width">
+
+				<mat-label>{{ label }}</mat-label>
+
+				<form [formGroup]="frontForm" class="full-width">
+					<input matInput #moneyInput formControlName="money"
+						(change)="onMoneyFrontFormSingleChange($event, moneyInput.value)"
+					>
+				</form>
+
+				<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+
+			</mat-form-field>
+
+		</ng-container>
+
+	</ng-container>
+
+</div>
+
+<!--<div *ngIf="inputsReady">-->
+
+	<!--<ng-container *ngIf="!multiple">-->
+
+		<!--<ng-container *ngIf="fControlName">-->
+
+			<!--<form [formGroup]="fGroup" (submit)="_onSubmit()" class="full-width">-->
+
+				<!--<ng-container *ngIf="!isFormArrayMember">-->
+
+					<!--<mat-form-field class="full-width">-->
+
+						<!--<mat-label>{{ label }}</mat-label>-->
+						<!--<input matInput formControlName="{{ fControlName }}">-->
+						<!--<mat-icon *ngIf="icon" matSuffix>{{icon}}</mat-icon>-->
+						<!--<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>-->
+
+					<!--</mat-form-field>-->
+
+				<!--</ng-container>-->
+
+				<!--<ng-container *ngIf="isFormArrayMember">-->
+
+					<!--<div formArrayName="{{ fArrayName }}">-->
+						<!--<div [formGroupName]="fArrayIndex">-->
+
+							<!--<mat-form-field class="full-width">-->
+
+								<!--<mat-label>{{ label }}</mat-label>-->
+								<!--<input matInput formControlName="{{ fControlName }}">-->
+								<!--<mat-icon *ngIf="icon" matSuffix>{{icon}}</mat-icon>-->
+								<!--<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>-->
+
+							<!--</mat-form-field>-->
+
+						<!--</div>-->
+					<!--</div>-->
+
+				<!--</ng-container>-->
+
+			<!--</form>-->
+
+		<!--</ng-container>-->
+
+	<!--</ng-container>-->
+
+	<!--<ng-container *ngIf="multiple && multiTextForm">-->
+
+		<!--<mat-form-field class="full-width">-->
+
+			<!--<mat-label>{{ label }}</mat-label>-->
+
+			<!--<form [formGroup]="multiTextForm" (ngSubmit)="onMultiFormSubmit()" class="full-width">-->
+				<!--<input matInput formControlName="multiText" name="multiText" placeholder="Escriba y presione Enter">-->
+			<!--</form>-->
+
+			<!--<mat-icon *ngIf="icon" matSuffix>{{icon}}</mat-icon>-->
+
+			<!--<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>-->
+
+		<!--</mat-form-field>-->
+
+
+		<!--<mat-chip-list>-->
+			<!--<mat-chip *ngFor="let chip of getFormControl().value; let i = index"-->
+				<!--[selectable]="true"-->
+				<!--[removable]="true"-->
+				<!--(removed)="onChipRemove(i)"-->
+			<!--&gt;-->
+				<!--{{ chip }}-->
+				<!--<mat-icon matChipRemove>cancel</mat-icon>-->
+			<!--</mat-chip>-->
+		<!--</mat-chip-list>-->
+
+	<!--</ng-container>-->
+
+<!--</div>-->
+<!--<div *ngIf="!inputsReady">-->
+	<!--<p>not ready</p>-->
+<!--</div>-->

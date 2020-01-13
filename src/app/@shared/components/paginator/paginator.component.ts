@@ -9,6 +9,8 @@ import { IOptionType } from '../form-elements/option-type';
 import Paginator from './paginator';
 import Utils from '../../helpers/utils/utils';
 
+/* tslint:disable */
+
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',

@@ -13,6 +13,7 @@ import { InputRadioComponent } from './input-radio/input-radio.component';
 import { InputToggleComponent } from './input-toggle/input-toggle.component';
 import { InputPasswordComponent } from './input-password/input-password.component';
 import { InputNumberComponent } from './input-number/input-number.component';
+import { InputMoneyComponent } from './input-money/input-money.component';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { InputNumberComponent } from './input-number/input-number.component';
         InputCheckComponent,
         InputToggleComponent,
         InputRadioComponent,
-        InputNumberComponent
+        InputNumberComponent,
+		InputMoneyComponent
     ],
     exports: [
         InputTextComponent,
@@ -41,7 +43,8 @@ import { InputNumberComponent } from './input-number/input-number.component';
         InputCheckComponent,
         InputToggleComponent,
         InputRadioComponent,
-        InputNumberComponent
+        InputNumberComponent,
+		InputMoneyComponent
     ]
 })
 export class FormElementsModule { }

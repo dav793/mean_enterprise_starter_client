@@ -86,6 +86,10 @@ export class FormInputsComponent implements OnInit {
             required: 'Campo obligatorio',
             number: 'No es un número válido'
         },
+		money: {
+			required: 'Campo obligatorio',
+			number: 'No es un monto de dinero válido'
+		},
 		arrayValues: {
         	text: {
 				required: 'Campo obligatorio'
@@ -154,6 +158,7 @@ export class FormInputsComponent implements OnInit {
             password:             [ '',                           [ Validators.required ] ],
             // password:             [ '12345678',                   [ Validators.required ] ],
             number:               [ 100,                          [ Validators.required, numberValidator() ] ],
+			money:                [ 1000,                         [ Validators.required, numberValidator() ] ],
             check:                [ true,                         [] ],
             toggle:               [ true,                         [] ],
             radio:                [ '2',                          [] ],

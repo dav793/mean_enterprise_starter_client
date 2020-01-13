@@ -6,6 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 import { ISearchPropertyMetadata } from './search.interface';
 import Search from './search';
 
+/* tslint:disable */
+
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',

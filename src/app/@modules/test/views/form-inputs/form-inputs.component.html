@@ -187,6 +187,24 @@
 			</div>
 		</div>
 
+		<h2 class="marg-top-md marg-bottom-sm">Money</h2>
+
+		<div class="marg-bottom-lg">
+			<div>
+
+				<app-form-input-money
+					[fGroup]="form"
+					fControlName="money"
+					label="Money"
+					[errorMessages]="errorMessages.money"
+				></app-form-input-money>
+
+				<pre class="marg-top-sm">value: {{ form.controls['money'].value }}</pre>
+				<pre class="marg-top-sm">typeof value: {{ getTypeof(form.controls['money'].value) }}</pre>
+
+			</div>
+		</div>
+
 		<h2 class="marg-top-md marg-bottom-sm">Check</h2>
 
 		<div class="marg-bottom-lg">
