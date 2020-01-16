@@ -14,6 +14,7 @@ import {
 import {FormControl, FormGroup, FormArray} from '@angular/forms';
 import {takeUntil} from 'rxjs/operators';
 import {combineLatest, EMPTY, merge, ReplaySubject, Subject} from 'rxjs';
+import {formatMoney, unformat} from 'accounting-js';
 
 import * as _ from 'lodash';
 
@@ -47,14 +48,13 @@ export class InputMoneyComponent implements OnInit, OnChanges, OnDestroy, AfterV
 	protected onSetupErrorReflection$ = new Subject();
     protected onReflectErrors$ = new Subject();
     protected onDestroy$ = new Subject();
-	protected afterViewInit$ = new Subject();
+    protected afterViewInit$ = new Subject();
 
     constructor() { }
 
     ngOnInit() {
 		this.buildFrontForm();
 		this.setFrontFormInitialValue();
-
 		combineLatest(
 			this.onInputsReady$,
 			this.onFrontFormReady$
@@ -155,29 +155,28 @@ export class InputMoneyComponent implements OnInit, OnChanges, OnDestroy, AfterV
 	watchFrontFormChanges() {
 
 		const backControl = this.getFormControl();
-		const frontControl = this.frontForm.controls['money'];
-
-		frontControl.valueChanges
+        const frontControl = this.frontForm.controls['money'];
+                
+        frontControl.valueChanges
 			.pipe( takeUntil(this.onDestroy$) )
 			.subscribe(() => {
 
-				let val = '';
-				if (this.moneyInput)
-					val = this.moneyInput.nativeElement.value;
+                let val = '';
+                if (this.moneyInput)
+                    val = this.moneyInput.nativeElement.value;
 
-				backControl.setValue(val, { emitEvent: true });
-				backControl.markAsDirty();
-				backControl.markAsTouched();
-				backControl.updateValueAndValidity();
-
-			});
-	}
+                backControl.setValue(unformat(val), { emitEvent: true });
+                backControl.markAsDirty();
+                backControl.markAsTouched();
+                backControl.updateValueAndValidity();
+                frontControl.setValue(formatMoney(backControl.value), { emitEvent: false });
+            });
+    }
 
 	onMoneyFrontFormSingleChange(event, inputText) {
 		const backControl = this.getFormControl();
 		const frontControl = this.frontForm.controls['money'];
 
-		// backControl.setValue(frontControl.value ? frontControl.value.format(Format.DATE) : inputText, { emitEvent: true });
 		backControl.setValue(frontControl.value ? frontControl.value : inputText, { emitEvent: true });
 		backControl.markAsDirty();
 		backControl.markAsTouched();
