@@ -11,10 +11,10 @@ import {
 	ElementRef,
 	AfterViewInit
 } from '@angular/core';
-import {FormControl, FormGroup, FormArray} from '@angular/forms';
-import {takeUntil} from 'rxjs/operators';
-import {combineLatest, EMPTY, merge, ReplaySubject, Subject} from 'rxjs';
-import {formatMoney, unformat} from 'accounting-js';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { takeUntil} from 'rxjs/operators';
+import { combineLatest, EMPTY, merge, ReplaySubject, Subject} from 'rxjs';
+import { formatMoney, unformat, settings } from 'accounting-js';
 
 import * as _ from 'lodash';
 
@@ -80,7 +80,7 @@ export class InputMoneyComponent implements OnInit, OnChanges, OnDestroy, AfterV
 				).subscribe(() => {
 
 					setTimeout(() => {  // wrapped in setTimout to avoid ExpressionChangedAfterItWasChecked error
-						this.moneyInput.nativeElement.value = this.getFormControl().value;
+						this.moneyInput.nativeElement.value = formatMoney(this.getFormControl().value);
 					});
 
 				});
@@ -156,7 +156,6 @@ export class InputMoneyComponent implements OnInit, OnChanges, OnDestroy, AfterV
 
 		const backControl = this.getFormControl();
         const frontControl = this.frontForm.controls['money'];
-                
         frontControl.valueChanges
 			.pipe( takeUntil(this.onDestroy$) )
 			.subscribe(() => {
@@ -168,7 +167,18 @@ export class InputMoneyComponent implements OnInit, OnChanges, OnDestroy, AfterV
                 backControl.setValue(unformat(val), { emitEvent: true });
                 backControl.markAsDirty();
                 backControl.markAsTouched();
-                backControl.updateValueAndValidity();
+				backControl.updateValueAndValidity();
+				
+				const valArray = backControl.value.toString().split('.');
+				if (valArray.length > 1){
+
+					if (valArray[1].length > 2){
+						settings.precision = valArray[1].length;
+					}else{
+						settings.precision = 2;
+					}
+				}		
+				
                 frontControl.setValue(formatMoney(backControl.value), { emitEvent: false });
             });
     }
@@ -177,7 +187,7 @@ export class InputMoneyComponent implements OnInit, OnChanges, OnDestroy, AfterV
 		const backControl = this.getFormControl();
 		const frontControl = this.frontForm.controls['money'];
 
-		backControl.setValue(frontControl.value ? frontControl.value : inputText, { emitEvent: true });
+		backControl.setValue(frontControl.value ? unformat(frontControl.value) : inputText, { emitEvent: true });
 		backControl.markAsDirty();
 		backControl.markAsTouched();
 	}
