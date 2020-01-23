@@ -13,12 +13,11 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { takeUntil} from 'rxjs/operators';
-import { combineLatest, EMPTY, merge, ReplaySubject, Subject} from 'rxjs';
+import { combineLatest, merge, ReplaySubject, Subject} from 'rxjs';
 import { formatMoney, unformat, settings } from 'accounting-js';
 
 import * as _ from 'lodash';
 
-import {Format} from '../../../enums/format';
 
 @Component({
   selector: 'app-form-input-money',
@@ -48,7 +47,8 @@ export class InputMoneyComponent implements OnInit, OnChanges, OnDestroy, AfterV
 	protected onSetupErrorReflection$ = new Subject();
     protected onReflectErrors$ = new Subject();
     protected onDestroy$ = new Subject();
-    protected afterViewInit$ = new Subject();
+	protected afterViewInit$ = new Subject();
+	
 
     constructor() { }
 
@@ -177,9 +177,15 @@ export class InputMoneyComponent implements OnInit, OnChanges, OnDestroy, AfterV
 					}else{
 						settings.precision = 2;
 					}
-				}		
+				}
+						
+				const caretPos = this.moneyInput.nativeElement.selectionStart;
+
+				frontControl.setValue(formatMoney(backControl.value), { emitEvent: false });
 				
-                frontControl.setValue(formatMoney(backControl.value), { emitEvent: false });
+				this.moneyInput.nativeElement.selectionStart = caretPos;
+				this.moneyInput.nativeElement.selectionEnd = caretPos;
+				
             });
     }
 
