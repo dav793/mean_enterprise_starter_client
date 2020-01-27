@@ -44,7 +44,7 @@ import { TestModule } from './@modules/test/test.module';
         UserModule,
         // RoleModule,
 		UserGroupModule,
-		//ContactModule,
+		// ContactModule,
         TestModule
     ],
     providers: [
