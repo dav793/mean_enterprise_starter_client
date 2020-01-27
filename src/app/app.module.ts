@@ -18,9 +18,9 @@ import { SharedModule } from './@shared/shared.module';
 import { LayoutModule } from './@modules/layout/layout.module';
 import { PagesModule } from './@modules/pages/pages.module';
 import { UserModule } from './@modules/user/user.module';
-import { RoleModule } from './@modules/role/role.module';
+// import { RoleModule } from './@modules/role/role.module';
 import { UserGroupModule } from './@modules/user-group/user-group.module';
-import { ContactModule } from './@modules/contact/contact.module';
+// import { ContactModule } from './@modules/contact/contact.module';
 import { TestModule } from './@modules/test/test.module';
 
 @NgModule({
@@ -42,9 +42,9 @@ import { TestModule } from './@modules/test/test.module';
         LayoutModule,
         PagesModule,
         UserModule,
-        RoleModule,
+        // RoleModule,
 		UserGroupModule,
-		ContactModule,
+		//ContactModule,
         TestModule
     ],
     providers: [

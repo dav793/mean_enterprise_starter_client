@@ -6,7 +6,10 @@ import { RoleViewComponent } from './views/role-view/role-view.component';
 import { AuthGuard } from '../../@shared/route-guards/auth.guard';
 
 const routes: Routes = [
-    { path: '', component: RoleViewComponent, canActivate: [AuthGuard] }
+    { 
+        path: '', 
+        component: RoleViewComponent, canActivate: [AuthGuard] 
+    }
 ];
 
 @NgModule({
