@@ -32,7 +32,7 @@ export class LayoutContainerComponent implements OnInit {
     get showAppLayout(): boolean {
     	if (this.url && this.url[0] && (
 			this.url[0] === 'login' ||
-			this.url[0] === 'register'
+			( this.url[0] === 'users' && this.url[1] === 'register' )
 		))
     		return false;
     	return true;

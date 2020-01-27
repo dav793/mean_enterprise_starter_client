@@ -19,7 +19,6 @@ import { ProfileRightLaneComponent } from './views/profile-view/profile-right-la
 import { UserListViewComponent } from './views/user-list-view/user-list-view.component';
 import { UserListTableComponent } from './views/user-list-view/user-list-table/user-list-table.component';
 import { UserRegisterViewComponent } from './views/user-register-view/user-register-view.component';
-import { LoginViewComponent } from './views/login-view/login-view.component';
 
 import { UserRoutingModule } from './user-routing.module';
 
@@ -30,14 +29,12 @@ import { UserRoutingModule } from './user-routing.module';
         ProfileRightLaneComponent,
         UserListViewComponent,
         UserListTableComponent,
-        UserRegisterViewComponent,
-        LoginViewComponent
+        UserRegisterViewComponent
     ],
     exports: [
         ProfileViewComponent,
         UserListViewComponent,
-        UserRegisterViewComponent,
-        LoginViewComponent
+        UserRegisterViewComponent
     ],
     imports: [
         CommonModule,
