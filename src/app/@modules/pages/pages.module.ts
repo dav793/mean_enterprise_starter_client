@@ -6,13 +6,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../@shared/shared.module';
 
 import { DashboardViewComponent } from './views/dashboard-view/dashboard-view.component';
+import { LoginViewComponent } from './views/login-view/login-view.component';
 
 @NgModule({
     declarations: [
-        DashboardViewComponent
+        DashboardViewComponent,
+		LoginViewComponent
     ],
     exports: [
-        DashboardViewComponent
+        DashboardViewComponent,
+		LoginViewComponent
     ],
     imports: [
         CommonModule,
