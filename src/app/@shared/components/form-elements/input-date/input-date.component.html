@@ -8,9 +8,9 @@
 
 			<form [formGroup]="frontForm" class="full-width">
 				<input matInput #pickerInput formControlName="date"
-					(change)="onDateFrontFormSingleChange($event, pickerInput.value)"
-					(dateChange)="onDateSingleChange($event, pickerInput.value)"
-					[matDatepicker]="myDatepicker"
+					   (change)="onDateFrontFormSingleChange($event, pickerInput.value)"
+					   (dateChange)="onDateSingleChange($event, pickerInput.value)"
+					   [matDatepicker]="myDatepicker"
 				>
 			</form>
 			<mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
