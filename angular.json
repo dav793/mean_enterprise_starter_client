@@ -31,7 +31,7 @@
               "src/assets/css/_variables.scss",
               "src/assets/css/_common.scss",
               "src/assets/css/_tables.scss",
-			  "src/assets/css/_grid.css",
+			  "src/assets/css/_grid.scss",
               "src/assets/css/_theme.scss"
             ],
             "scripts": [],

@@ -1,0 +1,52 @@
+
+.row-full {
+	grid-column: col-start / -1;
+}
+
+.row-halves.left {
+	grid-column: col-start / 7;
+}
+
+.row-halves.right {
+	grid-column: 7 / -1;
+}
+
+.row-thirds.left {
+	grid-column: col-start / 5;
+}
+
+.row-thirds.middle {
+	grid-column: 5 / 9;
+}
+
+.row-thirds.right {
+	grid-column: 9 / -1;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+}
+
+.orange {
+	background-color: orange;
+}
+
+.purple {
+	background-color: purple;
+}
+
+.brown {
+	background-color: brown;
+}
+
+.black {
+	background-color: black;
+}
