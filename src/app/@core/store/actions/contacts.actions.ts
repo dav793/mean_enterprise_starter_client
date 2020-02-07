@@ -7,24 +7,22 @@ import { IActionMetadata } from '../../../@shared/helpers/utils/store-action-met
 import { ISocketMessage } from '../../../@shared/lib/socket-io/socket-types';
 
 export enum ActionTypes {
-	RemoveContact                   = '[Contact] Remove Contact',
-	CreateContact                   = '[Contact View] Create Contact',
-	UpdateContact                   = '[Contact View] Update Contact',
-	DeleteContact                   = '[Contact View] Delete Contact',
-	LoadContact                     = '[Contact View] Load Contact',
-	LoadAllContacts                 = '[Contact] Load All Contacts',
-	APICreateContactSuccess         = '[Contact API] Created Contact Success',
-	APICreateContactError           = '[Contact API] Created Contact Error',
-	APIUpdateContactSuccess         = '[Contact API] Updated Contact Success',
-	APIUpdateContactError           = '[Contact API] Updated Contact Error',
-	APIDeleteContactSuccess         = '[Contact API] Deleted Contact Success',
-	APIDeleteContactError           = '[Contact API] Deleted Contact Error',
-	APILoadContactSuccess           = '[Contact API] Loaded Contact Success',
-	APILoadContactError             = '[Contact API] Loaded Contact Error',
-	APILoadAllContactsSuccess       = '[Contact API] Loaded All Contacts Success',
-	APILoadAllContactsError         = '[Contact API] Loaded All Contacts Error',
-	ServerEventUpdateContacts       = '[Server Event] Update Contacts',
-	NoOp                          	= '[User] No Operation'
+	RemoveContact                  	= '[Contact] Remove Contact',
+	CreateContact                  	= '[Contact] Create Contact',
+	UpdateContact                  	= '[Contact] Update Contact',
+	DeleteContact                  	= '[Contact] Delete Contact',
+	LoadContact                    	= '[Contact] Load Contact',
+	LoadAllContacts                	= '[Contact] Load All Contacts',
+	APICreateContactSuccess        	= '[Contact API] Created Contact Success',
+	APICreateContactError          	= '[Contact API] Created Contact Error',
+	APIUpdateContactSuccess        	= '[Contact API] Updated Contact Success',
+	APIUpdateContactError          	= '[Contact API] Updated Contact Error',
+	APIDeleteContactSuccess        	= '[Contact API] Deleted Contact Success',
+	APIDeleteContactError          	= '[Contact API] Deleted Contact Error',
+	APILoadAllContactsSuccess      	= '[Contact API] Loaded All Contacts Success',
+	APILoadAllContactsError        	= '[Contact API] Loaded All Contacts Error',
+	ServerEventUpdateContacts      	= '[Server Event] Update Contacts',
+	NoOp                        	= '[Contact] No Operation'
 }
 
 export class RemoveContact implements Action {
@@ -40,7 +38,7 @@ export class CreateContact implements Action {
 	readonly type = ActionTypes.CreateContact;
 
 	constructor(public payload: {
-		contact: any,
+		contact: IContact,
 		meta?: IActionMetadata
 	}) {}
 }
@@ -50,7 +48,7 @@ export class UpdateContact implements Action {
 
 	constructor(public payload: {
 		contactId: string,
-		contact: any,
+		contact: IContact,
 		meta?: IActionMetadata
 	}) {}
 }
@@ -139,24 +137,6 @@ export class APIDeleteContactError implements Action {
 	}) {}
 }
 
-export class APILoadContactSuccess implements Action {
-	readonly type = ActionTypes.APILoadContactSuccess;
-
-	constructor(public payload: {
-		contact: IContact,
-		meta?: IActionMetadata
-	}) {}
-}
-
-export class APILoadContactError implements Action {
-	readonly type = ActionTypes.APILoadContactError;
-
-	constructor(public payload: {
-		error: Error,
-		meta?: IActionMetadata
-	}) {}
-}
-
 export class APILoadAllContactsSuccess implements Action {
 	readonly type = ActionTypes.APILoadAllContactsSuccess;
 
@@ -185,23 +165,19 @@ export class NoOp implements Action {
 	readonly type = ActionTypes.NoOp;
 }
 
-export type ActionsUnion =  RemoveContact |
-							CreateContact |
-							UpdateContact |
-							DeleteContact |
-							LoadContact |
-							LoadAllContacts |
-							APICreateContactSuccess |
-							APICreateContactError |
-							APIUpdateContactSuccess |
-							APIUpdateContactError |
-							APIDeleteContactSuccess |
-							APIDeleteContactError |
-							APILoadContactSuccess |
-							APILoadContactError |
-							APILoadAllContactsSuccess |
-							APILoadAllContactsError |
-							ServerEventUpdateContacts |
-							NoOp;
-
-
+export type ActionsUnion =  	RemoveContact |
+								CreateContact |
+								UpdateContact |
+								DeleteContact |
+								LoadContact |
+								LoadAllContacts |
+								APICreateContactSuccess |
+								APICreateContactError |
+								APIUpdateContactSuccess |
+								APIUpdateContactError |
+								APIDeleteContactSuccess |
+								APIDeleteContactError |
+								APILoadAllContactsSuccess |
+								APILoadAllContactsError |
+								ServerEventUpdateContacts |
+								NoOp;

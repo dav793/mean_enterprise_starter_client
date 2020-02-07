@@ -15,9 +15,7 @@ export enum SocketMessageType {
 	UPDATE_USERS                    = 'updateUsers',
 	UPDATE_USER_GROUPS              = 'updateUserGroups',
 	UPDATE_ROLES                    = 'updateRoles',
-	UPDATE_PHYSICAL_CONTACTS        = 'updatePhysicalContacts',
-	UPDATE_CORPORATE_CONTACTS       = 'updateCorporateContacts',
-	UPDATE_ACCOUNTS                 = 'updateAccounts'
+	UPDATE_CONTACTS        			= 'updateContacts'
 }
 
 // create an interface here for every type of payload that may be sent by a socket message type
@@ -43,27 +41,17 @@ export interface IUpdateRolesPayload {
 	originatorId: string;
 }
 
-export interface IUpdatePhysicalContactsPayload {
-	originatorId: string;
-}
-
-export interface IUpdateCorporateContactsPayload {
-	originatorId: string;
-}
-
-export interface IUpdateAccountsPayload {
+export interface IUpdateContactsPayload {
 	originatorId: string;
 }
 
 export type SocketMessagePayloadType =  IAssignClientIdPayload |        // <- add individual payload types to union type
-	IRequestAuthenticationPayload |
-	IUpdateUsersPayload |
-	IUpdateUserGroupsPayload |
-	IUpdateRolesPayload |
-	IUpdatePhysicalContactsPayload |
-	IUpdateCorporateContactsPayload |
-	IUpdateAccountsPayload |
-	{};
+										IRequestAuthenticationPayload |
+										IUpdateUsersPayload |
+										IUpdateUserGroupsPayload |
+										IUpdateRolesPayload |
+										IUpdateContactsPayload |
+										{};
 
 export interface ISocketMessage {
 	type: SocketMessageType;

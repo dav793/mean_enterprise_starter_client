@@ -12,17 +12,20 @@ import { SharedModule } from '../../@shared/shared.module';
 import { ContactRoutingModule } from './contact-routing.module';
 
 import { ContactViewComponent } from './views/contact-view/contact-view.component';
-// import { RoleListComponent } from './views/role-view/role-list/role-list.component';
-// import { RoleFormComponent } from './views/role-view/role-form/role-form.component';
+// import { ContactFormComponent } from './views/contact-view/contact-form/contact-form.component';
+import { ContactListViewComponent } from './views/contact-list-view/contact-list-view.component';
+// import { ContactTableComponent } from './views/contact-list-view/contact-table/contact-table.component';
 
 @NgModule({
 	declarations: [
-		ContactViewComponent
-		// RoleListComponent,
-		// RoleFormComponent
+		ContactViewComponent,
+		// ContactFormComponent,
+		ContactListViewComponent
+		// ContactTableComponent,
 	],
 	exports: [
-		ContactViewComponent
+		ContactViewComponent,
+		ContactListViewComponent
 	],
 	imports: [
 		CommonModule,

@@ -4,12 +4,14 @@ import { Action } from '@ngrx/store';
 import { IActionMetadata } from '../../../../@shared/helpers/utils/store-action-metadata-factory';
 
 export enum ActionTypes {
-	ContactUpdateSuccess     = '[Contact Module] Contact Update Success',
-	ContactUpdateError       = '[Contact Module] Contact Update Error',
-	ContactCreateSuccess     = '[Contact Module] Contact Create Success',
-	ContactCreateError       = '[Contact Module] Contact Create Error',
-	ContactDeleteSuccess     = '[Contact Module] Contact Delete Success',
-	ContactDeleteError       = '[Contact Module] Contact Delete Error'
+	ContactUpdateSuccess 		= '[Contact Module] Contact Update Success',
+	ContactUpdateError 			= '[Contact Module] Contact Update Error',
+	ContactCreateSuccess 		= '[Contact Module] Contact Create Success',
+	ContactCreateError 			= '[Contact Module] Contact Create Error',
+	ContactDeleteSuccess 		= '[Contact Module] Contact Delete Success',
+	ContactDeleteError 			= '[Contact Module] Contact Delete Error',
+	ContactLoadAllSuccess 		= '[Contact Module] Contact Load All Success',
+	ContactLoadAllError 		= '[Contact Module] Contact Load All Error'
 }
 
 export class ContactUpdateSuccess implements Action {
@@ -63,9 +65,27 @@ export class ContactDeleteError implements Action {
 	}) {}
 }
 
+export class ContactLoadAllSuccess implements Action {
+	readonly type = ActionTypes.ContactLoadAllSuccess;
+
+	constructor(public payload: {
+		meta?: IActionMetadata
+	}) {}
+}
+
+export class ContactLoadAllError implements Action {
+	readonly type = ActionTypes.ContactLoadAllError;
+
+	constructor(public payload: {
+		meta?: IActionMetadata
+	}) {}
+}
+
 export type ActionsUnion =  ContactUpdateSuccess |
-	ContactUpdateError |
-	ContactCreateSuccess |
-	ContactCreateError |
-	ContactDeleteSuccess |
-	ContactDeleteError;
+							ContactUpdateError |
+							ContactCreateSuccess |
+							ContactCreateError |
+							ContactDeleteSuccess |
+							ContactDeleteError |
+							ContactLoadAllSuccess |
+							ContactLoadAllError;

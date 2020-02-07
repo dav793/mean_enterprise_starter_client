@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import {EMPTY, of} from 'rxjs';
+import {of} from 'rxjs';
 import {
 	map,
 	tap,
@@ -10,17 +10,20 @@ import {
 	catchError, first
 } from 'rxjs/operators';
 
+import { ofTypes } from '../../../@shared/helpers/operators/of-types';
+
 import { ToasterService } from '../../../@shared/lib/ngx-toastr/toaster.service';
 
 import { ContactApiService } from '../../contact/contact-api.service';
 import { IContact } from '../../contact/contact.model';
 
 import * as ContactsActions from '../actions/contacts.actions';
-
-import { ofTypes } from '../../../@shared/helpers/operators/of-types';
 import { storeActionMetadataSingleton as ActionMetadataFactory } from '../../../@shared/helpers/utils/store-action-metadata-factory';
 
 import { CoreStoreService } from '../core-store';
+
+import { ErrorCode } from '../../../@shared/enums/errors';
+import Util from '../../../@shared/helpers/utils/utils';
 
 @Injectable()
 export class ContactsEffects {
@@ -69,7 +72,7 @@ export class ContactsEffects {
 			mergeMap(allContacts => {
 
 				if (!a.payload.meta.forceFetch && Object.keys(allContacts).length > 0)
-					return of({                           // already loaded in store; do nothing
+					return of({                               // already loaded in store; do nothing
 						type: ContactsActions.ActionTypes.NoOp
 					});
 				else
@@ -83,11 +86,13 @@ export class ContactsEffects {
 							};
 
 						}),
-						catchError(e => {
+						catchError(error => {
+
+							a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
 
 							return of({
 								type: ContactsActions.ActionTypes.APILoadAllContactsError,
-								payload: { error: e, meta: a.payload.meta }
+								payload: { error, meta: a.payload.meta }
 							});
 
 						})
@@ -109,7 +114,7 @@ export class ContactsEffects {
 			const toast = this.toaster.showSaving();
 
 			return this.contactApiService.putContact(a.payload.contactId, a.payload.contact).pipe(
-				tap(contact => console.log(`saved contact ${contact._id} to API server`)),  // @todo: replace with real logging
+				tap(contact => console.log(`saved contact ${contact._id} to API server`)),
 				map(contact => {
 
 					return {
@@ -124,6 +129,8 @@ export class ContactsEffects {
 				}),
 				catchError(error => {
 
+					a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
+
 					return of({
 						type: ContactsActions.ActionTypes.APIUpdateContactError,
 						payload: {
@@ -134,6 +141,7 @@ export class ContactsEffects {
 					});
 
 				})
+
 			);
 
 		})
@@ -145,12 +153,16 @@ export class ContactsEffects {
 	 */
 	@Effect()
 	createContact = this.actions$.pipe(
-		ofType(ContactsActions.ActionTypes.CreateContact),
+		ofTypes([
+			ContactsActions.ActionTypes.CreateContact
+		]),
 		mergeMap((a: ContactsActions.CreateContact) => {
 
 			const toast = this.toaster.showSaving();
 
-			return this.contactApiService.postContact(a.payload.contact).pipe(
+			const operation = this.contactApiService.postContact(a.payload.contact);
+
+			return operation.pipe(
 				tap(contact => console.log(`saved new contact ${contact._id} to API server`)),
 				map(contact => {
 
@@ -166,6 +178,8 @@ export class ContactsEffects {
 				}),
 				catchError(error => {
 
+					a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
+
 					return of({
 						type: ContactsActions.ActionTypes.APICreateContactError,
 						payload: {
@@ -176,6 +190,7 @@ export class ContactsEffects {
 					});
 
 				})
+
 			);
 
 		})
@@ -207,6 +222,8 @@ export class ContactsEffects {
 
 				}),
 				catchError(error => {
+
+					a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
 
 					return of({
 						type: ContactsActions.ActionTypes.APIDeleteContactError,
@@ -244,19 +261,10 @@ export class ContactsEffects {
 		})
 	);
 
-	@Effect({dispatch: false})
-	handleContactDeleteError$ = this.actions$.pipe(
-		ofType(ContactsActions.ActionTypes.APIDeleteContactError),
-		tap((a: any) => {
-			if (a.payload.error.error.startsWith('ReferencedContact')) {
-				const toast = this.toaster.showError(
-					'Contacto ha sido aplicado a uno o más cuentas',
-					'No se pudo eliminar'
-				);
-			}
-		})
-	);
-
+	/**
+	 * when any server api error event occurs,
+	 * log error and show toast message
+	 */
 	@Effect({dispatch: false})
 	logError$ = this.actions$.pipe(
 		ofTypes([
@@ -266,12 +274,16 @@ export class ContactsEffects {
 			ContactsActions.ActionTypes.APILoadAllContactsError
 		]),
 		tap((a: any) => {
+
 			console.error(a.payload.error);
+
+			// @todo: log error
 
 			if (a.payload && a.payload.overrideToastId)
 				this.toaster.clearById(a.payload.overrideToastId);
 
-			const toast = this.toaster.chooseToast(a.payload.error);
+			this.toaster.chooseToast(a.payload.error);
+
 		})
 	);
 

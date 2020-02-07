@@ -1,10 +1,6 @@
 
-import {
-	ContactModuleState,
-	initialContactModuleState,
-	ContactOperationState,
-	initialContactOperationState
-} from '../contact-state';
+import { FeatureStoreOperationState, initialFeatureStoreOperationState } from '../../../../@core/store/feature-store-types';
+import { ContactModuleState, initialContactModuleState } from '../contact-state';
 import * as ContactModuleActions from '../actions/contact.actions';
 
 export function contactModuleReducer(
@@ -15,14 +11,15 @@ export function contactModuleReducer(
 		...state,
 		contactUpdate: contactUpdateReducer(state.contactUpdate, action),
 		contactCreate: contactCreateReducer(state.contactCreate, action),
-		contactDelete: contactDeleteReducer(state.contactDelete, action)
+		contactDelete: contactDeleteReducer(state.contactDelete, action),
+		contactLoadAll: contactLoadAllReducer(state.contactLoadAll, action)
 	};
 }
 
 export function contactUpdateReducer(
-	state = initialContactOperationState,
+	state = initialFeatureStoreOperationState,
 	action: ContactModuleActions.ActionsUnion
-): ContactOperationState {
+): FeatureStoreOperationState {
 	switch (action.type) {
 
 		case ContactModuleActions.ActionTypes.ContactUpdateSuccess: {
@@ -34,8 +31,9 @@ export function contactUpdateReducer(
 
 			return Object.assign({}, state, {
 				successEventId: action.payload.meta.eventId,
-				successContactId: action.payload.contactId,
-				errorEventId: null
+				successInstanceId: action.payload.contactId,
+				errorEventId: null,
+				errorCode: null
 			});
 
 		}
@@ -47,11 +45,11 @@ export function contactUpdateReducer(
 				return state;
 			}
 
-			const eventId = action.payload.meta.eventId;
 			return Object.assign({}, state, {
 				successEventId: null,
-				successContactId: null,
-				errorEventId: eventId
+				successInstanceId: null,
+				errorEventId: action.payload.meta.eventId,
+				errorCode: action.payload.meta.errorCode
 			});
 
 		}
@@ -64,9 +62,9 @@ export function contactUpdateReducer(
 }
 
 export function contactCreateReducer(
-	state = initialContactOperationState,
+	state = initialFeatureStoreOperationState,
 	action: ContactModuleActions.ActionsUnion
-): ContactOperationState {
+): FeatureStoreOperationState {
 	switch (action.type) {
 
 		case ContactModuleActions.ActionTypes.ContactCreateSuccess: {
@@ -78,8 +76,9 @@ export function contactCreateReducer(
 
 			return Object.assign({}, state, {
 				successEventId: action.payload.meta.eventId,
-				successContactId: action.payload.contactId,
-				errorEventId: null
+				successInstanceId: action.payload.contactId,
+				errorEventId: null,
+				errorCode: null
 			});
 
 		}
@@ -91,11 +90,11 @@ export function contactCreateReducer(
 				return state;
 			}
 
-			const eventId = action.payload.meta.eventId;
 			return Object.assign({}, state, {
 				successEventId: null,
-				successContactId: null,
-				errorEventId: eventId
+				successInstanceId: null,
+				errorEventId: action.payload.meta.eventId,
+				errorCode: action.payload.meta.errorCode
 			});
 
 		}
@@ -108,9 +107,9 @@ export function contactCreateReducer(
 }
 
 export function contactDeleteReducer(
-	state = initialContactOperationState,
+	state = initialFeatureStoreOperationState,
 	action: ContactModuleActions.ActionsUnion
-): ContactOperationState {
+): FeatureStoreOperationState {
 	switch (action.type) {
 
 		case ContactModuleActions.ActionTypes.ContactDeleteSuccess: {
@@ -122,8 +121,9 @@ export function contactDeleteReducer(
 
 			return Object.assign({}, state, {
 				successEventId: action.payload.meta.eventId,
-				successContactId: action.payload.contactId,
-				errorEventId: null
+				successInstanceId: action.payload.contactId,
+				errorEventId: null,
+				errorCode: null
 			});
 
 		}
@@ -135,11 +135,56 @@ export function contactDeleteReducer(
 				return state;
 			}
 
-			const eventId = action.payload.meta.eventId;
 			return Object.assign({}, state, {
 				successEventId: null,
-				successContactId: null,
-				errorEventId: eventId
+				successInstanceId: null,
+				errorEventId: action.payload.meta.eventId,
+				errorCode: action.payload.meta.errorCode
+			});
+
+		}
+
+		default: {
+			return state;
+		}
+
+	}
+}
+
+export function contactLoadAllReducer(
+	state = initialFeatureStoreOperationState,
+	action: ContactModuleActions.ActionsUnion
+): FeatureStoreOperationState {
+	switch (action.type) {
+
+		case ContactModuleActions.ActionTypes.ContactLoadAllSuccess: {
+
+			if (!action.payload || !action.payload.meta || !action.payload.meta.eventId) {
+				console.error('malformed action: ', action.payload);
+				return state;
+			}
+
+			return Object.assign({}, state, {
+				successEventId: action.payload.meta.eventId,
+				successInstanceId: null,
+				errorEventId: null,
+				errorCode: null
+			});
+
+		}
+
+		case ContactModuleActions.ActionTypes.ContactLoadAllError: {
+
+			if (!action.payload || !action.payload.meta || !action.payload.meta.eventId || !action.payload.meta.errorCode) {
+				console.error('malformed action: ', action.payload);
+				return state;
+			}
+
+			return Object.assign({}, state, {
+				successEventId: null,
+				successInstanceId: null,
+				errorEventId: action.payload.meta.eventId,
+				errorCode: action.payload.meta.errorCode
 			});
 
 		}

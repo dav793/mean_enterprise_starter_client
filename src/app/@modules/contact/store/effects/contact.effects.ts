@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { of } from 'rxjs';
 import {
 	map
 } from 'rxjs/operators';
 
 import * as ContactModuleActions from '../actions/contact.actions';
 import * as ContactActions from '../../../../@core/store/actions/contacts.actions';
+import { setActionMetadataErrorCode } from '../../../../@shared/helpers/utils/store-action-metadata-factory';
 
 @Injectable()
 export class ContactModuleEffects {
@@ -122,6 +122,41 @@ export class ContactModuleEffects {
 			return {
 				type: ContactModuleActions.ActionTypes.ContactDeleteError,
 				payload: { meta: a.payload.meta }
+			};
+
+		})
+	);
+
+	/**
+	 * when global api load-all success event occurs,
+	 * dispatch contact module's load-all success event
+	 */
+	@Effect()
+	contactLoadAllSuccess$ = this.actions$.pipe(
+		ofType(ContactActions.ActionTypes.APILoadAllContactsSuccess),
+		map((a: ContactActions.APILoadAllContactsSuccess) => {
+
+			return {
+				type: ContactModuleActions.ActionTypes.ContactLoadAllSuccess,
+				payload: { meta: a.payload.meta }
+			};
+
+		})
+	);
+
+	/**
+	 * when global api load-all error event occurs,
+	 * dispatch contact module's load-all error event
+	 */
+	@Effect()
+	contactLoadAllError$ = this.actions$.pipe(
+		ofType(ContactActions.ActionTypes.APILoadAllContactsError),
+		map((a: ContactActions.APILoadAllContactsError) => {
+
+			const meta = setActionMetadataErrorCode(a.payload.error, a.payload.meta);
+			return {
+				type: ContactModuleActions.ActionTypes.ContactLoadAllError,
+				payload: { meta }
 			};
 
 		})

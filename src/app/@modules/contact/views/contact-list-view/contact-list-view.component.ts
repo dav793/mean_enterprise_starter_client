@@ -26,18 +26,12 @@ import { MaritalStatus} from '../../../../@shared/lists/marital-status';
 import { Countries } from '../../../../@shared/lists/countries';
 import { IdentificationTypes } from '../../../../@shared/lists/identification-types';
 
-import { contactFormErrorMessages } from './form-error-messages';
-
 @Component({
-	selector: 'app-contact-view',
-	templateUrl: './contact-view.component.html',
-	styleUrls: ['./contact-view.component.css']
+	selector: 'app-contact-list-view',
+	templateUrl: './contact-list-view.component.html',
+	styleUrls: ['./contact-list-view.component.css']
 })
-export class ContactViewComponent implements OnInit, OnDestroy {
-
-	protected contact$ = new ReplaySubject<IContact|null>(1);
-	protected contact: Contact;
-	protected selectedContactId: string;
+export class ContactListViewComponent implements OnInit, OnDestroy {
 
 	protected contactTypeOptions = ContactTypes.getOptionsList();
 	protected genderOptions = Genders.getOptionsList();
@@ -50,25 +44,13 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 	protected subs = [];
 
 	toolbarConfig: IToolbarConfig = {
-		label: 'Contacto',
+		label: 'Contactos',
 		itemAlignment: ToolbarItemAlignment.RIGHT,
 		items: {
-			save: {
+			create: {
 				type: ToolbarItemType.BUTTON,
-				label: 'guardar',
+				label: 'nuevo',
 				classes: ['success', 'size-sm'],
-				isHidden: true
-			},
-			revert: {
-				type: ToolbarItemType.BUTTON,
-				label: 'revertir',
-				classes: ['warn', 'size-sm'],
-				isHidden: true
-			},
-			delete: {
-				type: ToolbarItemType.BUTTON,
-				label: 'eliminar',
-				classes: ['error', 'size-sm'],
 				isHidden: true
 			}
 		}
@@ -80,74 +62,11 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute
 	) { }
 
-	ngOnInit() {
-
-		// whenever route parameter changes...
-		this.route.params.pipe(
-			map(params => params.id),
-			startWith(null)
-		).subscribe(id => {});
-
-	}
+	ngOnInit() {}
 
 	ngOnDestroy() {
 		this.onDestroy$.next();
 		this.onDestroy$.complete();
-	}
-
-	loadData(): Observable<boolean> {
-
-		if (this.selectedContactId) { 	// existing contact
-
-			this.coreStore.loadAllContacts();
-
-			this.subs.push(
-				this.coreStore.selectContact(this.selectedContactId)
-					.pipe(takeUntil(this.onDestroy$))
-					.subscribe((ct: IContact) => {
-						this.contact$.next(ct);
-					})
-			);
-
-		}
-		else {							// new contact
-
-			const ct = new Contact({} as IContact);
-			this.contact$.next(ct.asInterface());
-
-		}
-
-		return this.contact$.pipe(
-			tap(contact => this.contact = new Contact(contact)),
-			map(() => true)
-		);
-
-	}
-
-	deleteContact(selectedContactId: string) {
-		if (!selectedContactId)
-			return;
-
-		const actionMetadata: IActionMetadata = this.coreStore.deleteContact(selectedContactId);
-	}
-
-	saveContact(selectedContactId: string, formValue: any) {
-		if (!formValue)
-			return;
-
-		let actionMetadata: IActionMetadata;
-		if (selectedContactId)
-			actionMetadata = this.coreStore.updateContact(selectedContactId, formValue);
-		else
-			actionMetadata = this.coreStore.createContact(formValue);
-
-		this.handleCreateResponse(actionMetadata);
-	}
-
-	handleCreateResponse(actionMetadata: IActionMetadata) {
-
-
-
 	}
 
 	/**

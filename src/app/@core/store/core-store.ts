@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {filter, switchMap} from 'rxjs/operators';
 
 import { ServerEventStreamService } from '../../@shared/services/server-event-stream.service';
@@ -44,9 +44,15 @@ export class CoreStoreService {
         return this.store.select(state => state.users.all);
     }
 
-    selectUser(userId: string): Observable<IUser> {
-        return this.store.select(state => state.users.all[userId]);
-    }
+	selectUser(userId: string): Observable<IUser|null> {
+		return this.selectAllUsers().pipe(
+			switchMap((allUsers: { [key: string]: IUser }) => {
+				if (userId && userId in allUsers)
+					return of(allUsers[userId]);
+				return of(null);
+			})
+		);
+	}
 
     selectSessionUser(): Observable<IUser> {
         return this.store.select(state => state.session.user);
@@ -56,24 +62,42 @@ export class CoreStoreService {
         return this.store.select(state => state.roles.all);
     }
 
-    selectRole(roleId: string): Observable<IRole> {
-      	return this.store.select(state => state.roles.all[roleId]);
-    }
+	selectRole(roleId: string): Observable<IRole> {
+		return this.selectAllRoles().pipe(
+			switchMap((allRoles: { [key: string]: IRole }) => {
+				if (roleId && roleId in allRoles)
+					return of(allRoles[roleId]);
+				return of(null);
+			})
+		);
+	}
 
     selectAllUserGroups(): Observable<{ [key: string]: IUserGroup }> {
       	return this.store.select(state => state.userGroups.all);
     }
 
-    selectUserGroup(userGroupId: string): Observable<IUserGroup> {
-      	return this.store.select(state => state.userGroups.all[userGroupId]);
-    }
+	selectUserGroup(userGroupId: string): Observable<IUserGroup> {
+		return this.selectAllUserGroups().pipe(
+			switchMap((allUserGroups: { [key: string]: IUserGroup }) => {
+				if (userGroupId && userGroupId in allUserGroups)
+					return of(allUserGroups[userGroupId]);
+				return of(null);
+			})
+		);
+	}
 
 	selectAllContacts(): Observable<{ [key: string]: IContact }> {
 		return this.store.select(state => state.contacts.all);
 	}
 
 	selectContact(contactId: string): Observable<IContact> {
-		return this.store.select(state => state.contacts.all[contactId]);
+		return this.selectAllContacts().pipe(
+			switchMap((allContacts: { [key: string]: IContact }) => {
+				if (contactId && contactId in allContacts)
+					return of(allContacts[contactId]);
+				return of(null);
+			})
+		);
 	}
 
     selectClientId(): Observable<string> {
@@ -222,6 +246,12 @@ export class CoreStoreService {
 			filter(msg => msg.type === SocketMessageType.UPDATE_USER_GROUPS)
 		).subscribe((message: ISocketMessage) => {
 			this.store.dispatch( new UserGroupsActions.ServerEventUpdateUserGroups({ message }) );
+		});
+
+		this.serverEventService.stream$.pipe(
+			filter(msg => msg.type === SocketMessageType.UPDATE_CONTACTS)
+		).subscribe((message: ISocketMessage) => {
+			this.store.dispatch( new ContactsActions.ServerEventUpdateContacts({ message }) );
 		});
 
     }

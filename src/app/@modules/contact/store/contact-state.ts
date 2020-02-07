@@ -1,28 +1,19 @@
+import { FeatureStoreOperationState, initialFeatureStoreOperationState } from '../../../@core/store/feature-store-types';
 
 export interface State {
 	contactModule: ContactModuleState;
 }
 
 export interface ContactModuleState {
-	contactUpdate: ContactOperationState;
-	contactCreate: ContactOperationState;
-	contactDelete: ContactOperationState;
+	contactUpdate: FeatureStoreOperationState;
+	contactCreate: FeatureStoreOperationState;
+	contactDelete: FeatureStoreOperationState;
+	contactLoadAll: FeatureStoreOperationState;
 }
-
-export interface ContactOperationState {
-	successEventId: string;
-	successContactId: string;
-	errorEventId: string;
-}
-
-export const initialContactOperationState = {
-	successEventId: null,
-	successContactId: null,
-	errorEventId: null
-};
 
 export const initialContactModuleState = {
-	contactUpdate: initialContactOperationState,
-	contactCreate: initialContactOperationState,
-	contactDelete: initialContactOperationState
+	contactUpdate: initialFeatureStoreOperationState,
+	contactCreate: initialFeatureStoreOperationState,
+	contactDelete: initialFeatureStoreOperationState,
+	contactLoadAll: initialFeatureStoreOperationState
 };

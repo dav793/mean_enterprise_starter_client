@@ -10,338 +10,63 @@ export interface IAddress {
 	postalCode: string;
 }
 
-export interface IPhoneNumber {
-	phoneNumber: string;
-	detail: string;
-}
-
 export interface IIdentification {
 	idType: string;
 	idNumber: string;
 	expirationDate: Date;
+	expeditedBy: string;
 	isMainId: boolean;
-}
-
-export interface ICorporateRepresentative {
-	name: string;
-	relation: string;
-	participationPercentage: number;
-	addressLine: string;
-}
-
-export interface ICommercialReference {
-	name: string;
-	phoneNumber: string;
-}
-
-export interface IPhysicalContact {
-	_id: string;
-	contactType: string;
-	firstName: string;
-	middleName: string;
-	lastName: string;
-	mothersMaidenName: string;
-	gender: string;
-	maritalStatus: string;
-	nationalities: string[];
-	countryOfBirth: string;
-	birthDate: Date;
-	homePhoneNumber: string;
-	mobilePhoneNumber: string;
-	email: string;
-	isPep: boolean;
-	identifications: IIdentification[];
-	addresses: IAddress[];
-	profession: string;
-	jobPosition: string;
-	companyName: string;
-	companyActivity: string;
-	companyPhoneNumber: string;
-	companyAddressLine: string;
-	grossMonthlyIncome: number;
-	sourcesOfIncome: string;
-	sourcesOfFunds: string[];
-	otherSourcesOfFunds: string;
-	countriesOfFundsOrigin: string[];
-	purposeOfFunds: string[];
-	otherPurposesOfFunds: string;
-	estimatedAmountOfTransactions: string;
-	deleted: boolean;
-	createdAt?: Date;
-	updatedAt?: Date;
-}
-
-export interface ICorporateContact {
-	_id: string;
-	contactType: string;
-	corporationName: string;
-	corporationType: string;
-	corporationIdNumber: string;
-	dateOfConstitution: Date;
-	countryOfConstitution: string;
-	email: string;
-	languagesSpoken: string[];
-	phoneNumbers: IPhoneNumber[];
-	isPep: boolean;
-	namesOfPeps: string[];
-	corporateRepresentatives: ICorporateRepresentative[];
-	commercialReferences: ICommercialReference[];
-	addresses: IAddress[];
-	companyActivity: string;
-	grossMonthlyIncome: number;
-	sourcesOfIncome: string;
-	sourcesOfFunds: string[];
-	otherSourcesOfFunds: string;
-	countriesOfFundsOrigin: string[];
-	purposeOfFunds: string[];
-	otherPurposesOfFunds: string;
-	estimatedAmountOfTransactions: string;
-	deleted: boolean;
-	createdAt?: Date;
-	updatedAt?: Date;
 }
 
 export interface IContact {
 	_id: string;
 
-	// common properties
-	contactType: string;
-	email: string;
-	isPep: boolean;
-	addresses: IAddress[];
-	companyActivity: string;
-	grossMonthlyIncome: number;
-	sourcesOfIncome: string;
-	sourcesOfFunds: string[];
-	otherSourcesOfFunds: string;
-	countriesOfFundsOrigin: string[];
-	purposeOfFunds: string[];
-	otherPurposesOfFunds: string;
-	estimatedAmountOfTransactions: string;
-	deleted: boolean;
-	createdAt?: Date;
-	updatedAt?: Date;
-
 	// physical contact properties
-	firstName?: string;
-	middleName?: string;
-	lastName?: string;
-	mothersMaidenName?: string;
-	gender?: string;
-	maritalStatus?: string;
-	nationalities?: string[];
-	countryOfBirth?: string;
-	birthDate?: Date;
-	homePhoneNumber?: string;
-	mobilePhoneNumber?: string;
-	identifications?: IIdentification[];
-	profession?: string;
-	jobPosition?: string;
-	companyName?: string;
-	companyPhoneNumber?: string;
-	companyAddressLine?: string;
+	firstName: string;
+	middleName: string;
+	lastName: string;
+	salutation: string;
+	alias: string;
+	gender: string;
+	maritalStatus: string;
+	dateOfBirth: string;
+	countryOfBirth: string;
 
 	// corporate contact properties
-	corporationName?: string;
-	corporationType?: string;
-	corporationIdNumber?: string;
-	dateOfConstitution?: Date;
-	countryOfConstitution?: string;
-	languagesSpoken?: string[];
-	phoneNumbers?: IPhoneNumber[];
-	namesOfPeps?: string[];
-	corporateRepresentatives?: ICorporateRepresentative[];
-	commercialReferences?: ICommercialReference[];
-}
-
-export class PhysicalContact {
-
-	_id: string;
+	corporateName: string;
+	dateOfConstitution: string;
+	countryOfConstitution: string;
 
 	// common properties
 	contactType: string;
+	homePhoneNumber: string;
+	mobilePhoneNumber: string;
+	workPhoneNumber: string;
 	email: string;
-	isPep: boolean;
+	identifications: IIdentification[];
 	addresses: IAddress[];
-	companyActivity: string;
-	grossMonthlyIncome: number;
-	sourcesOfIncome: string;
-	sourcesOfFunds: string[];
-	otherSourcesOfFunds: string;
-	countriesOfFundsOrigin: string[];
-	purposeOfFunds: string[];
-	otherPurposesOfFunds: string;
-	estimatedAmountOfTransactions: string;
+	profession: string;
+	jobPosition: string;
+
 	deleted: boolean;
 	createdAt?: Date;
 	updatedAt?: Date;
-
-	// physical contact properties
-	firstName?: string;
-	middleName?: string;
-	lastName?: string;
-	mothersMaidenName?: string;
-	gender?: string;
-	maritalStatus?: string;
-	nationalities?: string[];
-	countryOfBirth?: string;
-	birthDate?: Date;
-	homePhoneNumber?: string;
-	mobilePhoneNumber?: string;
-	identifications?: IIdentification[];
-	profession?: string;
-	jobPosition?: string;
-	companyName?: string;
-	companyPhoneNumber?: string;
-	companyAddressLine?: string;
-
-	constructor(private __data: IPhysicalContact) {
-
-		this._id = __data._id || '';
-
-		this.contactType = __data.contactType || '';
-		this.email = __data.email || '';
-		this.isPep = __data.isPep || false;
-		this.addresses = __data.addresses || [];
-		this.companyActivity = __data.companyActivity || '';
-		this.grossMonthlyIncome = __data.grossMonthlyIncome || 0;
-		this.sourcesOfIncome = __data.sourcesOfIncome || '';
-		this.sourcesOfFunds = __data.sourcesOfFunds || [];
-		this.otherSourcesOfFunds = __data.otherSourcesOfFunds || '';
-		this.countriesOfFundsOrigin = __data.countriesOfFundsOrigin || [];
-		this.purposeOfFunds = __data.purposeOfFunds || [];
-		this.otherPurposesOfFunds = __data.otherPurposesOfFunds || '';
-		this.estimatedAmountOfTransactions = __data.estimatedAmountOfTransactions || '';
-		this.deleted = __data.deleted || false;
-		this.createdAt = __data.createdAt || null;
-		this.updatedAt = __data.updatedAt || null;
-
-		if (ContactTypes.isPhysicalContact(this.contactType)) {
-
-			this.firstName = __data.firstName || '';
-			this.middleName = __data.middleName || '';
-			this.lastName = __data.lastName || '';
-			this.mothersMaidenName = __data.mothersMaidenName || '';
-			this.gender = __data.gender || '';
-			this.maritalStatus = __data.maritalStatus || '';
-			this.nationalities = __data.nationalities || [];
-			this.countryOfBirth = __data.countryOfBirth || '';
-			this.birthDate = __data.birthDate || null;
-			this.homePhoneNumber = __data.homePhoneNumber || '';
-			this.mobilePhoneNumber = __data.mobilePhoneNumber || '';
-			this.identifications = __data.identifications || [];
-			this.profession = __data.profession || '';
-			this.jobPosition = __data.jobPosition || '';
-			this.companyName = __data.companyName || '';
-			this.companyPhoneNumber = __data.companyPhoneNumber || '';
-			this.companyAddressLine = __data.companyAddressLine || '';
-
-		}
-
-	}
-
-	asInterface(): IPhysicalContact {
-		return this.__data;
-	}
-
-}
-
-export class CorporateContact {
-
-	_id: string;
-
-	// common properties
-	contactType: string;
-	email: string;
-	isPep: boolean;
-	addresses: IAddress[];
-	companyActivity: string;
-	grossMonthlyIncome: number;
-	sourcesOfIncome: string;
-	sourcesOfFunds: string[];
-	otherSourcesOfFunds: string;
-	countriesOfFundsOrigin: string[];
-	purposeOfFunds: string[];
-	otherPurposesOfFunds: string;
-	estimatedAmountOfTransactions: string;
-	deleted: boolean;
-	createdAt?: Date;
-	updatedAt?: Date;
-
-	// corporate contact properties
-	corporationName?: string;
-	corporationType?: string;
-	corporationIdNumber?: string;
-	dateOfConstitution?: Date;
-	countryOfConstitution?: string;
-	languagesSpoken?: string[];
-	phoneNumbers?: IPhoneNumber[];
-	namesOfPeps?: string[];
-	corporateRepresentatives?: ICorporateRepresentative[];
-	commercialReferences?: ICommercialReference[];
-
-	constructor(private __data: ICorporateContact) {
-
-		this._id = __data._id || '';
-
-		this.contactType = __data.contactType || '';
-		this.email = __data.email || '';
-		this.isPep = __data.isPep || false;
-		this.addresses = __data.addresses || [];
-		this.companyActivity = __data.companyActivity || '';
-		this.grossMonthlyIncome = __data.grossMonthlyIncome || 0;
-		this.sourcesOfIncome = __data.sourcesOfIncome || '';
-		this.sourcesOfFunds = __data.sourcesOfFunds || [];
-		this.otherSourcesOfFunds = __data.otherSourcesOfFunds || '';
-		this.countriesOfFundsOrigin = __data.countriesOfFundsOrigin || [];
-		this.purposeOfFunds = __data.purposeOfFunds || [];
-		this.otherPurposesOfFunds = __data.otherPurposesOfFunds || '';
-		this.estimatedAmountOfTransactions = __data.estimatedAmountOfTransactions || '';
-		this.deleted = __data.deleted || false;
-		this.createdAt = __data.createdAt || null;
-		this.updatedAt = __data.updatedAt || null;
-
-		if (ContactTypes.isCorporateContact(this.contactType)) {
-
-			this.corporationName = __data.corporationName || '';
-			this.corporationType = __data.corporationType || '';
-			this.corporationIdNumber = __data.corporationIdNumber || '';
-			this.dateOfConstitution = __data.dateOfConstitution || null;
-			this.countryOfConstitution = __data.countryOfConstitution || '';
-			this.languagesSpoken = __data.languagesSpoken || [];
-			this.phoneNumbers = __data.phoneNumbers || [];
-			this.namesOfPeps = __data.namesOfPeps || [];
-			this.corporateRepresentatives = __data.corporateRepresentatives || [];
-			this.commercialReferences = __data.commercialReferences || [];
-
-		}
-
-	}
-
-	asInterface(): ICorporateContact {
-		return this.__data;
-	}
-
 }
 
 export class Contact {
 
-	_id?: string;
+	_id: string;
 
 	// common properties
 	contactType: string;
+	homePhoneNumber: string;
+	mobilePhoneNumber: string;
+	workPhoneNumber: string;
 	email: string;
-	isPep: boolean;
+	identifications: IIdentification[];
 	addresses: IAddress[];
-	companyActivity: string;
-	grossMonthlyIncome: number;
-	sourcesOfIncome: string;
-	sourcesOfFunds: string[];
-	otherSourcesOfFunds: string;
-	countriesOfFundsOrigin: string[];
-	purposeOfFunds: string[];
-	otherPurposesOfFunds: string;
-	estimatedAmountOfTransactions: string;
+	profession: string;
+	jobPosition: string;
 	deleted: boolean;
 	createdAt?: Date;
 	updatedAt?: Date;
@@ -350,87 +75,53 @@ export class Contact {
 	firstName?: string;
 	middleName?: string;
 	lastName?: string;
-	mothersMaidenName?: string;
+	salutation?: string;
+	alias?: string;
 	gender?: string;
 	maritalStatus?: string;
-	nationalities?: string[];
+	dateOfBirth?: string;
 	countryOfBirth?: string;
-	birthDate?: Date;
-	homePhoneNumber?: string;
-	mobilePhoneNumber?: string;
-	identifications?: IIdentification[];
-	profession?: string;
-	jobPosition?: string;
-	companyName?: string;
-	companyPhoneNumber?: string;
-	companyAddressLine?: string;
 
 	// corporate contact properties
-	corporationName?: string;
-	corporationType?: string;
-	corporationIdNumber?: string;
-	dateOfConstitution?: Date;
+	corporateName?: string;
+	dateOfConstitution?: string;
 	countryOfConstitution?: string;
-	languagesSpoken?: string[];
-	phoneNumbers?: IPhoneNumber[];
-	namesOfPeps?: string[];
-	corporateRepresentatives?: ICorporateRepresentative[];
-	commercialReferences?: ICommercialReference[];
 
 	constructor(private __data: IContact) {
 
 		this._id = __data._id || '';
 
 		this.contactType = __data.contactType || '';
+		this.homePhoneNumber = __data.homePhoneNumber || '';
+		this.mobilePhoneNumber = __data.mobilePhoneNumber || '';
+		this.workPhoneNumber = __data.workPhoneNumber || '';
 		this.email = __data.email || '';
-		this.isPep = __data.isPep || false;
+		this.identifications = __data.identifications || [];
 		this.addresses = __data.addresses || [];
-		this.companyActivity = __data.companyActivity || '';
-		this.grossMonthlyIncome = __data.grossMonthlyIncome || 0;
-		this.sourcesOfIncome = __data.sourcesOfIncome || '';
-		this.sourcesOfFunds = __data.sourcesOfFunds || [];
-		this.otherSourcesOfFunds = __data.otherSourcesOfFunds || '';
-		this.countriesOfFundsOrigin = __data.countriesOfFundsOrigin || [];
-		this.purposeOfFunds = __data.purposeOfFunds || [];
-		this.otherPurposesOfFunds = __data.otherPurposesOfFunds || '';
-		this.estimatedAmountOfTransactions = __data.estimatedAmountOfTransactions || '';
+		this.profession = __data.profession || '';
+		this.jobPosition = __data.jobPosition || '';
 		this.deleted = __data.deleted || false;
 		this.createdAt = __data.createdAt || null;
 		this.updatedAt = __data.updatedAt || null;
 
-		if (ContactTypes.isPhysicalContact(this.contactType)) {
+		if (this.isPhysical()) {
 
 			this.firstName = __data.firstName || '';
 			this.middleName = __data.middleName || '';
-			this.lastName = __data.lastName || '';
-			this.mothersMaidenName = __data.mothersMaidenName || '';
+			this.lastName= __data.lastName || '';
+			this.salutation= __data.salutation || '';
+			this.alias= __data.alias || '';
 			this.gender = __data.gender || '';
 			this.maritalStatus = __data.maritalStatus || '';
-			this.nationalities = __data.nationalities || [];
+			this.dateOfBirth = __data.dateOfBirth || '';
 			this.countryOfBirth = __data.countryOfBirth || '';
-			this.birthDate = __data.birthDate || null;
-			this.homePhoneNumber = __data.homePhoneNumber || '';
-			this.mobilePhoneNumber = __data.mobilePhoneNumber || '';
-			this.identifications = __data.identifications || [];
-			this.profession = __data.profession || '';
-			this.jobPosition = __data.jobPosition || '';
-			this.companyName = __data.companyName || '';
-			this.companyPhoneNumber = __data.companyPhoneNumber || '';
-			this.companyAddressLine = __data.companyAddressLine || '';
 
 		}
-		else if (ContactTypes.isCorporateContact(this.contactType)) {
+		else if (this.isCorporate()) {
 
-			this.corporationName = __data.corporationName || '';
-			this.corporationType = __data.corporationType || '';
-			this.corporationIdNumber = __data.corporationIdNumber || '';
-			this.dateOfConstitution = __data.dateOfConstitution || null;
+			this.corporateName = __data.corporateName || '';
+			this.dateOfConstitution = __data.dateOfConstitution || '';
 			this.countryOfConstitution = __data.countryOfConstitution || '';
-			this.languagesSpoken = __data.languagesSpoken || [];
-			this.phoneNumbers = __data.phoneNumbers || [];
-			this.namesOfPeps = __data.namesOfPeps || [];
-			this.corporateRepresentatives = __data.corporateRepresentatives || [];
-			this.commercialReferences = __data.commercialReferences || [];
 
 		}
 
@@ -440,7 +131,12 @@ export class Contact {
 		return this.__data;
 	}
 
-}
+	isPhysical(): boolean {
+		return ContactTypes.isPhysicalContact(this.contactType);
+	}
 
-export type IAnyContact = IPhysicalContact | ICorporateContact;
-export type AnyContact = PhysicalContact | CorporateContact;
+	isCorporate(): boolean {
+		return ContactTypes.isCorporateContact(this.contactType);
+	}
+
+}

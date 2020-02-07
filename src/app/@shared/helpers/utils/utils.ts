@@ -120,6 +120,39 @@ class Utils {
     	return true;
 	}
 
+	/**
+	 * get the error signature portion of an error string as provided by the server.
+	 *
+	 * the server throws errors where the .error property consists of a single string with the following structure:
+	 * "<error signature>: <error detail>"
+	 *
+	 * so this method extracts the portion of the string to the left of the first colon ':',
+	 * or null if the provided string does not contain a colon.
+	 *
+	 * @param serverErrorString Server error string
+	 * @return string|null The error signature (null if not found)
+	 */
+	getErrorSigFromServerErrorString(serverErrorString: string): string|null {
+		const colonPosition = serverErrorString.indexOf(':');
+		if (colonPosition === -1)
+			return null;
+		return serverErrorString.substr(0, colonPosition);
+	}
+
+	/**
+	 * unsubscribe from all subscriptions in provided array of subscriptions,
+	 * and remove them from that array after unsubscribing.
+	 *
+	 * @param subscriptions An array of subscriptions to unsubscribe from
+	 */
+	unsubscribeFromAll(subscriptions: any[]): void {
+		// tslint:disable-next-line
+		for (let i = 0; i < subscriptions.length;) {
+			subscriptions[i].unsubscribe();
+			subscriptions.splice(i, 1);
+		}
+	}
+
 }
 
 export default new Utils();

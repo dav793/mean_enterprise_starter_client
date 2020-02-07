@@ -1,42 +1,26 @@
 
 const list = [
-	{id: '1', name: 'Persona física', riskLevel: 1},
-	{id: '2', name: 'Persona jurídica', riskLevel: 2},
-	{id: '3', name: 'Persona física sin actividad lucrativa', riskLevel: 3},
-	{id: '4', name: 'Persona jurídica de estructura compleja', riskLevel: 4}
+	{id: '1', name: 'Persona física'},
+	{id: '2', name: 'Persona jurídica'}
 ];
 
 class ContactTypesUtility {
 
 	constructor() { }
 
-	getList(): {id: string, name: string, riskLevel: number}[] {
+	getList(): {id: string, name: string}[] {
 		return list;
 	}
 
-	getPhysicalContactList(): {id: string, name: string, riskLevel: number}[] {
-		return list.filter(elem => elem.id === '1' || elem.id === '3');
-	}
-
-	getCorporateContactList(): {id: string, name: string, riskLevel: number}[] {
-		return list.filter(elem => elem.id === '2' || elem.id === '4');
-	}
-
-	isPhysicalContact(contactType: string): boolean {
-		const ids = this.getPhysicalContactList().map(elem => elem.id);
-		for (const id of ids) {
-			if (contactType === id)
-				return true;
-		}
+	isPhysicalContact(contactTypeId: string): boolean {
+		if (contactTypeId === '1')
+			return true;
 		return false;
 	}
 
-	isCorporateContact(contactType: string): boolean {
-		const ids = this.getCorporateContactList().map(elem => elem.id);
-		for (const id of ids) {
-			if (contactType === id)
-				return true;
-		}
+	isCorporateContact(contactTypeId: string): boolean {
+		if (contactTypeId === '2')
+			return true;
 		return false;
 	}
 

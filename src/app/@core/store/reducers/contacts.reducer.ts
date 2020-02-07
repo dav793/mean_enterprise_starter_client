@@ -19,14 +19,6 @@ export function contactsReducer(
 				return state;
 		}
 
-		case ContactsActions.ActionTypes.APILoadContactSuccess: {
-			const all = {};
-			all[action.payload.contact._id] = action.payload.contact;
-			return {
-				all: Object.assign({}, state.all, all)
-			};
-		}
-
 		case ContactsActions.ActionTypes.APILoadAllContactsSuccess: {
 			const all = Utils.arrayToObject(action.payload.contacts, '_id');
 			return { all };
