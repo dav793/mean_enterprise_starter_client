@@ -13,15 +13,11 @@ class ContactTypesUtility {
 	}
 
 	isPhysicalContact(contactTypeId: string): boolean {
-		if (contactTypeId === '1')
-			return true;
-		return false;
+		return contactTypeId === '1';
 	}
 
 	isCorporateContact(contactTypeId: string): boolean {
-		if (contactTypeId === '2')
-			return true;
-		return false;
+		return contactTypeId === '2';
 	}
 
 	getOptionsList(): {key: string, label: string}[] {
