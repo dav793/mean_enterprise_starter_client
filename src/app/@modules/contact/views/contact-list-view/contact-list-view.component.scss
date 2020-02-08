@@ -1,0 +1,10 @@
+@import "~src/assets/css/_variables.scss";
+
+.toolbar {
+  margin-bottom: $spacing-sm;
+}
+
+.search-textbox {
+  max-width: 222px;
+  margin-bottom: $spacing-xs;
+}

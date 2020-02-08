@@ -20,6 +20,9 @@ import { CoreStoreService } from '../../../../@core/store/core-store';
 import { ContactStoreService } from '../../store/contact-store';
 import { IActionMetadata } from '../../../../@shared/helpers/utils/store-action-metadata-factory';
 
+import { ErrorCode } from '../../../../@shared/enums/errors';
+import { ViewStatus } from '../../../../@shared/types/view-status';
+
 import { ContactTypes } from '../../../../@shared/lists/contact-types';
 import { Genders } from '../../../../@shared/lists/genders';
 import { MaritalStatus} from '../../../../@shared/lists/marital-status';
@@ -29,7 +32,7 @@ import { IdentificationTypes } from '../../../../@shared/lists/identification-ty
 @Component({
 	selector: 'app-contact-list-view',
 	templateUrl: './contact-list-view.component.html',
-	styleUrls: ['./contact-list-view.component.css']
+	styleUrls: ['./contact-list-view.component.scss']
 })
 export class ContactListViewComponent implements OnInit, OnDestroy {
 
@@ -40,7 +43,8 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 	protected identificationTypeOptions = IdentificationTypes.getOptionsList();
 
 	protected onDestroy$ = new Subject<void>();
-	protected isLoading = true;
+	// protected isLoading = true;
+	protected viewStatus: ViewStatus = 'loading';
 	protected subs = [];
 
 	toolbarConfig: IToolbarConfig = {
@@ -62,7 +66,31 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute
 	) { }
 
-	ngOnInit() {}
+	ngOnInit() {
+		// this.loadData().pipe(
+        //     takeUntil(this.onDestroy$)
+        // ).subscribe(
+        // 	result => {
+		// 		if (result)
+		// 			this.viewStatus = 'ready';
+
+		// 		// this.allUsers$.pipe(
+		// 		// 	takeUntil(this.onDestroy$)
+		// 		// ).subscribe(users => {
+
+		// 		// 	this.resetSearch$.next();
+
+		// 		// 	this.sortedUsers$.next(
+		// 		// 	  this.sortParams ? [...this.sortUsers()] : [...users]
+		// 		// 	);
+
+		// 		// });
+		// 	},
+		// 	error => {
+        // 		console.error(error);
+		// 	}
+		// );
+	}
 
 	ngOnDestroy() {
 		this.onDestroy$.next();
