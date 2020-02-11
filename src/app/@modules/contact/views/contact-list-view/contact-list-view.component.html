@@ -31,11 +31,11 @@
 		(pageItems)="onPageItemsChange($event)"
 	></app-paginator>
 
-	<app-user-list-table
+	<app-contact-list-table
 		[contacts$]="pageContacts$"
 		[sortParams]="sortParams"
-		(userClicked)="navigateToContactProfile($event)"
+		(contactClicked)="navigateToContactProfile($event)"
 		(columnClicked)="setActiveSort($event)"
-	></app-user-list-table>
+	></app-contact-list-table>
 
 </div>

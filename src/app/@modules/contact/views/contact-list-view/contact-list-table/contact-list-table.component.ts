@@ -8,7 +8,7 @@ import {IContactForView} from '../contact-for-view.model';
 @Component({
     selector: 'app-contact-list-table',
     templateUrl: './contact-list-table.component.html',
-    styleUrls: ['./contact-list-table.component.css']
+    styleUrls: ['./contact-list-table.component.scss']
 })
 export class ContactListTableComponent implements OnInit, OnDestroy, OnChanges {
 

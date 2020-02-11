@@ -89,7 +89,6 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 	constructor(
 		private coreStore: CoreStoreService,
 		private contactStore: ContactStoreService,
-		// private route: ActivatedRoute
 		private router: Router
 	) { }
 
