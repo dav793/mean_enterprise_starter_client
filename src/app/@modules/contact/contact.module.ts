@@ -14,13 +14,15 @@ import { ContactRoutingModule } from './contact-routing.module';
 import { ContactViewComponent } from './views/contact-view/contact-view.component';
 // import { ContactFormComponent } from './views/contact-view/contact-form/contact-form.component';
 import { ContactListViewComponent } from './views/contact-list-view/contact-list-view.component';
+import { ContactFormViewComponent } from './views/contact-form-view/contact-form-view.component';
 // import { ContactTableComponent } from './views/contact-list-view/contact-table/contact-table.component';
 
 @NgModule({
 	declarations: [
 		ContactViewComponent,
 		// ContactFormComponent,
-		ContactListViewComponent
+		ContactListViewComponent,
+		ContactFormViewComponent
 		// ContactTableComponent,
 	],
 	exports: [
