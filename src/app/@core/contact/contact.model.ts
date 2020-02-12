@@ -26,7 +26,6 @@ export interface IContact {
 	middleName: string;
 	lastName: string;
 	salutation: string;
-	alias: string;
 	gender: string;
 	maritalStatus: string;
 	dateOfBirth: string;
@@ -39,6 +38,7 @@ export interface IContact {
 
 	// common properties
 	contactType: string;
+	alias: string;
 	homePhoneNumber: string;
 	mobilePhoneNumber: string;
 	workPhoneNumber: string;
@@ -59,6 +59,7 @@ export class Contact {
 
 	// common properties
 	contactType: string;
+	alias?: string;
 	homePhoneNumber: string;
 	mobilePhoneNumber: string;
 	workPhoneNumber: string;
@@ -76,7 +77,6 @@ export class Contact {
 	middleName?: string;
 	lastName?: string;
 	salutation?: string;
-	alias?: string;
 	gender?: string;
 	maritalStatus?: string;
 	dateOfBirth?: string;
@@ -92,6 +92,7 @@ export class Contact {
 		this._id = __data._id || '';
 
 		this.contactType = __data.contactType || '';
+		this.alias= __data.alias || '';
 		this.homePhoneNumber = __data.homePhoneNumber || '';
 		this.mobilePhoneNumber = __data.mobilePhoneNumber || '';
 		this.workPhoneNumber = __data.workPhoneNumber || '';
@@ -110,7 +111,6 @@ export class Contact {
 			this.middleName = __data.middleName || '';
 			this.lastName= __data.lastName || '';
 			this.salutation= __data.salutation || '';
-			this.alias= __data.alias || '';
 			this.gender = __data.gender || '';
 			this.maritalStatus = __data.maritalStatus || '';
 			this.dateOfBirth = __data.dateOfBirth || '';
