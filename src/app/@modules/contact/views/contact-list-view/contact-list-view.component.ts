@@ -56,7 +56,8 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
     searchSorters: { [key: string]: ISearchPropertyMetadata } = {
 		_label_fullName: { propType: 'string' },
 		_label_alias:    { propType: 'string' },
-		_label_date:     { propType: 'string' }
+		_label_date:     { propType: 'string' },
+		_label_type:     { propType: 'string' }
 	};
 
 	toolbarConfig: IToolbarConfig = {
@@ -97,9 +98,12 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
             takeUntil(this.onDestroy$)
         ).subscribe(
         	result => {
-				if (result)
+				console.log(result);
+				if (result){
 					this.viewStatus = 'ready';
-
+				}else{
+					console.log(result);
+				}
 				this.allContacts$.pipe(
 					takeUntil(this.onDestroy$)
 				).subscribe(contacts => {
@@ -109,11 +113,11 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 					this.sortedContacts$.next(
 					  this.sortParams ? [...this.sortContacts()] : [...contacts]
 					);
-
+					
 				});
 			},
 			error => {
-        		console.error(error);
+				console.error(error);
 			}
 		);
 	}
@@ -124,11 +128,19 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 	}
 
 	loadData(): Observable<boolean> {
-		this.contacts$ = this.getContacts();
+		// this.contacts$ = this.getContacts();
+		// console.log(this.contacts$);
+		// return this.contacts$.pipe(
+		// 	mergeMap(v => this.contacts$.pipe(
+		// 		map(contacts => v && true))
+		// 	),
+		// 	distinctUntilChanged()
+		// );
 		
-		return this.contacts$.pipe(
-			mergeMap(v=> this.contacts$.pipe(
-				map(contacts=> v&& true))
+		this.contacts$ = this.getContacts();
+		return combineLatest(this.contacts$).pipe(
+			mergeMap(v => this.contacts$.pipe(
+				map(contacts => v && true))
 			),
 			distinctUntilChanged()
 		);
@@ -145,8 +157,9 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 	
     getContacts(): Observable<IContact[]> {
 		const meta: IActionMetadata = this.coreStore.loadAllContacts();
-
+		console.log(meta);
 		this.contactStore.selectContactLoadAllError('UM_ULA').pipe(
+		// this.contactStore.selectContactLoadAll().pipe(	
 			takeUntil(this.onDestroy$),
 			filter(({ eventId }) => eventId === meta.eventId),
 			first()
@@ -155,7 +168,7 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 			this.errorCode = eventInfo.errorCode;
 			this.errorSig = eventInfo.errorSig;
 		});
-
+		
 		return this.coreStore.selectAllContacts().pipe(
 			excludeFalsy,
 			distinctUntilChanged(),
@@ -198,9 +211,9 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 			const currentContact = new Contact(contact);
 
 			if(currentContact.isPhysical()){
-				return Object.assign(contact, {_label_fullName: currentContact.dateOfBirth });
+				return Object.assign(contact, {_label_date: currentContact.dateOfBirth });
 			} else if(currentContact.isCorporate()){
-                return Object.assign(contact, { _label_fullName: currentContact.dateOfConstitution });
+                return Object.assign(contact, { _label_date: currentContact.dateOfConstitution });
 			}
             
         });
