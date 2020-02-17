@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, Observable, of, ReplaySubject, Subject, BehaviorSubject } from 'rxjs';
+import { combineLatest, Observable, of, ReplaySubject, Subject, BehaviorSubject,  throwError} from 'rxjs';
 import { distinctUntilChanged, filter, first, mergeMap, switchMap, takeUntil, tap, map, startWith } from 'rxjs/operators';
 import { excludeFalsy } from '../../../../@shared/helpers/operators/exclude-falsy';
 
@@ -80,9 +80,7 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 	protected identificationTypeOptions = IdentificationTypes.getOptionsList();
 
 	protected onDestroy$ = new Subject<void>();
-	// protected isLoading = true;
 	protected viewStatus: ViewStatus = 'loading';
-	// protected subs = [];
 	protected errorCode: ErrorCode;
     protected errorSig: string;
 
@@ -98,12 +96,9 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
             takeUntil(this.onDestroy$)
         ).subscribe(
         	result => {
-				console.log(result);
-				if (result){
+				if (result)
 					this.viewStatus = 'ready';
-				}else{
-					console.log(result);
-				}
+				
 				this.allContacts$.pipe(
 					takeUntil(this.onDestroy$)
 				).subscribe(contacts => {
@@ -128,49 +123,39 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 	}
 
 	loadData(): Observable<boolean> {
-		// this.contacts$ = this.getContacts();
-		// console.log(this.contacts$);
-		// return this.contacts$.pipe(
-		// 	mergeMap(v => this.contacts$.pipe(
-		// 		map(contacts => v && true))
-		// 	),
-		// 	distinctUntilChanged()
-		// );
-		
 		this.contacts$ = this.getContacts();
+		console.log(this.contacts$);
 		return combineLatest(this.contacts$).pipe(
 			mergeMap(v => this.contacts$.pipe(
 				map(contacts => v && true))
 			),
 			distinctUntilChanged()
 		);
-
-        // return combineLatest(this.contactGroups$, this.roles$).pipe(
-        //     map(([contactGroups, roles]) => true),
-        //     mergeMap(v => this.contacts$
-        //         .pipe( map(contacts => v && true) )
-        //     ),
-        //     distinctUntilChanged()
-        // );
-
 	}
 	
-    getContacts(): Observable<IContact[]> {
+  	getContacts(): Observable<IContact[]> {
 		const meta: IActionMetadata = this.coreStore.loadAllContacts();
+		console.log('meta: ');
 		console.log(meta);
-		this.contactStore.selectContactLoadAllError('UM_ULA').pipe(
-		// this.contactStore.selectContactLoadAll().pipe(	
+		this.contactStore.selectContactLoadAll().pipe(
 			takeUntil(this.onDestroy$),
-			filter(({ eventId }) => eventId === meta.eventId),
-			first()
-		).subscribe((eventInfo: IContactStoreEventInfo) => {
-			this.viewStatus = 'failed';
-			this.errorCode = eventInfo.errorCode;
-			this.errorSig = eventInfo.errorSig;
-		});
-		
+			filter(state => state.errorEventId === meta.eventId),
+			first(),
+			mergeMap(state => {
+				const err = new Error();
+				err.name = meta.errorCode;
+				return throwError(err);
+			})
+		).subscribe(
+			() => {},
+			err => {
+				this.viewStatus = 'failed';
+				this.errorCode = err.name;
+			}
+		);
+
 		return this.coreStore.selectAllContacts().pipe(
-			excludeFalsy,
+			// excludeFalsy,
 			distinctUntilChanged(),
 			map(contacts => this.addExtrasOnContacts(contacts)),
 			tap(contacts => this.allContacts$.next([...contacts as IContactForView[]]))

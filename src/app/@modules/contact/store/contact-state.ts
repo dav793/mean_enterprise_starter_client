@@ -10,11 +10,6 @@ export interface ContactModuleState {
 	contactCreate: FeatureStoreOperationState;
 	contactDelete: FeatureStoreOperationState;
 	contactLoadAll: FeatureStoreOperationState;
-	// contactLoadAllErrorEventId: string;
-	// contactLoadAllErrorCode: ErrorCode;
-	contactLoadAllErrorEventId: FeatureStoreOperationState;
-	contactLoadAllErrorCode: FeatureStoreOperationState;
-
 }
 
 export const initialContactModuleState = {
@@ -22,8 +17,4 @@ export const initialContactModuleState = {
 	contactCreate: initialFeatureStoreOperationState,
 	contactDelete: initialFeatureStoreOperationState,
 	contactLoadAll: initialFeatureStoreOperationState,
-	// contactLoadAllErrorEventId: null,
-	contactLoadAllErrorEventId: initialFeatureStoreOperationState,
-	contactLoadAllErrorCode: initialFeatureStoreOperationState
-
 };

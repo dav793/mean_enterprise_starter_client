@@ -32,24 +32,6 @@ export class ContactStoreService {
 		return this.store.select(state => state.contactModule.contactLoadAll);
 	}
 
-	selectContactLoadAllError(errorSig: string = null): Observable<IContactStoreEventInfo> {
-    	return zip(
-
-			this.store.select(state => state.contactModule.contactLoadAllErrorEventId)
-				.pipe(excludeFalsy, first()),
-
-			this.store.select(state => state.contactModule.contactLoadAllErrorCode)
-				.pipe(excludeFalsy, first())
-
-		).pipe(
-			mergeMap(([eventId, errorCode]) => of({
-				eventId,
-				errorCode: errorCode as ErrorCode,
-				errorSig: errorSig
-			}))
-		);
-	}
-
 }
 
 export interface IContactStoreEventInfo {
