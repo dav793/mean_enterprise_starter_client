@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject, of, combineLatest } from 'rxjs';
+import {Observable, Subject, of, combineLatest, merge, throwError} from 'rxjs';
 import {
-  switchMap,
-  startWith,
-  distinctUntilChanged,
-  tap,
-  takeUntil,
-  map,
-  filter,
-  first
+	switchMap,
+	startWith,
+	distinctUntilChanged,
+	tap,
+	takeUntil,
+	map,
+	filter,
+	first, mergeMap
 } from 'rxjs/operators';
 
 import { excludeFalsy } from '../../../../@shared/helpers/operators/exclude-falsy';
@@ -142,25 +142,32 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
 
         const actionMetadata: IActionMetadata = this.coreStore.updateUser(userId, userFormValue);
 
-        // este es un ejemplo de como un componente puede recibir respuesta del disparo de eventos del store
-
         // si servidor responde con exito
-        this.userStore.selectUserSaveSuccessEventId().pipe(
-            filter(eventId => eventId === actionMetadata.eventId),
+        const successHandler = this.userStore.selectUserUpdate().pipe(
+            filter(state => state.successEventId === actionMetadata.eventId),
             takeUntil(this.onDestroy$),
             first()
-        ).subscribe(() => {
-            // console.log('se guardo');
-        });
+        );
 
         // si servidor responde con error
-        this.userStore.selectUserSaveErrorEventId().pipe(
-            filter(eventId => eventId === actionMetadata.eventId),
+        const errorHandler = this.userStore.selectUserUpdate().pipe(
+            filter(state => state.errorEventId === actionMetadata.eventId),
             takeUntil(this.onDestroy$),
-            first()
-        ).subscribe(() => {
-            // console.log('no se guardo');
-        });
+            first(),
+			mergeMap(state => {
+				const err = new Error();
+				err.name = actionMetadata.errorCode;
+				return throwError(err);
+			}),
+        );
+
+        merge([successHandler, errorHandler]).pipe(
+			takeUntil(this.onDestroy$),
+			first()
+		).subscribe(
+			() => {},		// manejar exito
+			err => {}		// manejar error
+		);
     }
 
     onToolbarEvent(e: IToolbarEvent) {

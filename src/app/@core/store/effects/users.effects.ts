@@ -22,6 +22,9 @@ import { storeActionMetadataSingleton as ActionMetadataFactory } from '../../../
 
 import { CoreStoreService } from '../core-store';
 
+import { ErrorCode } from '../../../@shared/enums/errors';
+import Util from '../../../@shared/helpers/utils/utils';
+
 @Injectable()
 export class UsersEffects {
 
@@ -83,11 +86,13 @@ export class UsersEffects {
                               };
 
                           }),
-                          catchError(e => {
+                          catchError(error => {
+
+							  a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
 
                               return of({
                                   type: UsersActions.ActionTypes.APILoadAllUsersError,
-                                  payload: { error: e, meta: a.payload.meta }
+                                  payload: { error , meta: a.payload.meta }
                               });
 
                           })
@@ -123,6 +128,8 @@ export class UsersEffects {
 
                 }),
                 catchError(error => {
+
+					a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
 
                     return of({
                         type: UsersActions.ActionTypes.APIUpdateUserError,
@@ -174,6 +181,8 @@ export class UsersEffects {
                 }),
                 catchError(error => {
 
+					a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
+
                     return of({
                         type: UsersActions.ActionTypes.APICreateUserError,
                         payload: {
@@ -216,6 +225,8 @@ export class UsersEffects {
 
                 }),
                 catchError(error => {
+
+					a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
 
                     return of({
                         type: UsersActions.ActionTypes.APIDeleteUserError,

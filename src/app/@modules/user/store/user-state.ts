@@ -1,21 +1,19 @@
-import {ErrorCode} from '../../../@shared/enums/errors';
+import { FeatureStoreOperationState, initialFeatureStoreOperationState } from '../../../@core/store/feature-store-types';
 
 export interface State {
     userModule: UserModuleState;
 }
 
 export interface UserModuleState {
-    userSaveSuccessEventId: string;
-    userSaveErrorEventId: string;
-	userSaveErrorCode: ErrorCode;
-	userLoadAllErrorEventId: string;
-	userLoadAllErrorCode: ErrorCode;
+	userUpdate: FeatureStoreOperationState;
+	userCreate: FeatureStoreOperationState;
+	userDelete: FeatureStoreOperationState;
+	userLoadAll: FeatureStoreOperationState;
 }
 
 export const initialUserModuleState = {
-    userSaveSuccessEventId: null,
-    userSaveErrorEventId: null,
-	userSaveErrorCode: null,
-	userLoadAllErrorEventId: null,
-	userLoadAllErrorCode: null
+	userUpdate: initialFeatureStoreOperationState,
+	userCreate: initialFeatureStoreOperationState,
+	userDelete: initialFeatureStoreOperationState,
+	userLoadAll: initialFeatureStoreOperationState
 };

@@ -7,6 +7,8 @@ import { excludeFalsy } from '../../../@shared/helpers/operators/exclude-falsy';
 
 import { State } from './user-state';
 import { ErrorCode } from '../../../@shared/enums/errors';
+import { FeatureStoreOperationState } from '../../../@core/store/feature-store-types';
+
 @Injectable()
 export class UserStoreService {
 
@@ -14,49 +16,20 @@ export class UserStoreService {
         private store: Store<State>
     ) {}
 
-    selectUserSaveSuccessEventId(): Observable<string> {
-        return this.store.select(state => state.userModule.userSaveSuccessEventId);
-    }
-
-	selectUserSaveError(errorSig: string = null): Observable<IUserStoreEventInfo> {
-		return zip(
-
-			this.store.select(state => state.userModule.userSaveErrorEventId)
-				.pipe(first()),
-
-			this.store.select(state => state.userModule.userSaveErrorCode)
-				.pipe(first())
-
-		).pipe(
-			mergeMap(([eventId, errorCode]) => of({
-				eventId,
-				errorCode: errorCode as ErrorCode,
-				errorSig: errorSig
-			}))
-		);
+	selectUserUpdate(): Observable<FeatureStoreOperationState> {
+		return this.store.select(state => state.userModule.userUpdate);
 	}
 
-	// @todo: sub this for selectUserSaveError and delete this
-    selectUserSaveErrorEventId(): Observable<string> {
-        return this.store.select(state => state.userModule.userSaveErrorEventId);
-    }
+	selectUserCreate(): Observable<FeatureStoreOperationState> {
+		return this.store.select(state => state.userModule.userCreate);
+	}
 
-	selectUserLoadAllError(errorSig: string = null): Observable<IUserStoreEventInfo> {
-    	return zip(
+	selectUserDelete(): Observable<FeatureStoreOperationState> {
+		return this.store.select(state => state.userModule.userDelete);
+	}
 
-			this.store.select(state => state.userModule.userLoadAllErrorEventId)
-				.pipe(excludeFalsy, first()),
-
-			this.store.select(state => state.userModule.userLoadAllErrorCode)
-				.pipe(excludeFalsy, first())
-
-		).pipe(
-			mergeMap(([eventId, errorCode]) => of({
-				eventId,
-				errorCode: errorCode as ErrorCode,
-				errorSig: errorSig
-			}))
-		);
+	selectUserLoadAll(): Observable<FeatureStoreOperationState> {
+		return this.store.select(state => state.userModule.userLoadAll);
 	}
 
 }
