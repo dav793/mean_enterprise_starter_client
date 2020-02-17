@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { filter, first, takeUntil } from 'rxjs/operators';
+import {merge, Subject, throwError} from 'rxjs';
+import {filter, first, mergeMap, takeUntil} from 'rxjs/operators';
 
 import { IUserRegisterBody } from '../../../../@core/user/user-api.service';
 import { CoreStoreService } from '../../../../@core/store/core-store';
@@ -117,21 +117,36 @@ export class UserRegisterViewComponent implements OnInit, OnDestroy {
 		const actionMetadata = this.storeService.registerUser(user);
 
 		// si servidor responde con exito
-		this.userStore.selectUserSaveSuccessEventId().pipe(
-			filter(eventId => eventId === actionMetadata.eventId),
-			first()
-		).subscribe(() => {
-			this.toaster.showSuccess('Usuario creado', 'Exito');
-			this.router.navigate(['/login']);
-		});
+		const successHandler = this.userStore.selectUserCreate().pipe(
+			filter(state => state.successEventId === actionMetadata.eventId),
+			first(),
+			takeUntil(this.onDestroy$)
+		);
 
-		// si servidor responde con error
-		this.userStore.selectUserSaveErrorEventId().pipe(
-			filter(eventId => eventId === actionMetadata.eventId),
-			first()
-		).subscribe(() => {
-			console.error('error creating user');
-		});
+		const errorHandler = this.userStore.selectUserCreate().pipe(
+			filter(state => state.errorEventId === actionMetadata.eventId),
+			first(),
+			takeUntil(this.onDestroy$),
+			mergeMap(state => {
+				const err = new Error();
+				err.name = actionMetadata.errorCode;
+				return throwError(err);
+			})
+		);
+
+		merge([successHandler, errorHandler]).pipe(
+			first(),
+			takeUntil(this.onDestroy$)
+		).subscribe(
+			() => {
+				this.toaster.showSuccess('Usuario creado', 'Exito');
+				this.router.navigate(['/login']);
+			},
+			err => {
+				console.error('error creating user');
+			}
+		);
+
 	}
 
 	get formsAreValid(): boolean {
