@@ -124,7 +124,6 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 
 	loadData(): Observable<boolean> {
 		this.contacts$ = this.getContacts();
-		console.log(this.contacts$);
 		return combineLatest(this.contacts$).pipe(
 			mergeMap(v => this.contacts$.pipe(
 				map(contacts => v && true))
@@ -135,8 +134,7 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 	
   	getContacts(): Observable<IContact[]> {
 		const meta: IActionMetadata = this.coreStore.loadAllContacts();
-		console.log('meta: ');
-		console.log(meta);
+
 		this.contactStore.selectContactLoadAll().pipe(
 			takeUntil(this.onDestroy$),
 			filter(state => state.errorEventId === meta.eventId),
@@ -155,9 +153,8 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 		);
 
 		return this.coreStore.selectAllContacts().pipe(
-			// excludeFalsy,
 			distinctUntilChanged(),
-			map(contacts => this.addExtrasOnContacts(contacts)),
+			map(contacts => this.addExtrasOnContacts(Utils.objectToArray(contacts))),
 			tap(contacts => this.allContacts$.next([...contacts as IContactForView[]]))
 		);
 	}
@@ -169,7 +166,9 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
         // add on contacts the extra properties needed for this view and its children
         let contactsArray = Utils.objectToArray(contacts);
 		contactsArray = this.addFullNameOnContacts(contactsArray);
+		contactsArray = this.addAliasOnContacts(contactsArray); 
 		contactsArray = this.addDatesOnContacts(contactsArray);
+		contactsArray = this.addTypesOnContacts(contactsArray);
         return contactsArray;
     }
 
@@ -179,8 +178,8 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 
 			if(currentContact.isPhysical()){
 				return Object.assign(contact, 
-					{_label_fullName: currentContact.firstName + 
-									  currentContact.middleName + 
+					{_label_fullName: currentContact.firstName + ' ' +
+									  currentContact.middleName + ' ' +
 									  currentContact.lastName 
 					}
 				);
@@ -190,6 +189,13 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
             
         });
 	}
+
+	addAliasOnContacts(contacts: IContact[]): any[] {
+		return contacts.map(contact => {
+			const currentContact = new Contact(contact);
+            return Object.assign(contact, {_label_alias: currentContact.alias}); 
+		});
+	} 
 	
 	addDatesOnContacts(contacts: IContact[]): any[] {
         return contacts.map(contact => {
@@ -202,6 +208,20 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 			}
             
         });
+	}
+
+	addTypesOnContacts(contacts: IContact[]): any[] {
+		return contacts.map(contact => {
+			const currentContact = new Contact(contact);
+			let currentType = '';
+			
+			if (currentContact.contactType === '1'){
+                currentType = 'Físico';
+			}else{
+				currentType = 'Corporativo';
+			}
+            return Object.assign(contact, {_label_type: currentType}); 
+		});
 	}
 
 	onPageItemsChange(items: IContactForView[]) {
