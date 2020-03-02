@@ -1,0 +1,39 @@
+.item1 {
+	grid-column: col-start / span 6;
+	grid-row: 1;
+}
+
+.item2 {
+	grid-column: col-start / span 6;
+	grid-row: 2;
+}
+
+.item3 {
+	grid-column: col-start 7 / -1;
+	grid-row: 2;
+}
+
+
+.row-full {
+	grid-column: col-start / -1;
+}
+
+.row-halves.left {
+	grid-column: col-start / 7;
+}
+
+.row-halves.right {
+	grid-column: 7 / -1;
+}
+
+.row-thirds.left {
+	grid-column: col-start / 5;
+}
+
+.row-thirds.middle {
+	grid-column: 5 / 9;
+}
+
+.row-thirds.right {
+	grid-column: 9 / -1;
+}

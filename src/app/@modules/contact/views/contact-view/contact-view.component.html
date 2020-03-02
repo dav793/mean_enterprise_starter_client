@@ -1,5 +1,5 @@
 
-<!-- <div *ngIf="isLoading" class="loading">
+<div *ngIf="isLoading" class="loading">
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
@@ -10,8 +10,14 @@
 		(events$)="onToolbarEvent($event)"
 	></app-toolbar>
 
-	<div></div>
+	<div>
+		<app-contact-form-view
+			[contact$]="contact$"
+			[revert$]="revertForm$"
+			(formChanges)="onContactFormChange($event)"
+			(formValidChanges)="onContactFormValidChange($event)"
+			(formDirtyChanges)="onContactFormDirtyChange($event)"
+		></app-contact-form-view>
+	</div> 
 
-</div> -->
-
-<app-contact-form-view> </app-contact-form-view>
+</div> 
