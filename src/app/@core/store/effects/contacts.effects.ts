@@ -178,6 +178,7 @@ export class ContactsEffects {
 				}),
 				catchError(error => {
 
+					console.log(error);
 					a.payload.meta.errorCode = Util.getErrorSigFromServerErrorString(error.error) as ErrorCode;
 
 					return of({

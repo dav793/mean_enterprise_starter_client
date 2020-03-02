@@ -2,14 +2,14 @@
 
 <app-form-input-select
 	[fGroup]="contactForm"
-	fControlName="select"
+	fControlName="contactType"
 	[options]="contactOption"
 	label="Select Type of Contact"
 ></app-form-input-select>
 
 <div *ngIf="contactForm">
 
-	<div class="app-grid gap-md border" *ngIf="contactForm.controls['select'].value === '1' ">
+	<div class="app-grid gap-md border" *ngIf="getContactType() === 'physical'">
 
 		<!-- <h3 class="row-halves left">Physic Contact Information</h3> -->
 
@@ -86,7 +86,7 @@
 					[fGroup]="contactForm"
 					fControlName="maritalStatus"
 					[selectionValue]="'Single'"
-					groupName="radioBtnGroup_1"
+					groupName="radioBtnGroup_2"
 					label="Single"
 				></app-form-input-radio>
 	
@@ -94,7 +94,7 @@
 					[fGroup]="contactForm"
 					fControlName="maritalStatus"
 					[selectionValue]="'Married'"
-					groupName="radioBtnGroup_1"
+					groupName="radioBtnGroup_2"
 					label="Married"
 				></app-form-input-radio>
 	
@@ -102,7 +102,7 @@
 					[fGroup]="contactForm"
 					fControlName="maritalStatus"
 					[selectionValue]="'Widowed'"
-					groupName="radioBtnGroup_1"
+					groupName="radioBtnGroup_2"
 					label="Widowed"
 				></app-form-input-radio>
 	
@@ -110,7 +110,7 @@
 					[fGroup]="contactForm"
 					fControlName="maritalStatus"
 					[selectionValue]="'Divorced'"
-					groupName="radioBtnGroup_1"
+					groupName="radioBtnGroup_2"
 					label="Divorced"
 				></app-form-input-radio>
 	
@@ -135,7 +135,7 @@
 
 	</div>
 
-	<div class="app-grid gap-md border" *ngIf="contactForm.controls['select'].value === '2' ">
+	<div class="app-grid gap-md border" *ngIf="getContactType() === 'corporate'">
 
 		<div class="row-halves left">
 			<app-form-input-text
