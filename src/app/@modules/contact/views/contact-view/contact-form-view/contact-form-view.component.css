@@ -13,7 +13,6 @@
 	grid-row: 2;
 }
 
-
 .row-full {
 	grid-column: col-start / -1;
 }
@@ -37,3 +36,10 @@
 .row-thirds.right {
 	grid-column: 9 / -1;
 }
+
+.border {
+	border: 2px solid black;
+	border-radius: 1em 1em 1em 1em;
+	padding: 3em;
+	padding-top: 1em;
+  }
