@@ -260,7 +260,7 @@ export class ContactListViewComponent implements OnInit, OnDestroy {
 
     sortContacts() {
         return SortUtils.sortByParams(this.sortParams, this.sortedContacts$.value);
-    }
+	}
 	
 	/**
 	 * reemplazar la referencia inmutable del toolbar config con otra que contenga las modificaciones

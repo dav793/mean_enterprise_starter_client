@@ -34,7 +34,7 @@
 	<app-contact-list-table
 		[contacts$]="pageContacts$"
 		[sortParams]="sortParams"
-		(contactClicked)="navigateToContactProfile($event)"
+		(contactClicked)="navigateToContactView($event)"
 		(columnClicked)="setActiveSort($event)"
 	></app-contact-list-table>
 

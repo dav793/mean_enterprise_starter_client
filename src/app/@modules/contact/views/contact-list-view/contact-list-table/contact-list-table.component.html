@@ -18,7 +18,7 @@
           <mat-icon *ngIf="isSortingByProperty('_label_date', 'desc')" aria-hidden="false" aria-label="Sorting by Date Descending">arrow_drop_down</mat-icon>
           <mat-icon *ngIf="isSortingByProperty('_label_date', 'asc')" aria-hidden="false" aria-label="Sorting by Date Ascending">arrow_drop_up</mat-icon>
         </th>
-        <th (click)="clickColumnHeader('_label_groupNames')">
+        <th (click)="clickColumnHeader('_label_type')">
           Tipo contacto
           <mat-icon *ngIf="isSortingByProperty('_label_type', 'desc')" aria-hidden="false" aria-label="Sorting by Date Descending">arrow_drop_down</mat-icon>
           <mat-icon *ngIf="isSortingByProperty('_label_type', 'asc')" aria-hidden="false" aria-label="Sorting by Date Ascending">arrow_drop_up</mat-icon>
@@ -29,8 +29,7 @@
         <td>{{ contact._label_fullName }}</td>
         <td>{{ contact._label_alias }}</td>
         <td>{{ contact._label_date }}</td>
-        <td>{{ contact._label_type }}</td>        
-       
+        <td>{{ contact._label_type }}</td>    
       </tr>
   
     </table>
