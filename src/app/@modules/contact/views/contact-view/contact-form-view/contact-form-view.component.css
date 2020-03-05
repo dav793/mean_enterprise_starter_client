@@ -38,8 +38,6 @@
 }
 
 .border {
-	border: 2px solid black;
-	border-radius: 1em 1em 1em 1em;
 	padding: 3em;
 	padding-top: 1em;
   }

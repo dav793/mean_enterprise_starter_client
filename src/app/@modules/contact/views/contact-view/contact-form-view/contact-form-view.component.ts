@@ -105,8 +105,7 @@ export class ContactFormViewComponent implements OnInit, OnDestroy, OnChanges {
 
 		const group = this.formBuilder.group({
 
-			select:   				  ['',								[] ],
-            //physical contact properties
+            // physical contact properties
             firstName:                [contact.firstName,               [] ],
             middleName:               [contact.middleName,              [] ],
             lastName:                 [contact.lastName,                [] ],
@@ -116,12 +115,12 @@ export class ContactFormViewComponent implements OnInit, OnDestroy, OnChanges {
             dateOfBirth:              [contact.dateOfBirth,             [] ],
             countryOfBirth:           [contact.countryOfBirth,          [] ],
 
-            //corporate properties
+            // corporate properties
             corporateName:            [contact.corporateName,           [] ],
             dateOfConstitution:       [contact.dateOfConstitution,      [] ],
             countryOfConstitution:    [contact.countryOfConstitution,   [] ],
 
-            //Common properties
+            // common properties
             contactType:              [contact.contactType,             [] ],
             alias:                    [contact.alias,                   [] ],
             homeNumber:               [contact.homePhoneNumber,         [] ], 
@@ -248,6 +247,19 @@ export class ContactFormViewComponent implements OnInit, OnDestroy, OnChanges {
 
 		this.contactForm.setControl('addresses', addressesFormArray);
 		this.contactForm.markAsDirty();
+	}
+
+	getContactType(): 'physical'|'corporate'|null {
+    	if (this.contactForm) {
+    		if (this.contactForm.controls['contactType'].value === '1')
+    			return 'physical';
+			else if (this.contactForm.controls['contactType'].value === '2')
+				return 'corporate';
+			else
+				return null;
+		}
+    	else
+    		return null;
 	}
 
 }

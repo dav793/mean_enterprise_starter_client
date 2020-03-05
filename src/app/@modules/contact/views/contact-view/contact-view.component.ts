@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable, of, ReplaySubject, Subject, from, throwError, merge } from 'rxjs';
 import { distinctUntilChanged, filter, first, mergeMap, switchMap, takeUntil, tap, map, startWith } from 'rxjs/operators';
 import { excludeFalsy } from '../../../../@shared/helpers/operators/exclude-falsy';
@@ -41,7 +41,7 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 	protected contact: Contact;
 
 	protected selectedContactId: string;
-	//protected selectedContact$ = new ReplaySubject<IContact|null>(1);
+	// protected selectedContact$ = new ReplaySubject<IContact|null>(1);
 
 	protected contactFormValue: any;
 	protected contactFormValidChanges$ = new Subject<boolean>();
@@ -86,7 +86,8 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 	constructor(
 		private coreStore: CoreStoreService,
 		private contactStore: ContactStoreService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private router: Router
 	) { }
 
 	ngOnInit() {
@@ -123,7 +124,8 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 				this.coreStore.selectContact(this.selectedContactId)
 					.pipe(takeUntil(this.onDestroy$))
 					.subscribe((ct: IContact) => {
-						this.contact$.next(ct);
+						if (ct !== null)
+							this.contact$.next(ct);
 					})
 			);
 
@@ -153,18 +155,20 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 			return;
 
 		let actionMetadata: IActionMetadata;
-		if (selectedContactId)
+		if (selectedContactId) {
 			actionMetadata = this.coreStore.updateContact(selectedContactId, formValue);
-		else
+			this.handleUpdateResponse(actionMetadata);
+		}
+		else {
 			actionMetadata = this.coreStore.createContact(formValue);
-
-		this.handleCreateResponse(actionMetadata);
+			this.handleCreateResponse(actionMetadata);
+		}
 	}
 
 
 	handleCreateResponse(actionMetadata: IActionMetadata) {
 
-		const responseHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactUpdate()
+		const responseHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactCreate()
 		.pipe(
 			filter(state => state.successEventId === actionMetadata.eventId),	// when receiving success response...
 			first(),
@@ -174,6 +178,43 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 			)),
 			takeUntil(this.onDestroy$)
 		);
+
+		const errorHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactCreate()
+			.pipe(
+				filter(state => state.errorEventId === actionMetadata.eventId),	// when receiving error response...
+				first(),
+				mergeMap(state => {
+					const err = new Error();
+					err.name = actionMetadata.errorCode;
+					return throwError(err);				// ...throw error...
+				}),
+				takeUntil(this.onDestroy$)
+			);
+
+		merge(responseHandler, errorHandler).pipe(
+			first(),						// wait for either success or error to occur...
+			takeUntil(this.onDestroy$)
+		).subscribe(
+			state => {					// ...handle success
+				this.router.navigate(['contacts', 'view', state.successInstanceId]);
+			},
+			err => console.error(err)		// ...handle error
+		);
+
+	}
+
+	handleUpdateResponse(actionMetadata: IActionMetadata) {
+
+		const responseHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactUpdate()
+			.pipe(
+				filter(state => state.successEventId === actionMetadata.eventId),	// when receiving success response...
+				first(),
+				mergeMap(state => this.contact$.pipe(		// ...wait to receive the updated contact...
+					first(),
+					map(() => state)
+				)),
+				takeUntil(this.onDestroy$)
+			);
 
 		const errorHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactUpdate()
 			.pipe(
@@ -191,7 +232,9 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 			first(),						// wait for either success or error to occur...
 			takeUntil(this.onDestroy$)
 		).subscribe(
-			state => {},					// ...handle success
+			state => {					// ...handle success
+				this.router.navigate(['contacts', 'view', state.successInstanceId]);
+			},
 			err => console.error(err)		// ...handle error
 		);
 
@@ -279,7 +322,7 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 			return;
 
 		this.deleteContact(this.selectedContactId);
-		//this.deselectUserGroup();
+		// this.deselectUserGroup();
 	}
 
 
