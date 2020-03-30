@@ -1,4 +1,5 @@
 import { FeatureStoreOperationState, initialFeatureStoreOperationState } from '../../../@core/store/feature-store-types';
+// import {ErrorCode} from '../../../@shared/enums/errors';
 
 export interface State {
 	contactModule: ContactModuleState;
@@ -15,5 +16,5 @@ export const initialContactModuleState = {
 	contactUpdate: initialFeatureStoreOperationState,
 	contactCreate: initialFeatureStoreOperationState,
 	contactDelete: initialFeatureStoreOperationState,
-	contactLoadAll: initialFeatureStoreOperationState
+	contactLoadAll: initialFeatureStoreOperationState,
 };
