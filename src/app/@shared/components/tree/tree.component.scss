@@ -1,0 +1,30 @@
+
+@import "~src/assets/css/_variables.scss";
+
+.example-tree-invisible {
+	display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+	margin-top: 0;
+	margin-bottom: 0;
+	list-style-type: none;
+}
+
+.mat-tree {
+	background-color: transparent;
+}
+
+.mat-tree-node,
+.mat-nested-tree-node {
+	color: $tertiary-textbody;
+	font-size: $font-sz-md;
+}
+
+.mat-tree-node:hover,
+.mat-nested-tree-node:hover {
+	background-color: $primary-even-darker;
+	color: $secondary-textbody-darkgb;
+	cursor: pointer;
+}

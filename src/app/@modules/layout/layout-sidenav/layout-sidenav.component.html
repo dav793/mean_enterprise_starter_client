@@ -6,23 +6,10 @@
     Dashboard
   </a>
 
-  <a class="sidenav-label">Group A</a>
+  <a class="sidenav-label">Entities</a>
 
-  <a class="sidenav-option">
-    <mat-icon aria-hidden="false" aria-label="Description">home</mat-icon>
-    Option 1
-  </a>
-
-  <a class="sidenav-option">
-    <mat-icon aria-hidden="false" aria-label="Description">star_rate</mat-icon>
-    Option 2
-  </a>
-
-  <a class="sidenav-label marg-top-sm ">Group B</a>
-
-  <a class="sidenav-option">
-    <mat-icon aria-hidden="false" aria-label="Description">today</mat-icon>
-    Option 3
-  </a>
+  <app-tree
+  	[treeData]="entityTreeData"
+  ></app-tree>
 
 </div>

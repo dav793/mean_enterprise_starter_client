@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject, combineLatest, BehaviorSubject } from 'rxjs';
+import {Observable, Subject, combineLatest, BehaviorSubject, throwError} from 'rxjs';
 import {
 	distinctUntilChanged,
 	takeUntil,
@@ -77,7 +77,6 @@ export class UserListViewComponent implements OnInit, OnDestroy {
     protected onDestroy$ = new Subject<void>();
     protected viewStatus: ViewStatus = 'loading';
     protected errorCode: ErrorCode;
-    protected errorSig: string;
 
     constructor(
         private toaster: ToasterService,
@@ -138,15 +137,22 @@ export class UserListViewComponent implements OnInit, OnDestroy {
     getUsers(): Observable<IUser[]> {
 		const meta: IActionMetadata = this.coreStore.loadAllUsers();
 
-		this.userStore.selectUserLoadAllError('UM_ULA').pipe(
+		this.userStore.selectUserLoadAll().pipe(
 			takeUntil(this.onDestroy$),
-			filter(({ eventId }) => eventId === meta.eventId),
-			first()
-		).subscribe((eventInfo: IUserStoreEventInfo) => {
-			this.viewStatus = 'failed';
-			this.errorCode = eventInfo.errorCode;
-			this.errorSig = eventInfo.errorSig;
-		});
+			filter(state => state.errorEventId === meta.eventId),
+			first(),
+			mergeMap(state => {
+				const err = new Error();
+				err.name = meta.errorCode;
+				return throwError(err);
+			})
+		).subscribe(
+			() => {},
+			err => {
+				this.viewStatus = 'failed';
+				this.errorCode = err.name;
+			}
+		);
 
 		return this.coreStore.selectAllUsers().pipe(
 			excludeFalsy,
