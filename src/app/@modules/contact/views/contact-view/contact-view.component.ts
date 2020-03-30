@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { combineLatest, Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest, Observable, of, ReplaySubject, Subject, from, throwError, merge } from 'rxjs';
 import { distinctUntilChanged, filter, first, mergeMap, switchMap, takeUntil, tap, map, startWith } from 'rxjs/operators';
 import { excludeFalsy } from '../../../../@shared/helpers/operators/exclude-falsy';
 
@@ -28,6 +28,8 @@ import { IdentificationTypes } from '../../../../@shared/lists/identification-ty
 
 import { contactFormErrorMessages } from './form-error-messages';
 
+import { FeatureStoreOperationState } from '../../../../@core/store/feature-store-types';
+
 @Component({
 	selector: 'app-contact-view',
 	templateUrl: './contact-view.component.html',
@@ -37,7 +39,13 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 
 	protected contact$ = new ReplaySubject<IContact|null>(1);
 	protected contact: Contact;
+
 	protected selectedContactId: string;
+	// protected selectedContact$ = new ReplaySubject<IContact|null>(1);
+
+	protected contactFormValue: any;
+	protected contactFormValidChanges$ = new Subject<boolean>();
+	protected contactFormDirtyChanges$ = new Subject<boolean>();
 
 	protected contactTypeOptions = ContactTypes.getOptionsList();
 	protected genderOptions = Genders.getOptionsList();
@@ -45,6 +53,7 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 	protected countryOptions = Countries.getOptionsList();
 	protected identificationTypeOptions = IdentificationTypes.getOptionsList();
 
+	protected revertForm$ = new Subject<void>();
 	protected onDestroy$ = new Subject<void>();
 	protected isLoading = true;
 	protected subs = [];
@@ -77,7 +86,8 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 	constructor(
 		private coreStore: CoreStoreService,
 		private contactStore: ContactStoreService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private router: Router
 	) { }
 
 	ngOnInit() {
@@ -86,7 +96,16 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 		this.route.params.pipe(
 			map(params => params.id),
 			startWith(null)
-		).subscribe(id => {});
+		).subscribe(id => {
+			if (id !== 'new') 
+				this.selectedContactId = id;
+			this.loadData().pipe(
+				takeUntil(this.onDestroy$)
+			).subscribe(() => {
+				this.listenChanges();
+				this.isLoading = false;
+			});
+		});
 
 	}
 
@@ -105,22 +124,22 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 				this.coreStore.selectContact(this.selectedContactId)
 					.pipe(takeUntil(this.onDestroy$))
 					.subscribe((ct: IContact) => {
-						this.contact$.next(ct);
+						if (ct !== null)
+							this.contact$.next(ct);
 					})
 			);
 
 		}
 		else {							// new contact
-
 			const ct = new Contact({} as IContact);
 			this.contact$.next(ct.asInterface());
-
 		}
 
 		return this.contact$.pipe(
 			tap(contact => this.contact = new Contact(contact)),
 			map(() => true)
 		);
+		
 
 	}
 
@@ -136,19 +155,176 @@ export class ContactViewComponent implements OnInit, OnDestroy {
 			return;
 
 		let actionMetadata: IActionMetadata;
-		if (selectedContactId)
+		if (selectedContactId) {
 			actionMetadata = this.coreStore.updateContact(selectedContactId, formValue);
-		else
+			this.handleUpdateResponse(actionMetadata);
+		}
+		else {
 			actionMetadata = this.coreStore.createContact(formValue);
-
-		this.handleCreateResponse(actionMetadata);
+			this.handleCreateResponse(actionMetadata);
+		}
 	}
+
 
 	handleCreateResponse(actionMetadata: IActionMetadata) {
 
+		const responseHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactCreate()
+		.pipe(
+			filter(state => state.successEventId === actionMetadata.eventId),	// when receiving success response...
+			first(),
+			mergeMap(state => this.contact$.pipe(		// ...wait to receive the updated contact...
+				first(),
+				map(() => state)
+			)),
+			takeUntil(this.onDestroy$)
+		);
 
+		const errorHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactCreate()
+			.pipe(
+				filter(state => state.errorEventId === actionMetadata.eventId),	// when receiving error response...
+				first(),
+				mergeMap(state => {
+					const err = new Error();
+					err.name = actionMetadata.errorCode;
+					return throwError(err);				// ...throw error...
+				}),
+				takeUntil(this.onDestroy$)
+			);
+
+		merge(responseHandler, errorHandler).pipe(
+			first(),						// wait for either success or error to occur...
+			takeUntil(this.onDestroy$)
+		).subscribe(
+			state => {					// ...handle success
+				this.router.navigate(['contacts', 'view', state.successInstanceId]);
+			},
+			err => console.error(err)		// ...handle error
+		);
 
 	}
+
+	handleUpdateResponse(actionMetadata: IActionMetadata) {
+
+		const responseHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactUpdate()
+			.pipe(
+				filter(state => state.successEventId === actionMetadata.eventId),	// when receiving success response...
+				first(),
+				mergeMap(state => this.contact$.pipe(		// ...wait to receive the updated contact...
+					first(),
+					map(() => state)
+				)),
+				takeUntil(this.onDestroy$)
+			);
+
+		const errorHandler: Observable<FeatureStoreOperationState> = this.contactStore.selectContactUpdate()
+			.pipe(
+				filter(state => state.errorEventId === actionMetadata.eventId),	// when receiving error response...
+				first(),
+				mergeMap(state => {
+					const err = new Error();
+					err.name = actionMetadata.errorCode;
+					return throwError(err);				// ...throw error...
+				}),
+				takeUntil(this.onDestroy$)
+			);
+
+		merge(responseHandler, errorHandler).pipe(
+			first(),						// wait for either success or error to occur...
+			takeUntil(this.onDestroy$)
+		).subscribe(
+			state => {					// ...handle success
+				this.router.navigate(['contacts', 'view', state.successInstanceId]);
+			},
+			err => console.error(err)		// ...handle error
+		);
+
+	}
+	
+	onContactFormChange(value: any) {
+		if (!value)
+			this.contactFormValue = null;
+		else
+			this.contactFormValue = value;
+	}
+
+	onContactFormValidChange(valid: boolean) {
+		this.contactFormValidChanges$.next(valid);
+	}
+
+	onContactFormDirtyChange(dirty: boolean) {
+		this.contactFormDirtyChanges$.next(dirty);
+	}
+
+
+	listenChanges() {
+		this.listenFormValidStatusChanges();
+		this.listenFormDirtyStatusChanges();
+	}
+
+	listenFormValidStatusChanges() {
+		this.contactFormValidChanges$
+			.pipe( takeUntil(this.onDestroy$) )
+			.subscribe(isValid => {
+
+				this.updateToolbarConfigItem('save', {
+					isDisabled: !isValid
+				});
+
+			});
+	}
+
+	listenFormDirtyStatusChanges() {
+		this.contactFormDirtyChanges$
+			.pipe( takeUntil(this.onDestroy$) )
+			.subscribe(isDirty => {
+
+				this.updateToolbarConfigItem('revert', {
+					isHidden: !isDirty
+				});
+
+				this.updateToolbarConfigItem('save', {
+					isHidden: !isDirty
+				});
+
+			});
+	}
+
+
+	onToolbarEvent(e: IToolbarEvent) {
+		switch (e.itemName) {
+			case 'save':
+				this.onToolbarSubmit();
+				break;
+			case 'revert':
+				this.onToolbarRevert();
+				break;
+			case 'delete':
+				this.onToolbarDelete();
+				break;
+		}
+	}
+
+	onToolbarSubmit() {
+		if (this.contactFormValue)
+			this.saveContact(this.selectedContactId, this.contactFormValue);
+	}
+
+	onToolbarRevert() {
+		this.revertForm$.next();
+
+		this.updateToolbarConfigItem('revert', {
+			isHidden: true
+		});
+	}
+
+	onToolbarDelete() {
+		if (!this.selectedContactId)
+			return;
+
+		this.deleteContact(this.selectedContactId);
+		// this.deselectUserGroup();
+	}
+
 
 	/**
 	 * reemplazar la referencia inmutable del toolbar config con otra que contenga las modificaciones

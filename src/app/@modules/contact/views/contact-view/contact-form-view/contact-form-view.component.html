@@ -1,0 +1,365 @@
+<br>
+
+
+<div class="app-grid gap-md border">
+
+	<div class="row-halves left">
+		<app-form-input-select
+		[fGroup]="contactForm"
+		fControlName="contactType"
+		[options]="contactOption"
+		label="Select Type of Contact"
+		></app-form-input-select>
+	</div>	
+
+</div>
+
+<div *ngIf="contactForm">
+
+	<div class="app-grid gap-md  border" *ngIf="getContactType() === 'physical' ">
+
+		<div class="row-thirds left ">
+			<app-form-input-text
+				[fGroup]="contactForm"
+				fControlName="firstName"
+				label="FirstName"
+			></app-form-input-text></div>
+		<div class="row-thirds middle ">
+			<app-form-input-text
+				[fGroup]="contactForm"
+				fControlName="middleName"
+				label="MiddleName"
+			></app-form-input-text>
+		</div>
+		<div class="row-thirds right ">
+			<app-form-input-text
+				[fGroup]="contactForm"
+				fControlName="lastName"
+				label="LastName"
+			></app-form-input-text>
+		</div>
+	
+		<div class="row-thirds left">
+			<app-form-input-text
+				[fGroup]="contactForm"
+				fControlName="salutation"
+				label="Salutation"
+			></app-form-input-text>
+		</div>
+	
+		<div class="row-thirds left">
+			<h4>Gender</h4>
+			
+			<div>
+	
+				<app-form-input-radio
+					[fGroup]="contactForm"
+					fControlName="gender"
+					[selectionValue]="'male'"
+					groupName="radioBtnGroup_1"
+					label="Male"
+				></app-form-input-radio>
+	
+				<app-form-input-radio
+					[fGroup]="contactForm"
+					fControlName="gender"
+					[selectionValue]="'female'"
+					groupName="radioBtnGroup_1"
+					label="Female"
+				></app-form-input-radio>
+	
+				<app-form-input-radio
+					[fGroup]="contactForm"
+					fControlName="gender"
+					[selectionValue]="'other'"
+					groupName="radioBtnGroup_1"
+					label="Other"
+				></app-form-input-radio>
+	
+			</div>
+		</div>
+	
+		<div  class="row-thirds middle">
+	
+		</div>
+	
+		<div  class="row-thirds middle ">
+			<h4>Marital Status</h4>
+			<div>
+	
+				<app-form-input-radio
+					[fGroup]="contactForm"
+					fControlName="maritalStatus"
+					[selectionValue]="'Single'"
+					groupName="radioBtnGroup_2"
+					label="Single"
+				></app-form-input-radio>
+	
+				<app-form-input-radio
+					[fGroup]="contactForm"
+					fControlName="maritalStatus"
+					[selectionValue]="'Married'"
+					groupName="radioBtnGroup_2"
+					label="Married"
+				></app-form-input-radio>
+	
+				<app-form-input-radio
+					[fGroup]="contactForm"
+					fControlName="maritalStatus"
+					[selectionValue]="'Widowed'"
+					groupName="radioBtnGroup_2"
+					label="Widowed"
+				></app-form-input-radio>
+	
+				<app-form-input-radio
+					[fGroup]="contactForm"
+					fControlName="maritalStatus"
+					[selectionValue]="'Divorced'"
+					groupName="radioBtnGroup_2"
+					label="Divorced"
+				></app-form-input-radio>
+	
+			</div>
+		</div>
+		<div class="row-thirds left">
+			<app-form-input-date
+				[fGroup]="contactForm"
+				fControlName="dateOfBirth"
+				label="Date of Birth"
+			></app-form-input-date>
+	
+		</div>
+	
+		<div class="row-thirds left">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="countryOfBirth"
+			label="Country of Birth"
+		></app-form-input-text>
+		</div>
+
+	</div>
+
+
+	<div class="app-grid gap-md border" *ngIf="getContactType() === 'corporate' ">
+
+		<div class="row-halves left">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="corporateName"
+			label="Name of Constitution"
+			></app-form-input-text>
+		</div>
+		
+		<div class="row-halves right">
+			<app-form-input-date
+			[fGroup]="contactForm"
+			fControlName="dateOfConstitution"
+			label="Date of Constitution"
+			></app-form-input-date>
+		</div>
+
+		<div class="row-halves left">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="countryOfConstitution"
+			label="Country of Constitution"
+			></app-form-input-text>
+		</div>
+
+	</div>
+
+	<!-- En común ................... -->
+	<br>
+	<div  class="app-grid gap-md border">
+
+		<h3 class="row-halves left">Common Contact Information</h3>
+
+		<div class="row-halves left">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="alias"
+			label="Alias"
+			></app-form-input-text>
+		</div>
+
+		<div class="row-thirds left">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="homeNumber"
+			label="Home Phone"
+			></app-form-input-text>
+		</div>
+
+		<div class="row-thirds middle">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="mobileNumber"
+			label="Mobile Phone"
+			></app-form-input-text>
+		</div>
+
+		<div class="row-thirds right"></div>
+		<div class="row-thirds right"></div>
+
+		<div class="row-thirds right">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="workNumber"
+			label="Work Phone"
+			></app-form-input-text>
+		</div>
+
+		<div class="row-halves left">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="email"
+			label="Email"
+			></app-form-input-text>
+		</div>
+
+		<div class="row-halves left">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="profession"
+			label="Profession"
+			></app-form-input-text>
+		</div>
+		
+		<div class="row-halves left">
+			<app-form-input-text
+			[fGroup]="contactForm"
+			fControlName="jobPosition"
+			label="Job Position"
+			></app-form-input-text>
+		</div>
+		
+
+		<div class="row-halves left">
+			<h4 >Identifications</h4>
+
+			<button mat-button (click)="addIdentifications()" >Add</button>
+
+			<div *ngFor="let identification of identificationsFormArray.controls; let i = index">
+
+				<div>
+					<br>
+					<app-form-input-text
+						[fGroup]="contactForm"
+						[fArrayName]="'identifications'"
+						[fArrayIndex]="i"
+						fControlName="idType"
+						[multiple]="true"
+						label="ID Type"
+					></app-form-input-text>
+
+					<app-form-input-text
+						[fGroup]="contactForm"
+						[fArrayName]="'identifications'"
+						[fArrayIndex]="i"
+						fControlName="idNumber"
+						[multiple]="true"
+						label="ID Number"
+					></app-form-input-text>
+
+					<app-form-input-date
+						[fGroup]="contactForm"
+						[fArrayName]="'identifications'"
+						[fArrayIndex]="i"
+						fControlName="expirationDate"
+						label="Expiration Date "
+					></app-form-input-date>
+
+					<app-form-input-text
+						[fGroup]="contactForm"
+						[fArrayName]="'identifications'"
+						[fArrayIndex]="i"
+						fControlName="expeditedBy"
+						[multiple]="true"
+						label="Expedited By"
+					></app-form-input-text>
+					<br>
+					<app-form-input-check
+						[fGroup]="contactForm"
+						[fArrayName]="'identifications'"
+						[fArrayIndex]="i"
+						fControlName="isMainId"
+						label="Main ID"
+					></app-form-input-check>
+					<br>
+					<button (click)="removeIdentifications(i)">Remove</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row-halves right"></div>
+		<div class="row-halves right"></div>
+		<div class="row-halves right"></div>
+
+		<div class="row-halves right">
+			<h4> Addresses </h4>
+
+			<button mat-button (click)="addAddresses()" >Add</button>
+
+			<div *ngFor="let address of addressesFormArray.controls; let i = index" >
+
+				<div>
+					<br>
+					<app-form-input-text
+						[fGroup]="contactForm"
+						[fArrayName]="'addresses'"
+						[fArrayIndex]="i"
+						fControlName="street"
+						[multiple]="true"
+						label="Street"
+					></app-form-input-text>
+
+					<app-form-input-text
+						[fGroup]="contactForm"
+						[fArrayName]="'addresses'"
+						[fArrayIndex]="i"
+						fControlName="city"
+						[multiple]="true"
+						label="City"
+					></app-form-input-text>
+
+					<app-form-input-text
+						[fGroup]="contactForm"
+						[fArrayName]="'addresses'"
+						[fArrayIndex]="i"
+						fControlName="state"
+						[multiple]="true"
+						label="State"
+					></app-form-input-text>
+
+					<app-form-input-text
+						[fGroup]="contactForm"
+						[fArrayName]="'addresses'"
+						[fArrayIndex]="i"
+						fControlName="country"
+						[multiple]="true"
+						label="Country"
+					></app-form-input-text>
+
+					<app-form-input-text
+						[fGroup]="contactForm"
+						[fArrayName]="'addresses'"
+						[fArrayIndex]="i"
+						fControlName="postalCode"
+						[multiple]="true"
+						label="Postal Code"
+					></app-form-input-text>
+					<br>
+					<button (click)="removeAddresses(i)">Remove</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+

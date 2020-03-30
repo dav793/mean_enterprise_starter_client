@@ -10,6 +10,14 @@
 		(events$)="onToolbarEvent($event)"
 	></app-toolbar>
 
-	<div></div>
+	<div>
+		<app-contact-form-view
+			[contact$]="contact$"
+			[revert$]="revertForm$"
+			(formChanges)="onContactFormChange($event)"
+			(formValidChanges)="onContactFormValidChange($event)"
+			(formDirtyChanges)="onContactFormDirtyChange($event)"
+		></app-contact-form-view>
+	</div> 
 
-</div>
+</div> 
