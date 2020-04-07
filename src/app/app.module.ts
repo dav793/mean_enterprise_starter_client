@@ -22,6 +22,7 @@ import { UserModule} from './@modules/user/user.module';
 import { RoleModule } from './@modules/role/role.module';
 import { UserGroupModule } from './@modules/user-group/user-group.module';
 import { ContactModule } from './@modules/contact/contact.module';
+import { RelationModule } from './@modules/relation/relation.module';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { ContactModule } from './@modules/contact/contact.module';
 		UserModule,
 		RoleModule,
 		UserGroupModule,
-		ContactModule
+		ContactModule,
+		RelationModule
     ],
     providers: [
         {

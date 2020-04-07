@@ -3,12 +3,15 @@ import { IUser } from '../user/user.model';
 import { IRole } from '../role/role.model';
 import { IUserGroup } from '../user-group/user-group.model';
 import { IContact } from '../contact/contact.model';
+import { IRelationDefinition } from '../relation/relation-definition.model';
+import { IRelationInstance } from '../relation/relation-instance.model';
 
 export interface CoreState {
     users: UsersState;
     roles: RolesState;
     userGroups: UserGroupsState;
     contacts: ContactsState;
+    relations: RelationsState;
     session: SessionState;
 }
 
@@ -45,6 +48,24 @@ export interface ContactsState {
 
 export const initialContactsState = {
 	all: {}
+};
+
+export interface RelationsState {
+	definitions: {
+		all: { [key: string]: IRelationDefinition }
+	};
+	instances: {
+		all: { [key: string]: IRelationInstance }
+	};
+}
+
+export const initialRelationsState = {
+	definitions: {
+		all: {}
+	},
+	instances: {
+		all: {}
+	}
 };
 
 

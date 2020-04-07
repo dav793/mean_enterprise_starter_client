@@ -1,4 +1,3 @@
-
 import { ContactsState, initialContactsState } from '../core-state';
 import * as ContactsActions from '../actions/contacts.actions';
 import Utils from '../../../@shared/helpers/utils/utils';

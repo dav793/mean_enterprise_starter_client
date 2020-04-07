@@ -12,6 +12,7 @@ import * as UsersActions from './actions/users.actions';
 import * as RolesActions from './actions/roles.actions';
 import * as UserGroupsActions from './actions/user-groups.actions';
 import * as ContactsActions from './actions/contacts.actions';
+import * as RelationsActions from './actions/relations.actions';
 import * as SessionActions from './actions/session.actions';
 
 import {IUser} from '../user/user.model';
@@ -24,6 +25,9 @@ import {IUserGroup} from '../user-group/user-group.model';
 import {IUserGroupCreateBody, IUserGroupUpdateBody} from '../user-group/user-group-api.service';
 
 import {IContact} from '../contact/contact.model';
+
+import {IRelationDefinition} from '../relation/relation-definition.model';
+import {IRelationInstance} from '../relation/relation-instance.model';
 
 import {excludeFalsy} from '../../@shared/helpers/operators/exclude-falsy';
 
@@ -95,6 +99,34 @@ export class CoreStoreService {
 			switchMap((allContacts: { [key: string]: IContact }) => {
 				if (contactId && contactId in allContacts)
 					return of(allContacts[contactId]);
+				return of(null);
+			})
+		);
+	}
+
+	selectAllRelationDefinitions(): Observable<{ [key: string]: IRelationDefinition }> {
+		return this.store.select(state => state.relations.definitions.all);
+	}
+
+	selectRelationDefinition(relationId: string): Observable<IRelationDefinition> {
+		return this.selectAllRelationDefinitions().pipe(
+			switchMap((allRelations: { [key: string]: IRelationDefinition }) => {
+				if (relationId && relationId in allRelations)
+					return of(allRelations[relationId]);
+				return of(null);
+			})
+		);
+	}
+
+	selectAllRelationInstances(): Observable<{ [key: string]: IRelationInstance }> {
+		return this.store.select(state => state.relations.instances.all);
+	}
+
+	selectRelationInstances(relationId: string): Observable<IRelationInstance> {
+		return this.selectAllRelationInstances().pipe(
+			switchMap((allRelations: { [key: string]: IRelationInstance }) => {
+				if (relationId && relationId in allRelations)
+					return of(allRelations[relationId]);
 				return of(null);
 			})
 		);
@@ -203,6 +235,54 @@ export class CoreStoreService {
 	deleteContact(contactId: string): IActionMetadata {
 		const meta = ActionMetadataFactory.create(this.clientId);
 		this.store.dispatch( new ContactsActions.DeleteContact({ contactId, meta }) );
+		return meta;
+	}
+
+	loadAllRelationDefinitions(): IActionMetadata {
+		const meta = ActionMetadataFactory.create(this.clientId);
+		this.store.dispatch( new RelationsActions.LoadAllRelationDefinitions({ meta }) );
+		return meta;
+	}
+
+	createRelationDefinition(relationDefinition: any): IActionMetadata {
+		const meta = ActionMetadataFactory.create(this.clientId);
+		this.store.dispatch( new RelationsActions.CreateRelationDefinition({ relationDefinition, meta }) );
+		return meta;
+	}
+
+	updateRelationDefinition(relationDefinitionId: string, relationDefinition: any): IActionMetadata {
+		const meta = ActionMetadataFactory.create(this.clientId);
+		this.store.dispatch( new RelationsActions.UpdateRelationDefinition({ relationDefinitionId, relationDefinition, meta }) );
+		return meta;
+	}
+
+	deleteRelationDefinition(relationDefinitionId: string): IActionMetadata {
+		const meta = ActionMetadataFactory.create(this.clientId);
+		this.store.dispatch( new RelationsActions.DeleteRelationDefinition({ relationDefinitionId, meta }) );
+		return meta;
+	}
+
+	loadAllRelationInstances(): IActionMetadata {
+		const meta = ActionMetadataFactory.create(this.clientId);
+		this.store.dispatch( new RelationsActions.LoadAllRelationInstances({ meta }) );
+		return meta;
+	}
+
+	createRelationInstance(relationInstance: any): IActionMetadata {
+		const meta = ActionMetadataFactory.create(this.clientId);
+		this.store.dispatch( new RelationsActions.CreateRelationInstance({ relationInstance, meta }) );
+		return meta;
+	}
+
+	updateRelationInstance(relationInstanceId: string, relationInstance: any): IActionMetadata {
+		const meta = ActionMetadataFactory.create(this.clientId);
+		this.store.dispatch( new RelationsActions.UpdateRelationInstance({ relationInstanceId, relationInstance, meta }) );
+		return meta;
+	}
+
+	deleteRelationInstance(relationInstanceId: string): IActionMetadata {
+		const meta = ActionMetadataFactory.create(this.clientId);
+		this.store.dispatch( new RelationsActions.DeleteRelationInstance({ relationInstanceId, meta }) );
 		return meta;
 	}
 

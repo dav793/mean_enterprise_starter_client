@@ -17,6 +17,7 @@ import { UserApiServiceStub } from './user/spec/user-api.service.stub';
 import { RoleApiService } from './role/role-api.service';
 import { UserGroupApiService } from './user-group/user-group-api.service';
 import { ContactApiService } from './contact/contact-api.service';
+import { RelationApiService } from './relation/relation-api.service';
 
 import { CoreStoreService } from './store/core-store';
 import { usersReducer } from './store/reducers/users.reducer';
@@ -27,6 +28,8 @@ import { userGroupsReducer } from './store/reducers/user-groups.reducer';
 import { UserGroupsEffects} from './store/effects/user-groups.effects';
 import { contactsReducer } from './store/reducers/contacts.reducer';
 import { ContactsEffects} from './store/effects/contacts.effects';
+import { relationsReducer } from './store/reducers/relations.reducer';
+import { RelationsEffects } from './store/effects/relations.effects';
 import { sessionReducer } from './store/reducers/session.reducer';
 
 @NgModule({
@@ -42,6 +45,8 @@ import { sessionReducer } from './store/reducers/session.reducer';
         EffectsModule.forFeature([UserGroupsEffects]),
 		StoreModule.forFeature('contacts', contactsReducer),
 		EffectsModule.forFeature([ContactsEffects]),
+		StoreModule.forFeature('relations', relationsReducer),
+		EffectsModule.forFeature([RelationsEffects]),
         StoreModule.forFeature('session', sessionReducer),
         SharedModule
     ]
@@ -57,7 +62,8 @@ export class CoreModule {
                 UserApiService,
                 RoleApiService,
 				ContactApiService,
-                UserGroupApiService
+                UserGroupApiService,
+				RelationApiService
             ]
         };
     }

@@ -19,7 +19,7 @@ import { ContactFormViewComponent } from './views/contact-view/contact-form-view
 @NgModule({
 	declarations: [
 		ContactViewComponent,
-		ContactListViewComponent
+		ContactListViewComponent,
 		ContactListTableComponent,
     ContactFormViewComponent
 	],
