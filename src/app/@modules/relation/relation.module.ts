@@ -11,9 +11,17 @@ import { CoreModule } from '../../@core/core.module';
 import { SharedModule } from '../../@shared/shared.module';
 import { RelationRoutingModule } from './relation-routing.module';
 
+import { RelationDefinitionListTableComponent } from './views/relation-list-view/relation-list-table/relation-list-table.component';
+import { RelationListViewComponent } from './views/relation-list-view/relation-list-view.component';
+
 @NgModule({
-	declarations: [],
-	exports: [],
+	declarations: [
+		RelationDefinitionListTableComponent,
+		RelationListViewComponent
+	],
+	exports: [
+		RelationListViewComponent
+	],
 	imports: [
 		CommonModule,
 		CoreModule,

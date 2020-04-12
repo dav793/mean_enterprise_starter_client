@@ -1,0 +1,34 @@
+<div *ngIf="isReady && relations">
+
+    <table class="app-table">
+  
+      <tr>
+        <th (click)="clickColumnHeader('_label_description')">
+          Descripción
+          <mat-icon *ngIf="isSortingByProperty('_label_description', 'desc')" aria-hidden="false" aria-label="Sorting by Description Descending">arrow_drop_down</mat-icon>
+          <mat-icon *ngIf="isSortingByProperty('_label_description', 'asc')" aria-hidden="false" aria-label="Sorting by Description Ascending">arrow_drop_up</mat-icon>
+        </th>
+        <th (click)="clickColumnHeader('_label_entityTypeA')">
+          Entidad tipo A
+          <mat-icon *ngIf="isSortingByProperty('_label_entityTypeA', 'desc')" aria-hidden="false" aria-label="Sorting by Entity Type A Descending">arrow_drop_down</mat-icon>
+          <mat-icon *ngIf="isSortingByProperty('_label_entityTypeA', 'asc')" aria-hidden="false" aria-label="Sorting by Entity A Ascending">arrow_drop_up</mat-icon>
+        </th>
+        <th (click)="clickColumnHeader('_label_entityTypeB')">
+          Entidad tipo B
+          <mat-icon *ngIf="isSortingByProperty('_label_entityTypeB', 'desc')" aria-hidden="false" aria-label="Sorting by Entity Type B Descending">arrow_drop_down</mat-icon>
+          <mat-icon *ngIf="isSortingByProperty('_label_entityTypeB', 'asc')" aria-hidden="false" aria-label="Sorting by Entity Type B Ascending">arrow_drop_up</mat-icon>
+        </th>
+      </tr>
+  
+      <tr *ngFor="let relations of relations" (click)="clickRelationDefinition(relations)" class="hover-bg-shadow hover-pointer">
+        <td>{{ relations._label_description }}</td>
+        <td>{{ relations._label_entityTypeA }}</td>
+        <td>{{ relations._label_entityTypeB }}</td>  
+      </tr>
+  
+    </table>
+  
+    <!--<pre>{{ relations | json }}</pre>-->
+  
+  </div>
+  

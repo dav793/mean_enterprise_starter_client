@@ -5,6 +5,7 @@ import { UserModule } from './@modules/user/user.module';
 import { UserGroupModule } from './@modules/user-group/user-group.module';
 import { RoleModule } from './@modules/role/role.module';
 import { ContactModule } from './@modules/contact/contact.module';
+import { RelationModule } from './@modules/relation/relation.module';
 
 import { GridExampleComponent } from './@modules/test/views/grid-example/grid-example.component';
 import { FormInputsComponent } from './@modules/test/views/form-inputs/form-inputs.component';
@@ -45,6 +46,10 @@ const routes: Routes = [
 	{
 		path: 'contacts',
 		loadChildren: () => ContactModule
+	},
+	{
+		path: 'relations',
+		loadChildren: () => RelationModule
 	},
     { path: 'tests/form-inputs', component: FormInputsComponent },
 	{ path: 'tests/grid-example', component: GridExampleComponent },
